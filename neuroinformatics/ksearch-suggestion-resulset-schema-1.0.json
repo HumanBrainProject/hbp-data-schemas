@@ -1,0 +1,75 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "title": "Suggestion",
+    "description": "ksearch suggestion results' schema",
+    "version": "1.0",
+    "type": "object",
+    "required": [
+        "suggestions",
+        "total",
+        "max_score"
+    ],
+    "properties": {
+        "total": {
+            "description": "The number of results",
+            "type": "integer",
+            "minimum": 0
+        },
+        "took": {
+            "description": "The time (in milliseconds) it took to execute user query",
+            "type": "integer",
+            "minimum": 0
+        },
+        "max_score": {
+            "description": "The greatest score of search results",
+            "type": "number"
+        },
+        "suggestions": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "text",
+                    "score"
+                ],
+                "properties": {
+                    "text": {
+                        "type": "string",
+                        "description": "Suggestion text"
+                    },
+                    "source": {
+                        "type": "object",
+                        "description": "Suggested entities json representation. The aim is to provide the client with a way to retrieve the suggested entities. It may be a list of dataset's ids for example or a query to run"
+                    },
+                    "schema": {
+                        "type": "string",
+                        "description": "Link to the json schema of the suggested entities"
+                    },
+                    "score": {
+                        "type": "number",
+                        "description": "The score of the suggestion"
+                    },
+                    "highlighted": {
+                        "type": "string",
+                        "description": "User query text highlight within suggestion text"
+                    },
+                    "token": {
+                        "type": "string",
+                        "description": "Text for which the actual suggestion is retrieved"
+                    },
+                    "offset": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "description": "The start position in the user input where to start looking for the token"
+                    },
+                    "length": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "description": "Starting from the offset position, this value represents how far you need to go in the user input in order to get the token"
+                    }
+
+                }
+            }
+        }
+    }
+}

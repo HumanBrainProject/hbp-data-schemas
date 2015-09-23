@@ -1,0 +1,49 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "title": "User profile",
+    "description": "A json schema for a user profile",
+    "version": "1.0",
+    "type": "object",
+    "required": [
+        "id"
+    ],
+    "properties": {
+        "affiliations": {
+            "description": "Organizations in which the person is affiliated",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+                "type": "string"
+            }
+        },
+        "id": {
+            "description": "The person id",
+            "type": "string"
+        },
+        "first_name": {
+            "description": "The person first name",
+            "type": "string"
+        },
+        "last_name": {
+            "description": "The person last name",
+            "type": "string"
+        },
+        "middle_name": {
+            "description": "The person middle name",
+            "type": "string"
+        },
+        "email": {
+            "description": "The person email",
+            "type": "string"
+        },
+        "roles": {
+            "description": "The roles played by the person",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+                "$ref": "https://schemas.humanbrainproject.eu/neuroinformatics/ksearch-ontology-term-schema-1.0.json"
+            }
+        }
+    }
+
+}

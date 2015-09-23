@@ -1,0 +1,24 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "title": "Ontology term schema",
+    "description": "Reference to a resolvable ontology term.",
+    "version": "1.0",
+    "type": "object",
+    "required": [
+        "uri"
+    ],
+    "properties": {
+        "uri": {
+            "description": "Resolvable URI for the ontology term, eg ontology.humanbrainproject.eu/$ontology_name/$term_code.",
+            "type": "string"
+        },
+        "name": {
+            "description": "Human readable name for the term.",
+            "type": "string"
+        },
+        "description": {
+            "description": "Human readable description for the term.",
+            "type": "string"
+        }
+    }
+}

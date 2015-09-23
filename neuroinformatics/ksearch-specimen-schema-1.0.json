@@ -1,0 +1,39 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "title": "Specimen schema",
+    "description": "An individual animal, plant, or single-celled life form",
+    "version": "1.0",
+    "type": "object",
+    "required": [
+        "uuid",
+        "sex",
+        "species",
+        "age"
+    ],
+    "properties": {
+        "scale": {
+            "type": "string"
+        },
+        "sex": {
+            "type": "string"
+        },
+        "species": {
+            "$ref": "https://schemas.humanbrainproject.eu/neuroinformatics/ksearch-ontology-term-schema-1.0.json"
+        },
+        "strain": {
+            "$ref": "https://schemas.humanbrainproject.eu/neuroinformatics/ksearch-ontology-term-schema-1.0.json"
+        },
+        "age": {
+            "type": "string"
+        },
+        "uuid": {
+            "$ref": "#/definitions/uuid"
+        }
+    },
+    "definitions": {
+        "uuid": {
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
+        }
+    }
+}

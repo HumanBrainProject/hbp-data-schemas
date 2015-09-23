@@ -1,0 +1,66 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "title": "Search result schema",
+    "description": "Ksearch search result schema",
+    "version": "1.0",
+    "type": "object",
+    "required": [
+        "id",
+        "schema",
+        "source",
+        "score"
+    ],
+    "properties": {
+        "id": {
+            "$ref": "#/definitions/uuid"
+        },
+        "score": {
+            "description": "The score of the retrieved entity",
+            "type": "number"
+        },
+        "schema": {
+            "description": "A URL to the json schema of the retrieved entity in source field",
+            "type": "string"
+        },
+        "source": {
+            "type": "object",
+            "oneOf": [
+                {
+                    "$ref": "https://schemas.humanbrainproject.eu/neuroinformatics/ksearch-dataset-schema-1.0.json"
+                },
+                {
+                    "$ref": "https://schemas.humanbrainproject.eu/neuroinformatics/ksearch-userprofile-schema-1.0.json"
+                },
+                {
+                    "$ref": "https://schemas.humanbrainproject.eu/neuroinformatics/ksearch-ontology-term-schema-1.0.json"
+                }
+            ]
+        },
+        "highlights": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "field": {
+                        "description": "The name of a field that match the user query and from which text fragments (thanks to a fragment size) are extracted",
+                        "type": "string"
+                    },
+                    "fragments": {
+                        "type": "array",
+                        "minItems": 1,
+                        "items": {
+                            "description": "A text fragment (thanks to a fragment size) that match the user query. Occurrences of user query tokens can be delimited whithin fragments by html tags",
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "uuid": {
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
+        }
+    }
+}

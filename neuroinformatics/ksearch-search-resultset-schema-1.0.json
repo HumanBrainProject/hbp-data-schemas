@@ -1,0 +1,69 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "title": "Search result set schema",
+    "description": "Ksearch search result set schema",
+    "version": "1.0",
+    "type": "object",
+    "properties": {
+        "total": {
+            "description": "The number of results",
+            "type": "integer"
+        },
+        "hits": {
+            "description": "The ordered list of search results",
+            "type": "array",
+            "items": {
+                "$ref": "https://schemas.humanbrainproject.eu/neuroinformatics/ksearch-search-result-schema-1.0.json"
+            }
+        },
+        "took": {
+            "description": "The time (in milliseconds) it took to execute user query",
+            "type": "integer"
+        },
+        "max_score": {
+            "description": "The greatest score of search results",
+            "type": "number"
+        },
+        "aggregations": {
+            "description": "Search results aggregation",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "field": {
+                        "description": "Field name from which the bucket key values are taken",
+                        "type": "string"
+                    },
+                    "total": {
+                        "description": "The sum of doc_count values.",
+                        "type": "integer"
+                    },
+                    "buckets": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "doc_count": {
+                                    "description": "The total number of documents having the value of key as value of field",
+                                    "type": "integer"
+                                },
+                                "key": {
+                                    "description": "Field value for which the aggregation is made",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "name": {
+                        "description": "The aggregation name",
+                        "type": "string"
+                    },
+                    "join_back_level": {
+                        "description": "The field name (the root of retrieved entity or one of its field names) that we count in doc_count.",
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}
