@@ -377,8 +377,8 @@
                         ],
                         "properties": {
                             "atlas_template": {
-                                        "description": "Reference atlas to which the observation was aligned. Can be itself.",
-                                        "$ref": "#/definitions/uuid"
+                                        "description": "Reference atlas to which the observation was aligned taken from HBP Atlas Ontology",
+                                        "$ref": "#/definitions/onto_term"
                             },
                             "bounding_box": {
                                 "description": "Coordinates of a bounding box in a reference space where the observation was extracted.",
