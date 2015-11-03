@@ -372,44 +372,14 @@
                         "description": "Details for registering the observation in a reference atlas.",
                         "type": "object",
                         "required": [
-                            "bounding_box"
-                        ],
-                        "oneOf": [
-                            {
-                                "properties": {
-                                    "atlas_template": {
-                                        "description": "Reference atlas to which the observation was aligned. Can be itself.",
-                                        "$ref": "#/definitions/uuid"
-                                    }
-                                },
-                                "required": [
-                                    "atlas_template"
-                                ]
-                            },
-                            {
-                                "properties": {
-                                    "is_template": {
-                                        "type": "boolean",
-                                        "description": "The flag that indicates that the dataset is itself a template"
-                                    }
-                                },
-                                "required": [
-                                    "is_template"
-                                ]
-                            },
-                            {
-                                "properties": {
-                                    "parent_space": {
-                                        "description": "Parent space from which a bounding box was extracted. Reference the Knowledge Graph UUID of the parent observation.",
-                                        "$ref": "#/definitions/uuid"
-                                    }
-                                },
-                                "required": [
-                                    "parent_space"
-                                ]
-                            }
+                            "bounding_box",
+                            "atlas_template"
                         ],
                         "properties": {
+                            "atlas_template": {
+                                        "description": "Reference atlas to which the observation was aligned. Can be itself.",
+                                        "$ref": "#/definitions/uuid"
+                            },
                             "bounding_box": {
                                 "description": "Coordinates of a bounding box in a reference space where the observation was extracted.",
                                 "$ref": "#/definitions/bounding_box"
