@@ -268,7 +268,6 @@
                                 "type": "string"
                             }
                         }
-
                     },
                     "developmental_stage": {
                         "$ref": "#/definitions/onto_term"
@@ -372,14 +371,33 @@
                         "description": "Details for registering the observation in a reference atlas.",
                         "type": "object",
                         "required": [
-                            "bounding_box",
-                            "atlas_template"
+                            "bounding_box"
                         ],
-                        "properties": {
-                            "atlas_template": {
+                        "oneOf": [
+                            {
+                                "properties": {
+                                    "atlas_template": {
                                         "description": "Reference atlas to which the observation was aligned. Can be itself.",
                                         "$ref": "#/definitions/uuid"
+                                    }
+                                },
+                                "required": [
+                                    "atlas_template"
+                                ]
                             },
+                            {
+                                "properties": {
+                                    "parent_space": {
+                                        "description": "Parent space from which a bounding box was extracted. Reference the Knowledge Graph UUID of the parent observation.",
+                                        "$ref": "#/definitions/uuid"
+                                    }
+                                },
+                                "required": [
+                                    "parent_space"
+                                ]
+                            }
+                        ],
+                        "properties": {
                             "bounding_box": {
                                 "description": "Coordinates of a bounding box in a reference space where the observation was extracted.",
                                 "$ref": "#/definitions/bounding_box"
