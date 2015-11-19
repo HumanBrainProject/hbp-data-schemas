@@ -268,7 +268,6 @@
                                 "type": "string"
                             }
                         }
-
                     },
                     "developmental_stage": {
                         "$ref": "#/definitions/onto_term"
@@ -384,17 +383,6 @@
                                 },
                                 "required": [
                                     "atlas_template"
-                                ]
-                            },
-                            {
-                                "properties": {
-                                    "is_template": {
-                                        "type": "boolean",
-                                        "description": "The flag that indicates that the dataset is itself a template"
-                                    }
-                                },
-                                "required": [
-                                    "is_template"
                                 ]
                             },
                             {
