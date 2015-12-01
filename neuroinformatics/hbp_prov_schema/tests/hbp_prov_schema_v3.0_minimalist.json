@@ -1,0 +1,33 @@
+{
+  "registration": {
+    "registration_id": "12345678-1234-5678-1234-567812345678",
+    "submission_date": "1999",
+    "data_provider": [
+      "org1",
+      "org2"
+    ]
+  },
+  "datasets": [
+    {
+    "id" : "12345678-1234-5678-1234-567812345678",
+    "categories" : [{"uri": "http://blalblb.ru"}],
+    "name" : "blabal",
+    "generation" : "12345678-1234-5678-1234-567812345678",
+    "representations" : ["12345678-1234-5678-1234-567812345678"]
+    }
+  ],
+  "activities": [
+    {
+      "id": "12345678-1234-5678-1234-567812345678",
+      "type":{"uri": "http://blalblb.ru"},
+      "end_date":"1999-12-22",
+      "agents":[{
+        "id":"yuryid",
+        "role": {"uri": "http://ontolorole.com/role1"}
+      }],
+      "protocol": {"uri": "http://ontolorole.com/plan1"},
+      "source_entities": ["12345678-1234-5678-1234-567812345678"]
+    }
+  ],
+  "agents": {}
+}

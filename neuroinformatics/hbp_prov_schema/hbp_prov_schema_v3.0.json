@@ -21,10 +21,17 @@
                     "type": "string"
                 },
                 "submission_date": {
-                    "description": "An RFC3339 date in the format YYYY-MM-DD.",
-                    "type": "string",
-                    "format": "date",
-                    "pattern": "^(19|20)\\d\\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$"
+                    "description": "The date on which the data provider submitted the data for the integration.",
+                    "$ref" : "#/definitions/date_optional_MM_DD"
+                },
+                "curation_date": {
+                    "description": "The date of the start of the curation process.",
+                    "$ref" : "#/definitions/date_optional_MM_DD"
+                },
+                "release_date": {
+                    "description": "The date on which the data has been released to a neuroinformatics platform.",
+                    "$ref" : "#/definitions/date_optional_MM_DD"
+
                 },
                 "data_providers": {
                     "description": "List of organisations and/or contributors who contributed the data.",
@@ -69,8 +76,8 @@
                         "description": "Link to mime type service.",
                         "$ref": "#/definitions/xref"
                     },
-                    "sha1": {
-                        "description": "SHA1 checksum of the file. Not applicable for databases.",
+                    "checksum": {
+                        "description": "Checksum of the file. Not applicable for databases.",
                         "pattern": "\\b[0-9a-f]{5,40}\\b"
                     },
                     "represented_entities": {
@@ -83,7 +90,7 @@
                     "comment": {
                         "type": "string"
                     },
-                    "satellite_files": {
+                    "documentation_files": {
                         "type": "array",
                         "description": "Files that are shipped with the main file and help to understand the data: pictures, notes, documents.",
                         "items": {
@@ -91,7 +98,7 @@
                             "required": [
                                 "id",
                                 "address",
-                                "sha1"
+                                "checksum"
                             ],
                             "properties": {
                                 "id": {
@@ -105,8 +112,8 @@
                                     "description": "Link to mime type service.",
                                     "$ref": "#/definitions/xref"
                                 },
-                                "sha1": {
-                                    "description": "SHA1 checksum of the file. Not applicable for databases.",
+                                "checksum": {
+                                    "description": "Checksum of the file. Not applicable for databases.",
                                     "pattern": "\\b[0-9a-f]{5,40}\\b"
                                 },
                                 "comment": {
@@ -150,16 +157,13 @@
                         "$ref": "#/definitions/onto_term"
                     },
                     "start_date": {
-                        "description": "An RFC3339 date in the format YYYY-MM-DD.",
-                        "type": "string",
-                        "format": "date",
-                        "pattern": "^(19|20)\\d\\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$"
+                        "description": "The date on which the activity has started YYYY-MM-DD.",
+                        "$ref" : "#/definitions/date_optional_MM_DD"
                     },
                     "end_date": {
-                        "description": "An RFC3339 date in the format YYYY-MM-DD. If end_date is not know, put the submission date of registration.",
-                        "type": "string",
-                        "format": "date",
-                        "pattern": "^(19|20)\\d\\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$"
+                        "description": "The date on which the activity has ended.",
+                        "$ref" : "#/definitions/date_optional_MM_DD"
+
                     },
                     "agents": {
                         "description": "List of agent ids that were associated with the activity.",
@@ -388,7 +392,7 @@
                     },
                     "categories": {
                         "type": "array",
-                        "description": "The description of the nature of the data in neuroscientific terms.",
+                        "description": "The description of the nature of the data in neuroscientific terms. Contains the uri to a term in data",
                         "minItems": 1,
                         "items": {
                             "$ref": "#/definitions/onto_term"
@@ -674,6 +678,11 @@
                     }
                 }
             }
+        },
+        "date_optional_MM_DD": {
+            "type": "string",
+            "format": "date",
+            "pattern": "^(19|20)\\d\\d(-(0[1-9]|1[012])(-(0[1-9]|[12]\\d|3[01]))?)?$"
         }
     }
 }
