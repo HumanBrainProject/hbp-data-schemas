@@ -13,7 +13,7 @@
     "properties": {
         "schema_version" : {
             "type" : "string",
-            "description": "The version number of the schema.",
+            "description": "The version number of the schema. Note to the schema designer: if this schema supports more than one version, list all the versions in the enum. ",
             "enum": ["3.1"]
         },
         "registration": {
@@ -95,38 +95,6 @@
                     },
                     "comment": {
                         "type": "string"
-                    },
-                    "documentation_files": {
-                        "type": "array",
-                        "description": "Files that are shipped with the main file and help to understand the data: pictures, notes, documents.",
-                        "items": {
-                            "type": "object",
-                            "required": [
-                                "id",
-                                "address",
-                                "checksum"
-                            ],
-                            "properties": {
-                                "id": {
-                                    "$ref": "#/definitions/uuid"
-                                },
-                                "address": {
-                                    "description": "A resolvable URI",
-                                    "type": "string"
-                                },
-                                "mime_type": {
-                                    "description": "Link to mime type service.",
-                                    "$ref": "#/definitions/xref"
-                                },
-                                "checksum": {
-                                    "description": "Checksum of the file. Not applicable for databases.",
-                                    "pattern": "\\b[0-9a-f]{5,40}\\b"
-                                },
-                                "comment": {
-                                    "type": "string"
-                                }
-                            }
-                        }
                     },
                     "generation": {
                         "description": "UUID of the activity that generated the representation. Must be described in the same registration file.",
@@ -477,6 +445,38 @@
                         "minItems": 1,
                         "items": {
                             "$ref": "#/definitions/uuid"
+                        }
+                    },
+                    "documentation_files": {
+                        "type": "array",
+                        "description": "Files that are shipped with the main file and help to understand the data: pictures, notes, documents.",
+                        "items": {
+                            "type": "object",
+                            "required": [
+                                "id",
+                                "address",
+                                "checksum"
+                            ],
+                            "properties": {
+                                "id": {
+                                    "$ref": "#/definitions/uuid"
+                                },
+                                "address": {
+                                    "description": "A resolvable URI",
+                                    "type": "string"
+                                },
+                                "mime_type": {
+                                    "description": "Link to mime type service.",
+                                    "$ref": "#/definitions/xref"
+                                },
+                                "checksum": {
+                                    "description": "Checksum of the file. Not applicable for databases.",
+                                    "pattern": "\\b[0-9a-f]{5,40}\\b"
+                                },
+                                "comment": {
+                                    "type": "string"
+                                }
+                            }
                         }
                     },
                     "publications": {
