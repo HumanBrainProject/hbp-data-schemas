@@ -235,5 +235,15 @@
         "name": "C57BL/6J Dawley"
       }
     }
+  ],
+  "classifications": [
+    {
+      "assigned_class": {
+        "uri": "http://hbp.org/some_class"
+      },
+      "generation": "b1d8335b-7153-4e5a-bb99-ffcde998053c",
+      "evidences": [ "119b832f-502c-4749-9827-2ac147744c9b" ]
+
+    }
   ]
 }

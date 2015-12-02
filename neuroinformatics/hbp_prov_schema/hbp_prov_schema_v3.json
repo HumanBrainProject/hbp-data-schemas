@@ -590,12 +590,12 @@
             "items": {
                 "type": "object",
                 "required": [
-                    "classification",
+                    "assigned_class",
                     "generation",
                     "evidences"
                 ],
                 "properties": {
-                    "classification": {
+                    "assigned_class": {
                         "$ref": "#/definitions/onto_term"
                     },
                     "generation": {
@@ -607,7 +607,8 @@
                         "description": "The datasets that contain the information that has been used to classify the entity.",
                         "items": {
                             "$ref": "#/definitions/uuid"
-                        }
+                        },
+                        "minItems": 1
                     }
                 },
                 "additionalProperties": false
