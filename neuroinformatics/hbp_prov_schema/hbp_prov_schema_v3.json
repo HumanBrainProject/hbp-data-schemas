@@ -31,6 +31,9 @@
                 "id": {
                     "$ref": "#/definitions/uuid"
                 },
+                "name": {
+                    "type": "string"
+                },
                 "comment": {
                     "type": "string"
                 },

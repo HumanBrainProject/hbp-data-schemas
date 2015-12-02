@@ -3,6 +3,7 @@
   "registration": {
     "id": "12345678-1234-5678-1234-567812345678",
     "submission_date": "1999",
+    "name": "This is more or less realistic dataset",
     "data_providers": [
       {"id": "someidhere"},
       {"id": "someidhere2"}
