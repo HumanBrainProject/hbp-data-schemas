@@ -10,6 +10,7 @@
         "agents",
         "schema_version"
     ],
+    "additionalProperties": false,
     "properties": {
         "schema_version" : {
             "type" : "string",
@@ -17,6 +18,13 @@
             "enum": ["3.1"]
         },
         "registration": {
+            "required":[
+                "id",
+                "submission_date",
+                "release_date",
+                "release",
+                "data_providers"
+            ],
             "type": "object",
             "description": "Registration activity, regrouping all activities described in file.",
             "properties": {
@@ -45,10 +53,19 @@
                     "minItems": 1,
                     "items": {
                         "type": "object",
+                        "required": ["id"],
                         "properties": {
                             "id": {
                                 "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "email": {
+                                "type": "string",
+                                "description": "If applicable"
                             }
+
                         }
                     }
                 },
@@ -58,7 +75,8 @@
                         "public"
                     ]
                 }
-            }
+            },
+            "additionalProperties": false
         },
         "resources": {
             "description": "List of the data sources used in the registration. Those data sources are typically files or databases that represent the results of the observations.",
@@ -100,7 +118,8 @@
                         "description": "UUID of the activity that generated the representation. Must be described in the same registration file.",
                         "$ref": "#/definitions/uuid"
                     }
-                }
+                },
+                "additionalProperties": false
             }
         },
         "activities": {
@@ -145,6 +164,7 @@
                         "minItems": 1,
                         "items": {
                             "type": "object",
+                            "required": ["id", "role"],
                             "properties": {
                                 "id": {
                                     "type": "string"
@@ -152,7 +172,9 @@
                                 "role": {
                                     "$ref": "#/definitions/onto_term"
                                 }
-                            }
+                            },
+                            "additionalProperties": false
+
                         }
                     },
                     "protocol": {
@@ -166,7 +188,8 @@
                             "$ref": "#/definitions/uuid"
                         }
                     }
-                }
+                },
+                "additionalProperties": false
             }
         },
         "agents": {
@@ -236,7 +259,8 @@
                         }
                     }
                 }
-            }
+            },
+            "additionalProperties": false
         },
         "specimen": {
             "description": "An individual animal, plant, or single-celled life form.",
@@ -303,7 +327,8 @@
                     "disease": {
                         "$ref": "#/definitions/onto_term"
                     }
-                }
+                },
+                "additionalProperties": false
             }
         },
         "samples": {
@@ -338,7 +363,8 @@
                             "$ref": "#/definitions/onto_term"
                         }
                     }
-                }
+                },
+                "additionalProperties": false
             }
         },
         "datasets": {
@@ -487,7 +513,8 @@
                             "$ref": "#/definitions/xref"
                         }
                     }
-                }
+                },
+                "additionalProperties": false
             }
         },
         "models": {
@@ -539,7 +566,8 @@
                             "$ref": "#/definitions/uuid"
                         }
                     }
-                }
+                },
+                "additionalProperties": false
             }
         },
         "classifications": {
@@ -568,7 +596,8 @@
                             "$ref": "#/definitions/uuid"
                         }
                     }
-                }
+                },
+                "additionalProperties": false
             }
         }
     },
@@ -591,7 +620,9 @@
                 "description": {
                     "description": "Human readable description for the term.",
                     "type": "string"
-                }
+                },
+                "additionalProperties": false
+
             }
         },
         "uuid": {
@@ -630,7 +661,8 @@
                                 "type": "number",
                                 "format": "float"
                             }
-                        }
+                        },
+                        "additionalProperties": false
                     }
                 },
                 "resolution": {
@@ -659,9 +691,11 @@
                             "type": "number",
                             "format": "float"
                         }
-                    }
+                    },
+                    "additionalProperties": false
                 }
-            }
+            },
+            "additionalProperties": false
         },
         "xref": {
             "description": "Arrays of cross references to external resources.",
@@ -682,7 +716,9 @@
                         "description": "Reference to an ontology term that contains the needed information to build a valid cross-reference from the code.",
                         "$ref": "#/definitions/onto_term"
                     }
-                }
+                },
+                "additionalProperties": false
+
             }
         },
         "date_optional_MM_DD": {
