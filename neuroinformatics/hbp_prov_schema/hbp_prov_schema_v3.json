@@ -405,7 +405,7 @@
                     },
                     "categories": {
                         "type": "array",
-                        "description": "The description of the nature of the data in neuroscientific terms. Contains the uri to a term in data",
+                        "description": "The description of the nature of the data in neuroscientific terms. Contains the uri to a term in hbp data modality ontology",
                         "minItems": 1,
                         "items": {
                             "$ref": "#/definitions/onto_term"
