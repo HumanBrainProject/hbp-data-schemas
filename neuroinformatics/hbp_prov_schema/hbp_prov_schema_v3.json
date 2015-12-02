@@ -433,7 +433,11 @@
                                 "properties": {
                                     "atlas_template": {
                                         "description": "Reference atlas to which the observation was aligned. Can be itself.",
-                                        "$ref": "#/definitions/uuid"
+                                        "enum": [
+                                            "Allen Mouse Brain Atlas CCFv3",
+                                            "Waxholm Rat Brain Atlas v2",
+                                            "BigBrain Human Brain Atlas"
+                                        ]
                                     }
                                 },
                                 "required": [

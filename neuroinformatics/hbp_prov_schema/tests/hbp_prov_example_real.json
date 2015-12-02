@@ -122,6 +122,16 @@
           "name": "Thalamus"
         }
       ],
+      "atlas_location": {
+        "atlas_template": "Allen Mouse Brain Atlas CCFv3",
+        "bounding_box": {
+          "points": [{
+            "x": 212, "y": 121, "z":21
+          },{
+            "x": 112, "y": 221, "z":29
+          }]
+        }
+      },
       "categories": [
         {
           "uri": "HBP_DASP:0000096",
