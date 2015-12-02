@@ -179,7 +179,11 @@
       "mime_type": [{
         "code": "HBP_FT:0000003",
         "database": {"uri": "http://mime_db"}
-      }]
+      }],
+      "checksum": {
+        "value": "e472cdd6355b6ae710e7a380e4fd8fcd",
+        "algorithm": "MD5"
+      }
     },
     {
       "address": "smb://mit.edu/repo/superfile2.txt",

@@ -105,7 +105,17 @@
                     },
                     "checksum": {
                         "description": "Checksum of the file. Not applicable for databases.",
-                        "pattern": "\\b[0-9a-f]{5,40}\\b"
+                        "type": "object",
+                        "properties": {
+                            "algorithm": {
+                                "enum": ["MD5", "SHA-1"]
+                            },
+                            "value": {
+                                "type": "string",
+                                "pattern": "^[0-9a-f]{32,40}$"
+                            }
+                        },
+                        "additionalProperties": false
                     },
                     "represented_entities": {
                         "type": "array",
