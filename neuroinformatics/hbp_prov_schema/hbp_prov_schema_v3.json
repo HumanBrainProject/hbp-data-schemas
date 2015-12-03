@@ -12,13 +12,15 @@
     ],
     "additionalProperties": false,
     "properties": {
-        "schema_version" : {
-            "type" : "string",
+        "schema_version": {
+            "type": "string",
             "description": "The version number of the schema. Note to the schema designer: if this schema supports more than one version, list all the versions in the enum. ",
-            "enum": ["3.1"]
+            "enum": [
+                "3.1"
+            ]
         },
         "registration": {
-            "required":[
+            "required": [
                 "id",
                 "submission_date",
                 "release_date",
@@ -39,16 +41,15 @@
                 },
                 "submission_date": {
                     "description": "The date on which the data provider submitted the data for the integration.",
-                    "$ref" : "#/definitions/date_optional_MM_DD"
+                    "$ref": "#/definitions/date_optional_MM_DD"
                 },
                 "curation_date": {
                     "description": "The date of the start of the curation process.",
-                    "$ref" : "#/definitions/date_optional_MM_DD"
+                    "$ref": "#/definitions/date_optional_MM_DD"
                 },
                 "release_date": {
                     "description": "The date on which the data has been released to a neuroinformatics platform.",
-                    "$ref" : "#/definitions/date_optional_MM_DD"
-
+                    "$ref": "#/definitions/date_optional_MM_DD"
                 },
                 "data_providers": {
                     "description": "List of organisations and/or contributors who contributed the data.",
@@ -56,7 +57,9 @@
                     "minItems": 1,
                     "items": {
                         "type": "object",
-                        "required": ["id"],
+                        "required": [
+                            "id"
+                        ],
                         "properties": {
                             "id": {
                                 "type": "string"
@@ -68,7 +71,6 @@
                                 "type": "string",
                                 "description": "If applicable"
                             }
-
                         }
                     }
                 },
@@ -105,35 +107,19 @@
                     },
                     "checksum": {
                         "description": "Checksum of the file. Not applicable for databases.",
-                        "type": "object",
-                        "properties": {
-                            "algorithm": {
-                                "enum": ["MD5", "SHA-1"]
-                            },
-                            "value": {
-                                "type": "string",
-                                "pattern": "^[0-9a-f]{32,40}$"
-                            }
-                        },
-                        "additionalProperties": false
+                        "$ref": "#/definitions/checksum"
                     },
-                    "represented_entities": {
-                        "type": "array",
-                        "description": "Entities found in the representation of the data. E.g. cells found in image of the slice.",
-                        "items": {
-                            "$ref": "#/definitions/uuid"
-                        }
-                    },
-                    "comment": {
-                        "type": "string"
-                    },
-                    "generation": {
-                        "description": "UUID of the activity that generated the representation. Must be described in the same registration file.",
-                        "$ref": "#/definitions/uuid"
-                    }
+                    "additionalProperties": false
                 },
-                "additionalProperties": false
-            }
+                "comment": {
+                    "type": "string"
+                },
+                "generation": {
+                    "description": "UUID of the activity that generated the representation. Must be described in the same registration file.",
+                    "$ref": "#/definitions/uuid"
+                }
+            },
+            "additionalProperties": false
         },
         "activities": {
             "description": "List of registered activities.",
@@ -164,12 +150,11 @@
                     },
                     "start_date": {
                         "description": "The date on which the activity has started YYYY-MM-DD.",
-                        "$ref" : "#/definitions/date_optional_MM_DD"
+                        "$ref": "#/definitions/date_optional_MM_DD"
                     },
                     "end_date": {
                         "description": "The date on which the activity has ended.",
-                        "$ref" : "#/definitions/date_optional_MM_DD"
-
+                        "$ref": "#/definitions/date_optional_MM_DD"
                     },
                     "agents": {
                         "description": "List of agent ids that were associated with the activity.",
@@ -177,7 +162,10 @@
                         "minItems": 1,
                         "items": {
                             "type": "object",
-                            "required": ["id", "role"],
+                            "required": [
+                                "id",
+                                "role"
+                            ],
                             "properties": {
                                 "id": {
                                     "type": "string"
@@ -187,7 +175,6 @@
                                 }
                             },
                             "additionalProperties": false
-
                         }
                     },
                     "protocol": {
@@ -514,7 +501,7 @@
                                 },
                                 "checksum": {
                                     "description": "Checksum of the file. Not applicable for databases.",
-                                    "pattern": "\\b[0-9a-f]{5,40}\\b"
+                                    "$ref": "#/definitions/checksum"
                                 },
                                 "comment": {
                                     "type": "string"
@@ -619,6 +606,7 @@
             }
         }
     },
+
     "definitions": {
         "onto_term": {
             "description": "Reference to a resolvable ontology term.",
@@ -640,7 +628,6 @@
                     "type": "string"
                 },
                 "additionalProperties": false
-
             }
         },
         "uuid": {
@@ -736,13 +723,27 @@
                     }
                 },
                 "additionalProperties": false
-
             }
         },
         "date_optional_MM_DD": {
             "type": "string",
             "format": "date",
             "pattern": "^(19|20)\\d\\d(-(0[1-9]|1[012])(-(0[1-9]|[12]\\d|3[01]))?)?$"
+        },
+        "checksum": {
+            "type": "object",
+            "properties": {
+                "algorithm": {
+                    "enum": [
+                        "MD5",
+                        "SHA-1"
+                    ]
+                },
+                "value": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{32,40}$"
+                }
+            }
         }
     }
 }
