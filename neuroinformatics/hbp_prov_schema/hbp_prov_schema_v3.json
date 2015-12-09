@@ -91,7 +91,7 @@
                 "required": [
                     "id",
                     "mime_type",
-                    "address"
+                    "addresses"
                 ],
                 "properties": {
                     "id": {
@@ -119,9 +119,9 @@
                         "description": "UUID of the activity that generated the resource. Must be described in the same registration file.",
                         "$ref": "#/definitions/uuid"
                     }
-                }
-            },
-            "additionalProperties": false
+                },
+                "additionalProperties": false
+            }
         },
         "activities": {
             "description": "List of registered activities.",
@@ -364,9 +364,9 @@
                         "items": {
                             "$ref": "#/definitions/onto_term"
                         }
-                    }
-                },
-                "additionalProperties": false
+                    },
+                    "additionalProperties": false
+                }
             }
         },
         "datasets": {
