@@ -302,8 +302,8 @@
                 "uri": "HBP_TRANS:0000233",
                 "name": "some name"
             },
-            "desease": {
-                "uri": "HBP_DES:0000010",
+            "disease": {
+                "uri": "HBP_DIS:0000010",
                 "name": "scald head"
             }
         }

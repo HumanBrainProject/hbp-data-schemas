@@ -69,7 +69,8 @@
                             },
                             "email": {
                                 "type": "string",
-                                "description": "If applicable"
+                                "description": "If applicable",
+                                "pattern": "^\\w+([-+.']|\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$"
                             }
                         }
                     }
@@ -215,7 +216,8 @@
                                 "type": "string"
                             },
                             "email": {
-                                "type": "string"
+                                "type": "string",
+                                "pattern": "^\\w+([-+.']|\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$"
                             }
                         }
                     }
@@ -364,9 +366,10 @@
                         "items": {
                             "$ref": "#/definitions/onto_term"
                         }
-                    },
-                    "additionalProperties": false
-                }
+                    }
+                },
+                "additionalProperties": false
+
             }
         },
         "datasets": {
@@ -631,9 +634,9 @@
                 "description": {
                     "description": "Human readable description for the term.",
                     "type": "string"
-                },
-                "additionalProperties": false
-            }
+                }
+            },
+            "additionalProperties": false
         },
         "uuid": {
             "type": "string",
