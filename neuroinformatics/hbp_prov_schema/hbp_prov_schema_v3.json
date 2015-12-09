@@ -708,27 +708,23 @@
             "additionalProperties": false
         },
         "xref": {
-            "description": "Arrays of cross references to external resources.",
-            "type": "array",
-            "minItems": 1,
-            "items": {
-                "type": "object",
-                "required": [
-                    "code",
-                    "database"
-                ],
-                "properties": {
-                    "code": {
-                        "description": "Cross reference code, for example DOI or PUBMED_ID. The code is used with the database information to build a valid URL.",
-                        "type": "string"
-                    },
-                    "database": {
-                        "description": "Reference to an ontology term that contains the needed information to build a valid cross-reference from the code.",
-                        "$ref": "#/definitions/onto_term"
-                    }
+            "description": "Cross references to external resources.",
+            "type": "object",
+            "required": [
+                "code",
+                "database"
+            ],
+            "properties": {
+                "code": {
+                    "description": "Cross reference code, for example DOI or PUBMED_ID. The code is used with the database information to build a valid URL.",
+                    "type": "string"
                 },
-                "additionalProperties": false
-            }
+                "database": {
+                    "description": "Reference to an ontology term that contains the needed information to build a valid cross-reference from the code.",
+                    "$ref": "#/definitions/onto_term"
+                }
+            },
+            "additionalProperties": false
         },
         "date_optional_MM_DD": {
             "type": "string",
@@ -748,7 +744,8 @@
                     "type": "string",
                     "pattern": "^[0-9a-f]{32,40}$"
                 }
-            }
+            },
+            "additionalProperties": false
         },
         "resource_address": {
             "type": "object",
