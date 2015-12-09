@@ -69,7 +69,8 @@
                             },
                             "email": {
                                 "type": "string",
-                                "description": "If applicable"
+                                "description": "If applicable",
+                                "pattern": "^\\w+([-+.']|\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$"
                             }
                         }
                     }
@@ -215,7 +216,8 @@
                                 "type": "string"
                             },
                             "email": {
-                                "type": "string"
+                                "type": "string",
+                                "pattern": "^\\w+([-+.']|\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$"
                             }
                         }
                     }
