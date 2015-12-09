@@ -24,4 +24,5 @@
 * classifications/classification is renamed to classification/assigned_class
 * resources/address is now an array
 * addresses support not just URLs but also ids in the outside services
+* resource can't have more than more than one MIME-type
 
