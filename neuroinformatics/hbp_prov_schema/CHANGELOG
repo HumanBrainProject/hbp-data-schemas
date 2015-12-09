@@ -22,4 +22,6 @@
 * we support just 3 atlases in the /datasets/atlas_location/atlas_template
 * we added checksums for /representations and /datasets/documentation_files. MD5 and SHA-1 are supported now
 * classifications/classification is renamed to classification/assigned_class
+* resources/address is now an array
+* addresses support not just URLs but also ids in the outside services
 
