@@ -305,8 +305,7 @@
                             },
                             "value": {
                                 "description": "Age in days.",
-                                "type": "number",
-                                "format": "float"
+                                "type": "number"
                             },
                             "comment": {
                                 "type": "string"
@@ -663,16 +662,13 @@
                         ],
                         "properties": {
                             "x": {
-                                "type": "number",
-                                "format": "float"
+                                "type": "number"
                             },
                             "y": {
-                                "type": "number",
-                                "format": "float"
+                                "type": "number"
                             },
                             "z": {
-                                "type": "number",
-                                "format": "float"
+                                "type": "number"
                             }
                         },
                         "additionalProperties": false
