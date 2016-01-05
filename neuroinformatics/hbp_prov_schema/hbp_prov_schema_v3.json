@@ -1,30 +1,55 @@
 {
     "$schema": "http://json-schema.org/schema#",
     "description": "schema for a the json that describes the registration activity.",
-    "version": "3.0",
+    "version": "3.1",
     "type": "object",
     "required": [
         "registration",
         "activities",
         "datasets",
-        "agents"
+        "agents",
+        "schema_version"
     ],
+    "additionalProperties": false,
     "properties": {
+        "schema_version": {
+            "type": "string",
+            "description": "The version number of the schema. Note to the schema designer: if this schema supports more than one version, list all the versions in the enum. ",
+            "enum": [
+                "3.1"
+            ]
+        },
         "registration": {
+            "required": [
+                "id",
+                "submission_date",
+                "release_date",
+                "release",
+                "data_providers"
+            ],
             "type": "object",
             "description": "Registration activity, regrouping all activities described in file.",
             "properties": {
                 "id": {
                     "$ref": "#/definitions/uuid"
                 },
+                "name": {
+                    "type": "string"
+                },
                 "comment": {
                     "type": "string"
                 },
                 "submission_date": {
-                    "description": "An RFC3339 date in the format YYYY-MM-DD.",
-                    "type": "string",
-                    "format": "date",
-                    "pattern": "^(19|20)\\d\\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$"
+                    "description": "The date on which the data provider submitted the data for the integration.",
+                    "$ref": "#/definitions/date_optional_MM_DD"
+                },
+                "curation_date": {
+                    "description": "The date of the start of the curation process.",
+                    "$ref": "#/definitions/date_optional_MM_DD"
+                },
+                "release_date": {
+                    "description": "The date on which the data has been released to a neuroinformatics platform.",
+                    "$ref": "#/definitions/date_optional_MM_DD"
                 },
                 "data_providers": {
                     "description": "List of organisations and/or contributors who contributed the data.",
@@ -32,9 +57,20 @@
                     "minItems": 1,
                     "items": {
                         "type": "object",
+                        "required": [
+                            "id"
+                        ],
                         "properties": {
                             "id": {
                                 "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "email": {
+                                "type": "string",
+                                "description": "If applicable",
+                                "pattern": "^\\w+([-+.']|\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$"
                             }
                         }
                     }
@@ -45,7 +81,8 @@
                         "public"
                     ]
                 }
-            }
+            },
+            "additionalProperties": false
         },
         "resources": {
             "description": "List of the data sources used in the registration. Those data sources are typically files or databases that represent the results of the observations.",
@@ -55,32 +92,36 @@
                 "required": [
                     "id",
                     "mime_type",
-                    "address"
+                    "addresses"
                 ],
                 "properties": {
                     "id": {
                         "$ref": "#/definitions/uuid"
                     },
-                    "address": {
-                        "description": "A resolvable URI",
-                        "type": "string"
+                    "addresses": {
+                        "type": "array",
+                        "description": "The list of pointers to the places where the file is stored",
+                        "items": {
+                            "$ref": "#/definitions/resource_address"
+                        }
                     },
                     "mime_type": {
                         "description": "Link to mime type service.",
                         "$ref": "#/definitions/xref"
                     },
-                    "represented_entities": {
-                        "type": "array",
-                        "description": "Entities found in the representation of the data. E.g. cells found in image of the slice.",
-                        "items": {
-                            "$ref": "#/definitions/uuid"
-                        }
+                    "checksum": {
+                        "description": "Checksum of the file. Not applicable for databases.",
+                        "$ref": "#/definitions/checksum"
+                    },
+                    "comment": {
+                        "type": "string"
                     },
                     "generation": {
-                        "description": "UUID of the activity that generated the representation. Must be described in the same registration file.",
+                        "description": "UUID of the activity that generated the resource. Must be described in the same registration file.",
                         "$ref": "#/definitions/uuid"
                     }
-                }
+                },
+                "additionalProperties": false
             }
         },
         "activities": {
@@ -93,7 +134,6 @@
                 "required": [
                     "id",
                     "type",
-                    "end_date",
                     "agents",
                     "protocol",
                     "source_entities"
@@ -112,16 +152,12 @@
                         "$ref": "#/definitions/onto_term"
                     },
                     "start_date": {
-                        "description": "An RFC3339 date in the format YYYY-MM-DD.",
-                        "type": "string",
-                        "format": "date",
-                        "pattern": "^(19|20)\\d\\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$"
+                        "description": "The date on which the activity has started YYYY-MM-DD.",
+                        "$ref": "#/definitions/date_optional_MM_DD"
                     },
                     "end_date": {
-                        "description": "An RFC3339 date in the format YYYY-MM-DD. If end_date is not know, put the submission date of registration.",
-                        "type": "string",
-                        "format": "date",
-                        "pattern": "^(19|20)\\d\\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$"
+                        "description": "The date on which the activity has ended.",
+                        "$ref": "#/definitions/date_optional_MM_DD"
                     },
                     "agents": {
                         "description": "List of agent ids that were associated with the activity.",
@@ -129,6 +165,10 @@
                         "minItems": 1,
                         "items": {
                             "type": "object",
+                            "required": [
+                                "id",
+                                "role"
+                            ],
                             "properties": {
                                 "id": {
                                     "type": "string"
@@ -136,7 +176,8 @@
                                 "role": {
                                     "$ref": "#/definitions/onto_term"
                                 }
-                            }
+                            },
+                            "additionalProperties": false
                         }
                     },
                     "protocol": {
@@ -150,7 +191,8 @@
                             "$ref": "#/definitions/uuid"
                         }
                     }
-                }
+                },
+                "additionalProperties": false
             }
         },
         "agents": {
@@ -174,7 +216,8 @@
                                 "type": "string"
                             },
                             "email": {
-                                "type": "string"
+                                "type": "string",
+                                "pattern": "^\\w+([-+.']|\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$"
                             }
                         }
                     }
@@ -220,7 +263,8 @@
                         }
                     }
                 }
-            }
+            },
+            "additionalProperties": false
         },
         "specimen": {
             "description": "An individual animal, plant, or single-celled life form.",
@@ -261,8 +305,7 @@
                             },
                             "value": {
                                 "description": "Age in days.",
-                                "type": "number",
-                                "format": "float"
+                                "type": "number"
                             },
                             "comment": {
                                 "type": "string"
@@ -287,7 +330,8 @@
                     "disease": {
                         "$ref": "#/definitions/onto_term"
                     }
-                }
+                },
+                "additionalProperties": false
             }
         },
         "samples": {
@@ -322,7 +366,9 @@
                             "$ref": "#/definitions/onto_term"
                         }
                     }
-                }
+                },
+                "additionalProperties": false
+
             }
         },
         "datasets": {
@@ -350,7 +396,7 @@
                     },
                     "categories": {
                         "type": "array",
-                        "description": "The description of the nature of the data in neuroscientific terms.",
+                        "description": "The description of the nature of the data in neuroscientific terms. Contains the uri to a term in hbp data modality ontology",
                         "minItems": 1,
                         "items": {
                             "$ref": "#/definitions/onto_term"
@@ -378,7 +424,11 @@
                                 "properties": {
                                     "atlas_template": {
                                         "description": "Reference atlas to which the observation was aligned. Can be itself.",
-                                        "$ref": "#/definitions/uuid"
+                                        "enum": [
+                                            "Allen Mouse Brain Atlas CCFv3",
+                                            "Waxholm Rat Brain Atlas v2",
+                                            "BigBrain Human Brain Atlas"
+                                        ]
                                     }
                                 },
                                 "required": [
@@ -431,6 +481,41 @@
                             "$ref": "#/definitions/uuid"
                         }
                     },
+                    "documentation_files": {
+                        "type": "array",
+                        "description": "Files that are shipped with the main file and help to understand the data: pictures, notes, documents.",
+                        "items": {
+                            "type": "object",
+                            "required": [
+                                "id",
+                                "address",
+                                "checksum"
+                            ],
+                            "properties": {
+                                "id": {
+                                    "$ref": "#/definitions/uuid"
+                                },
+                                "addresses": {
+                                    "type": "array",
+                                    "description": "The list of pointers to the places where the file is stored",
+                                    "items": {
+                                        "$ref": "#/definitions/resource_address"
+                                    }
+                                },
+                                "mime_type": {
+                                    "description": "Link to mime type service.",
+                                    "$ref": "#/definitions/xref"
+                                },
+                                "checksum": {
+                                    "description": "Checksum of the file. Not applicable for databases.",
+                                    "$ref": "#/definitions/checksum"
+                                },
+                                "comment": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
                     "publications": {
                         "description": "Cross references to publications describing the production or use of the datasets.",
                         "type": "array",
@@ -439,7 +524,8 @@
                             "$ref": "#/definitions/xref"
                         }
                     }
-                }
+                },
+                "additionalProperties": false
             }
         },
         "models": {
@@ -491,7 +577,8 @@
                             "$ref": "#/definitions/uuid"
                         }
                     }
-                }
+                },
+                "additionalProperties": false
             }
         },
         "classifications": {
@@ -501,21 +588,32 @@
             "items": {
                 "type": "object",
                 "required": [
-                    "classification",
-                    "generation"
+                    "assigned_class",
+                    "generation",
+                    "evidences"
                 ],
                 "properties": {
-                    "classification": {
+                    "assigned_class": {
                         "$ref": "#/definitions/onto_term"
                     },
                     "generation": {
                         "description": "UUID of the activity that generated the classification. Must be described in the same registration file.",
                         "$ref": "#/definitions/uuid"
+                    },
+                    "evidences": {
+                        "type": "array",
+                        "description": "The datasets that contain the information that has been used to classify the entity.",
+                        "items": {
+                            "$ref": "#/definitions/uuid"
+                        },
+                        "minItems": 1
                     }
-                }
+                },
+                "additionalProperties": false
             }
         }
     },
+
     "definitions": {
         "onto_term": {
             "description": "Reference to a resolvable ontology term.",
@@ -536,7 +634,8 @@
                     "description": "Human readable description for the term.",
                     "type": "string"
                 }
-            }
+            },
+            "additionalProperties": false
         },
         "uuid": {
             "type": "string",
@@ -563,18 +662,16 @@
                         ],
                         "properties": {
                             "x": {
-                                "type": "number",
-                                "format": "float"
+                                "type": "number"
                             },
                             "y": {
-                                "type": "number",
-                                "format": "float"
+                                "type": "number"
                             },
                             "z": {
-                                "type": "number",
-                                "format": "float"
+                                "type": "number"
                             }
-                        }
+                        },
+                        "additionalProperties": false
                     }
                 },
                 "resolution": {
@@ -603,31 +700,65 @@
                             "type": "number",
                             "format": "float"
                         }
-                    }
+                    },
+                    "additionalProperties": false
                 }
-            }
+            },
+            "additionalProperties": false
         },
         "xref": {
-            "description": "Arrays of cross references to external resources.",
-            "type": "array",
-            "minItems": 1,
-            "items": {
-                "type": "object",
-                "required": [
-                    "code",
-                    "database"
-                ],
-                "properties": {
-                    "code": {
-                        "description": "Cross reference code, for example DOI or PUBMED_ID. The code is used with the database information to build a valid URL.",
-                        "type": "string"
-                    },
-                    "database": {
-                        "description": "Reference to an ontology term that contains the needed information to build a valid cross-reference from the code.",
-                        "$ref": "#/definitions/onto_term"
-                    }
+            "description": "Cross references to external resources.",
+            "type": "object",
+            "required": [
+                "code",
+                "database"
+            ],
+            "properties": {
+                "code": {
+                    "description": "Cross reference code, for example DOI or PUBMED_ID. The code is used with the database information to build a valid URL.",
+                    "type": "string"
+                },
+                "database": {
+                    "description": "Reference to an ontology term that contains the needed information to build a valid cross-reference from the code.",
+                    "$ref": "#/definitions/onto_term"
                 }
-            }
+            },
+            "additionalProperties": false
+        },
+        "date_optional_MM_DD": {
+            "type": "string",
+            "pattern": "^(19|20)\\d\\d(-(0[1-9]|1[012])(-(0[1-9]|[12]\\d|3[01]))?)?$"
+        },
+        "checksum": {
+            "type": "object",
+            "properties": {
+                "algorithm": {
+                    "enum": [
+                        "MD5",
+                        "SHA-1"
+                    ]
+                },
+                "value": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{32,40}$"
+                }
+            },
+            "additionalProperties": false
+        },
+        "resource_address": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "The id by which the resource can be retrieved from the service. Use URLs if it's possible."
+                },
+                "storage": {
+                    "description": "The link to the ontology term that has the description of the services along with the its access parameters.",
+                    "$ref": "#/definitions/onto_term"
+                }
+            },
+            "additionalProperties": false
+
         }
+
     }
 }

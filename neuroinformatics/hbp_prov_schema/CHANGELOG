@@ -1,0 +1,28 @@
+## [3.1] 2015-12-03 Yuri Katkov / Francois Sy:
+
+### Whole schema changes
+* additional properties are now not allowed anywhere in the schema
+* added new directory structure
+* added examples/tests
+* starting from now, every json document will have the backlink to the schema
+
+#### Removed fields
+* /representations/represented_entities is removed because we never used it and not fully understand what it really means
+
+#### Added fields
+* /registration/name
+* /datasets/documentation_files
+* /classifications/evidences field to provide the data upon which you classified the entity
+
+#### Changed fields
+* /registration - some fields made mandatory
+* date fields are allowed to be YYYY, YYYY-MM and YYYY-MM-DD
+* dates in /activities are not mandatory anymore
+* both agent and role made mandatory in the agent-role pair
+* we support just 3 atlases in the /datasets/atlas_location/atlas_template
+* we added checksums for /representations and /datasets/documentation_files. MD5 and SHA-1 are supported now
+* classifications/classification is renamed to classification/assigned_class
+* resources/address is now an array
+* addresses support not just URLs but also ids in the outside services
+* resource can't have more than more than one MIME-type
+
