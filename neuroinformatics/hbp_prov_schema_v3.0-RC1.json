@@ -1,0 +1,633 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "description": "schema for a the json that describes the registration activity.",
+    "version": "3.0",
+    "type": "object",
+    "required": [
+        "registration",
+        "activities",
+        "datasets",
+        "agents"
+    ],
+    "properties": {
+        "registration": {
+            "type": "object",
+            "description": "Registration activity, regrouping all activities described in file.",
+            "properties": {
+                "id": {
+                    "$ref": "#/definitions/uuid"
+                },
+                "comment": {
+                    "type": "string"
+                },
+                "submission_date": {
+                    "description": "An RFC3339 date in the format YYYY-MM-DD.",
+                    "type": "string",
+                    "format": "date",
+                    "pattern": "^(19|20)\\d\\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$"
+                },
+                "data_providers": {
+                    "description": "List of organisations and/or contributors who contributed the data.",
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "release": {
+                    "enum": [
+                        "HBP",
+                        "public"
+                    ]
+                }
+            }
+        },
+        "resources": {
+            "description": "List of the data sources used in the registration. Those data sources are typically files or databases that represent the results of the observations.",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "id",
+                    "mime_type",
+                    "address"
+                ],
+                "properties": {
+                    "id": {
+                        "$ref": "#/definitions/uuid"
+                    },
+                    "address": {
+                        "description": "A resolvable URI",
+                        "type": "string"
+                    },
+                    "mime_type": {
+                        "description": "Link to mime type service.",
+                        "$ref": "#/definitions/xref"
+                    },
+                    "represented_entities": {
+                        "type": "array",
+                        "description": "Entities found in the representation of the data. E.g. cells found in image of the slice.",
+                        "items": {
+                            "$ref": "#/definitions/uuid"
+                        }
+                    },
+                    "generation": {
+                        "description": "UUID of the activity that generated the representation. Must be described in the same registration file.",
+                        "$ref": "#/definitions/uuid"
+                    }
+                }
+            }
+        },
+        "activities": {
+            "description": "List of registered activities.",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+                "description": "Representation of a HBP-Provenance activity.",
+                "type": "object",
+                "required": [
+                    "id",
+                    "type",
+                    "end_date",
+                    "agents",
+                    "protocol",
+                    "source_entities"
+                ],
+                "properties": {
+                    "id": {
+                        "$ref": "#/definitions/uuid"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "comment": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "$ref": "#/definitions/onto_term"
+                    },
+                    "start_date": {
+                        "description": "An RFC3339 date in the format YYYY-MM-DD.",
+                        "type": "string",
+                        "format": "date",
+                        "pattern": "^(19|20)\\d\\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$"
+                    },
+                    "end_date": {
+                        "description": "An RFC3339 date in the format YYYY-MM-DD. If end_date is not know, put the submission date of registration.",
+                        "type": "string",
+                        "format": "date",
+                        "pattern": "^(19|20)\\d\\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$"
+                    },
+                    "agents": {
+                        "description": "List of agent ids that were associated with the activity.",
+                        "type": "array",
+                        "minItems": 1,
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string"
+                                },
+                                "role": {
+                                    "$ref": "#/definitions/onto_term"
+                                }
+                            }
+                        }
+                    },
+                    "protocol": {
+                        "$ref": "#/definitions/onto_term"
+                    },
+                    "source_entities": {
+                        "description": "An array containing the identifiers for input entities. The entities might be described in the current file or already in repository.",
+                        "type": "array",
+                        "minItems": 1,
+                        "items": {
+                            "$ref": "#/definitions/uuid"
+                        }
+                    }
+                }
+            }
+        },
+        "agents": {
+            "description": "list of all agents associated with the activities described in the registration.",
+            "type": "object",
+            "properties": {
+                "contributors": {
+                    "description": "An array of people who contributed to the activities.",
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "id"
+                        ],
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "email": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "organisations": {
+                    "description": "An array of organisations who contributed to the activities.",
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "id"
+                        ],
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "software": {
+                    "description": "An array of software products used to generate data artifacts.",
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "id"
+                        ],
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "version": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "specimen": {
+            "description": "An individual animal, plant, or single-celled life form.",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+                "type": "object",
+                "required": [
+                    "id",
+                    "name",
+                    "sex",
+                    "species",
+                    "age"
+                ],
+                "properties": {
+                    "id": {
+                        "$ref": "#/definitions/uuid"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "comment": {
+                        "type": "string"
+                    },
+                    "age": {
+                        "description": "",
+                        "type": "object",
+                        "required": [
+                            "period",
+                            "value"
+                        ],
+                        "properties": {
+                            "period": {
+                                "enum": [
+                                    "Gestation",
+                                    "Post-natal"
+                                ]
+                            },
+                            "value": {
+                                "description": "Age in days.",
+                                "type": "number",
+                                "format": "float"
+                            },
+                            "comment": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "developmental_stage": {
+                        "$ref": "#/definitions/onto_term"
+                    },
+                    "sex": {
+                        "$ref": "#/definitions/onto_term"
+                    },
+                    "species": {
+                        "$ref": "#/definitions/onto_term"
+                    },
+                    "strain": {
+                        "$ref": "#/definitions/onto_term"
+                    },
+                    "transgenic": {
+                        "$ref": "#/definitions/onto_term"
+                    },
+                    "disease": {
+                        "$ref": "#/definitions/onto_term"
+                    }
+                }
+            }
+        },
+        "samples": {
+            "description": "Biological material.",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+                "type": "object",
+                "required": [
+                    "generation",
+                    "id",
+                    "name"
+                ],
+                "properties": {
+                    "id": {
+                        "$ref": "#/definitions/uuid"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "comment": {
+                        "type": "string"
+                    },
+                    "generation": {
+                        "description": "UUID of the activity that generated the sample. Must be described in the same registration file.",
+                        "$ref": "#/definitions/uuid"
+                    },
+                    "brain_regions": {
+                        "description": "Brain region(s) where the sample originates.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/onto_term"
+                        }
+                    }
+                }
+            }
+        },
+        "datasets": {
+            "description": "List of generated observations to be registered.",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+                "type": "object",
+                "required": [
+                    "id",
+                    "categories",
+                    "name",
+                    "generation",
+                    "representations"
+                ],
+                "properties": {
+                    "id": {
+                        "$ref": "#/definitions/uuid"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "comment": {
+                        "type": "string"
+                    },
+                    "categories": {
+                        "type": "array",
+                        "description": "The description of the nature of the data in neuroscientific terms.",
+                        "minItems": 1,
+                        "items": {
+                            "$ref": "#/definitions/onto_term"
+                        }
+                    },
+                    "generation": {
+                        "description": "UUID of the activity that generated the observation. Must be described in the same registration file.",
+                        "$ref": "#/definitions/uuid"
+                    },
+                    "brain_regions": {
+                        "description": "Brain region(s) this observation was made on.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/onto_term"
+                        }
+                    },
+                    "atlas_location": {
+                        "description": "Details for registering the observation in a reference atlas.",
+                        "type": "object",
+                        "required": [
+                            "bounding_box"
+                        ],
+                        "oneOf": [
+                            {
+                                "properties": {
+                                    "atlas_template": {
+                                        "description": "Reference atlas to which the observation was aligned. Can be itself.",
+                                        "$ref": "#/definitions/uuid"
+                                    }
+                                },
+                                "required": [
+                                    "atlas_template"
+                                ]
+                            },
+                            {
+                                "properties": {
+                                    "parent_space": {
+                                        "description": "Parent space from which a bounding box was extracted. Reference the Knowledge Graph UUID of the parent observation.",
+                                        "$ref": "#/definitions/uuid"
+                                    }
+                                },
+                                "required": [
+                                    "parent_space"
+                                ]
+                            }
+                        ],
+                        "properties": {
+                            "bounding_box": {
+                                "description": "Coordinates of a bounding box in a reference space where the observation was extracted.",
+                                "$ref": "#/definitions/bounding_box"
+                            },
+                            "transformation": {
+                                "description": "Transformation to place the current bounding box in the atlas template specified.",
+                                "type": "object",
+                                "properties": {
+                                    "transformation_type": {
+                                        "enum": [
+                                            "linear",
+                                            "polynom"
+                                        ]
+                                    },
+                                    "transformation_matrix": {
+                                        "description": "3D matrix, ordered row.",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "number",
+                                            "format": "float"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "representations": {
+                        "type": "array",
+                        "minItems": 1,
+                        "items": {
+                            "$ref": "#/definitions/uuid"
+                        }
+                    },
+                    "publications": {
+                        "description": "Cross references to publications describing the production or use of the datasets.",
+                        "type": "array",
+                        "minItems": 1,
+                        "items": {
+                            "$ref": "#/definitions/xref"
+                        }
+                    }
+                }
+            }
+        },
+        "models": {
+            "description": "In silico models, used to perform simulations and in silico experimentation.",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+                "type": "object",
+                "required": [
+                    "id",
+                    "categories",
+                    "name",
+                    "generation",
+                    "representations"
+                ],
+                "properties": {
+                    "id": {
+                        "$ref": "#/definitions/uuid"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "comment": {
+                        "type": "string"
+                    },
+                    "categories": {
+                        "type": "array",
+                        "description": "The description of the nature of the model in neuroscientific terms.",
+                        "minItems": 1,
+                        "items": {
+                            "$ref": "#/definitions/onto_term"
+                        }
+                    },
+                    "generation": {
+                        "description": "UUID of the activity that generated the model. Must be described in the same registration file.",
+                        "$ref": "#/definitions/uuid"
+                    },
+                    "locations": {
+                        "description": "Brain region(s) from which the model was derived.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/onto_term"
+                        }
+                    },
+                    "representations": {
+                        "type": "array",
+                        "minItems": 1,
+                        "items": {
+                            "$ref": "#/definitions/uuid"
+                        }
+                    }
+                }
+            }
+        },
+        "classifications": {
+            "description": "A list of classification terms derived from a manual or automated analysis.",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+                "type": "object",
+                "required": [
+                    "classification",
+                    "generation"
+                ],
+                "properties": {
+                    "classification": {
+                        "$ref": "#/definitions/onto_term"
+                    },
+                    "generation": {
+                        "description": "UUID of the activity that generated the classification. Must be described in the same registration file.",
+                        "$ref": "#/definitions/uuid"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "onto_term": {
+            "description": "Reference to a resolvable ontology term.",
+            "type": "object",
+            "required": [
+                "uri"
+            ],
+            "properties": {
+                "uri": {
+                    "description": "Resolvable URI for the ontology term, eg ontology.humanbrainproject.eu/$ontology_name/$term_code.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Human readable name for the term.",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "Human readable description for the term.",
+                    "type": "string"
+                }
+            }
+        },
+        "uuid": {
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
+        },
+        "bounding_box": {
+            "description": "XYZ coordinates of an axis-aligned bounding box in a reference space. The box is defined by at least 2 points.",
+            "type": "object",
+            "required": [
+                "points"
+            ],
+            "properties": {
+                "points": {
+                    "description": "The lower and upper coordinate of the bounding box.",
+                    "type": "array",
+                    "minItems": 2,
+                    "maxItems": 2,
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "x",
+                            "y",
+                            "z"
+                        ],
+                        "properties": {
+                            "x": {
+                                "type": "number",
+                                "format": "float"
+                            },
+                            "y": {
+                                "type": "number",
+                                "format": "float"
+                            },
+                            "z": {
+                                "type": "number",
+                                "format": "float"
+                            }
+                        }
+                    }
+                },
+                "resolution": {
+                    "description": "Resolution in each dimension",
+                    "type": "object",
+                    "required": [
+                        "unit",
+                        "res_x",
+                        "res_y",
+                        "res_z"
+                    ],
+                    "properties": {
+                        "unit": {
+                            "description": "Units used to describe the resolution. All dimensions are specified in the same unit.",
+                            "$ref": "#/definitions/onto_term"
+                        },
+                        "res_x": {
+                            "type": "number",
+                            "format": "float"
+                        },
+                        "res_y": {
+                            "type": "number",
+                            "format": "float"
+                        },
+                        "res_z": {
+                            "type": "number",
+                            "format": "float"
+                        }
+                    }
+                }
+            }
+        },
+        "xref": {
+            "description": "Arrays of cross references to external resources.",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+                "type": "object",
+                "required": [
+                    "code",
+                    "database"
+                ],
+                "properties": {
+                    "code": {
+                        "description": "Cross reference code, for example DOI or PUBMED_ID. The code is used with the database information to build a valid URL.",
+                        "type": "string"
+                    },
+                    "database": {
+                        "description": "Reference to an ontology term that contains the needed information to build a valid cross-reference from the code.",
+                        "$ref": "#/definitions/onto_term"
+                    }
+                }
+            }
+        }
+    }
+}
