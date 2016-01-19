@@ -1,0 +1,80 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "description": "A schema for simple description of the dataset. The schema is used for passing the data from the one-click registration app to its frontend, the Orchestrator",
+    "version": "3.0-RC3",
+    "type": "object",
+    "required": [
+        "registration",
+        "specimen",
+        "sample",
+        "dataset",
+        "resource"
+    ],
+    "properties": {
+        "registration": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "comment": {
+                    "type": "string"
+                },
+                "submission_date": {
+                    "description": "The date on which the data provider submitted the data for the integration.",
+                    "type": "string",
+                    "format": "date"
+                },
+                "production_date": {
+                    "description": "The date on which the data has been produced.",
+                    "type": "string",
+                    "format": "date"
+                },
+                "data_providers": {
+                    "description": "List of organisations and/or contributors' id who contributed the data.",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "minItems": 1,
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "contact_person": {
+                    "description": "The person who is responsible for aswering questions about the data",
+                    "type": "object"
+
+                }
+            }
+        },
+        "specimen": {
+            "type": "object",
+            "properties": {
+                "species": {
+                    "id": "2",
+                    "term": "Human"
+                },
+                "sex": {
+                    "id": "2",
+                    "term": "female"
+                },
+                "age": {
+                    "value": "sd"
+                }
+            }
+        },
+        "sample": {
+            "type": "object",
+            "properties": {
+                "brain_region": {
+                    "id": "3",
+                    "term": "human temporal cortex"
+                }
+            }
+        },
+        "dataset": {},
+        "resource": {}
+    },
+    "definitions": {
+
+    }
+}

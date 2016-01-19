@@ -12,10 +12,7 @@
 * Added activities.methods is an optional array of ontology_term
 * Renamed all attribute 'generation' to 'activity_ref'
 * Changed the type of 'dataset.atlas_location.atlas_template' from an enum to an ontology term so that we do not require a schema change when adding a atlas templates.
-
-TODO:
-- Update Yuri's test instances
-
+* some fields in address of resourse become mandatory
 
 ## [3.0-RC2] 2015-12-03 Yuri Katkov / Francois Sy:
 
