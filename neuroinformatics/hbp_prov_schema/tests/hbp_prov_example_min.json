@@ -1,12 +1,11 @@
 {
-  "schema_version": "3.1",
+  "schema_version": "3.0-RC3",
   "registration": {
     "id": "12345678-1234-5678-1234-567812345678",
     "submission_date": "1999",
     "name": "This is more or less realistic dataset",
     "data_providers": [
-      {"id": "someidhere"},
-      {"id": "someidhere2"}
+     "EPFL", "LNMC"
     ],
     "release_date" : "1999",
     "release" : "public"
@@ -16,7 +15,7 @@
     "id" : "12345678-1234-5678-1234-567812345678",
     "categories" : [{"uri": "http://blalblb.ru"}],
     "name" : "blabal",
-    "generation" : "12345678-1234-5678-1234-567812345678",
+    "activity_ref" : "12345678-1234-5678-1234-567812345678",
     "representations" : ["12345678-1234-5678-1234-567812345678"]
     }
   ],
@@ -26,10 +25,9 @@
       "type":{"uri": "http://blalblb.ru"},
       "end_date":"1999-12-22",
       "agents":[{
-        "id":"yuryid",
+        "agent_ref":"yuryid",
         "role": {"uri": "http://ontolorole.com/role1"}
       }],
-      "protocol": {"uri": "http://ontolorole.com/plan1"},
       "source_entities": ["12345678-1234-5678-1234-567812345678"]
     }
   ],
