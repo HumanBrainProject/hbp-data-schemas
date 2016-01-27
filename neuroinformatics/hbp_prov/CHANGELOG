@@ -1,0 +1,44 @@
+## [3.0-RC3] 2016-01-07 Samuel Kerrien / Lomig Mégard / Catherine Zwahlen / Yuri Katkov
+
+### Updated fields
+* 'schema_version' enum now has only the following value: "3.0"
+* All fields representing a UUID, previously typed as #/definitions/uuid are now defined as "type":"string", "format":"uuid"
+  That way we do not have to maintain our own regex (which was wrong anyway since typically the accepted character set is 0-9a-Z)
+* All fields representing dates, previously typed as #/definitions/date_optional_MM_DD are now defined as "type":"string", "format":"date" so we do not have to maintain our own regex. 
+* All fields representing emails with hand crafted regex, are now defined as "type":"string", "format":"email" and will be validated as per the schema specification against RFC 5322, section 3.4.1.
+* 'registration.data_providers': instead of defining the providers, we now only have a list of identifiers that should take their values in 'agents.contributors', 'agents.organisations' or 'agents.software'. This list of identifiers does not allow for duplicates.
+* Renamed 'activities.agents.id' to 'activities.agents.agent_ref' to clarify that this is a reference to an existing agent UUID.
+* Renamed activities.protocol to activities.protocol_description and its type has changes from a single ontology_term to free text where a submitted can describe the protocol used. This field is now optional and the hbp-prov-validator will make sure that at least one protocol_description or method is present.
+* Added activities.methods is an optional array of ontology_term
+* Renamed all attribute 'generation' to 'activity_ref'
+* Changed the type of 'dataset.atlas_location.atlas_template' from an enum to an ontology term so that we do not require a schema change when adding a atlas templates.
+* some fields in address of resourse become mandatory
+
+## [3.0-RC2] 2015-12-03 Yuri Katkov / Francois Sy:
+
+### Whole schema changes
+* additional properties are now not allowed anywhere in the schema
+* added new directory structure to store the schema
+* added examples/tests
+* starting from now, every json document will have the backlink to the schema
+
+#### Removed fields
+* /representations/represented_entities is removed because we never used it and not fully understand what it really means
+
+#### Added fields
+* /registration/name
+* /datasets/documentation_files
+* /classifications/evidences field to provide the data upon which you classified the entity
+
+#### Changed fields
+* /registration - some fields made mandatory
+* date fields are allowed to be YYYY, YYYY-MM and YYYY-MM-DD
+* dates in /activities are not mandatory anymore
+* both agent and role made mandatory in the agent-role pair
+* we support just 3 atlases in the /datasets/atlas_location/atlas_template
+* we added checksums for /representations and /datasets/documentation_files. MD5 and SHA-1 are supported now
+* classifications/classification is renamed to classification/assigned_class
+* resources/address is now an array
+* addresses support not just URLs but also ids in the outside services
+* resource can't have more than more than one MIME-type
+

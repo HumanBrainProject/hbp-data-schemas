@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/schema#",
     "description": "schema for a the json that describes the registration activity.",
-    "version": "3.1",
+    "version": "3.0-RC3",
     "type": "object",
     "required": [
         "registration",
@@ -16,7 +16,7 @@
             "type": "string",
             "description": "The version number of the schema. Note to the schema designer: if this schema supports more than one version, list all the versions in the enum. ",
             "enum": [
-                "3.1"
+                "3.0-RC3"
             ]
         },
         "registration": {
@@ -31,7 +31,8 @@
             "description": "Registration activity, regrouping all activities described in file.",
             "properties": {
                 "id": {
-                    "$ref": "#/definitions/uuid"
+                    "type": "string",
+                    "format": "uuid"
                 },
                 "name": {
                     "type": "string"
@@ -41,38 +42,26 @@
                 },
                 "submission_date": {
                     "description": "The date on which the data provider submitted the data for the integration.",
-                    "$ref": "#/definitions/date_optional_MM_DD"
+                    "type": "string",
+                    "format": "date"
                 },
                 "curation_date": {
                     "description": "The date of the start of the curation process.",
-                    "$ref": "#/definitions/date_optional_MM_DD"
+                    "type": "string",
+                    "format": "date"
                 },
                 "release_date": {
                     "description": "The date on which the data has been released to a neuroinformatics platform.",
-                    "$ref": "#/definitions/date_optional_MM_DD"
+                    "type": "string",
+                    "format": "date"
                 },
                 "data_providers": {
-                    "description": "List of organisations and/or contributors who contributed the data.",
+                    "description": "List of organisations and/or contributors' id who contributed the data.",
                     "type": "array",
+                    "uniqueItems": true,
                     "minItems": 1,
                     "items": {
-                        "type": "object",
-                        "required": [
-                            "id"
-                        ],
-                        "properties": {
-                            "id": {
-                                "type": "string"
-                            },
-                            "name": {
-                                "type": "string"
-                            },
-                            "email": {
-                                "type": "string",
-                                "description": "If applicable",
-                                "pattern": "^\\w+([-+.']|\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$"
-                            }
-                        }
+                        "type": "string"
                     }
                 },
                 "release": {
@@ -96,7 +85,8 @@
                 ],
                 "properties": {
                     "id": {
-                        "$ref": "#/definitions/uuid"
+                        "type": "string",
+                        "format": "uuid"
                     },
                     "addresses": {
                         "type": "array",
@@ -116,9 +106,10 @@
                     "comment": {
                         "type": "string"
                     },
-                    "generation": {
+                    "activity_ref": {
                         "description": "UUID of the activity that generated the resource. Must be described in the same registration file.",
-                        "$ref": "#/definitions/uuid"
+                        "type": "string",
+                        "format": "uuid"
                     }
                 },
                 "additionalProperties": false
@@ -135,12 +126,12 @@
                     "id",
                     "type",
                     "agents",
-                    "protocol",
                     "source_entities"
                 ],
                 "properties": {
                     "id": {
-                        "$ref": "#/definitions/uuid"
+                        "type": "string",
+                        "format": "uuid"
                     },
                     "name": {
                         "type": "string"
@@ -153,11 +144,13 @@
                     },
                     "start_date": {
                         "description": "The date on which the activity has started YYYY-MM-DD.",
-                        "$ref": "#/definitions/date_optional_MM_DD"
+                        "type": "string",
+                        "format": "date"
                     },
                     "end_date": {
                         "description": "The date on which the activity has ended.",
-                        "$ref": "#/definitions/date_optional_MM_DD"
+                        "type": "string",
+                        "format": "date"
                     },
                     "agents": {
                         "description": "List of agent ids that were associated with the activity.",
@@ -166,11 +159,11 @@
                         "items": {
                             "type": "object",
                             "required": [
-                                "id",
+                                "agent_ref",
                                 "role"
                             ],
                             "properties": {
-                                "id": {
+                                "agent_ref": {
                                     "type": "string"
                                 },
                                 "role": {
@@ -180,15 +173,24 @@
                             "additionalProperties": false
                         }
                     },
-                    "protocol": {
-                        "$ref": "#/definitions/onto_term"
+                    "protocol_description": {
+                        "description": "The textual description of the protocol used to perform the activity.",
+                        "type": "string"
+                    },
+                    "methods": {
+                        "description": "Methods that were used in the protocol, taken from the method ontology.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/onto_term"
+                        }
                     },
                     "source_entities": {
                         "description": "An array containing the identifiers for input entities. The entities might be described in the current file or already in repository.",
                         "type": "array",
                         "minItems": 1,
                         "items": {
-                            "$ref": "#/definitions/uuid"
+                            "type": "string",
+                            "format": "uuid"
                         }
                     }
                 },
@@ -217,7 +219,7 @@
                             },
                             "email": {
                                 "type": "string",
-                                "pattern": "^\\w+([-+.']|\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$"
+                                "format": "email"
                             }
                         }
                     }
@@ -272,6 +274,7 @@
             "minItems": 1,
             "items": {
                 "type": "object",
+                "javaType": "ch.epfl.hbp.nip.prov.v3.domain.Specimen",
                 "required": [
                     "id",
                     "name",
@@ -281,7 +284,8 @@
                 ],
                 "properties": {
                     "id": {
-                        "$ref": "#/definitions/uuid"
+                        "type": "string",
+                        "format": "uuid"
                     },
                     "name": {
                         "type": "string"
@@ -341,13 +345,14 @@
             "items": {
                 "type": "object",
                 "required": [
-                    "generation",
+                    "activity_ref",
                     "id",
                     "name"
                 ],
                 "properties": {
                     "id": {
-                        "$ref": "#/definitions/uuid"
+                        "type": "string",
+                        "format": "uuid"
                     },
                     "name": {
                         "type": "string"
@@ -355,9 +360,10 @@
                     "comment": {
                         "type": "string"
                     },
-                    "generation": {
+                    "activity_ref": {
                         "description": "UUID of the activity that generated the sample. Must be described in the same registration file.",
-                        "$ref": "#/definitions/uuid"
+                        "type": "string",
+                        "format": "uuid"
                     },
                     "brain_regions": {
                         "description": "Brain region(s) where the sample originates.",
@@ -372,7 +378,7 @@
             }
         },
         "datasets": {
-            "description": "List of generated observations to be registered.",
+            "description": "List of generated datasets to be registered.",
             "type": "array",
             "minItems": 1,
             "items": {
@@ -381,12 +387,13 @@
                     "id",
                     "categories",
                     "name",
-                    "generation",
+                    "activity_ref",
                     "representations"
                 ],
                 "properties": {
                     "id": {
-                        "$ref": "#/definitions/uuid"
+                        "type": "string",
+                        "format": "uuid"
                     },
                     "name": {
                         "type": "string"
@@ -402,19 +409,20 @@
                             "$ref": "#/definitions/onto_term"
                         }
                     },
-                    "generation": {
-                        "description": "UUID of the activity that generated the observation. Must be described in the same registration file.",
-                        "$ref": "#/definitions/uuid"
+                    "activity_ref": {
+                        "description": "UUID of the activity that generated the dataset. Must be described in the same registration file.",
+                        "type": "string",
+                        "format": "uuid"
                     },
                     "brain_regions": {
-                        "description": "Brain region(s) this observation was made on.",
+                        "description": "Brain region(s) this dataset was made on.",
                         "type": "array",
                         "items": {
                             "$ref": "#/definitions/onto_term"
                         }
                     },
                     "atlas_location": {
-                        "description": "Details for registering the observation in a reference atlas.",
+                        "description": "Details for registering the dataset in a reference atlas.",
                         "type": "object",
                         "required": [
                             "bounding_box"
@@ -423,12 +431,8 @@
                             {
                                 "properties": {
                                     "atlas_template": {
-                                        "description": "Reference atlas to which the observation was aligned. Can be itself.",
-                                        "enum": [
-                                            "Allen Mouse Brain Atlas CCFv3",
-                                            "Waxholm Rat Brain Atlas v2",
-                                            "BigBrain Human Brain Atlas"
-                                        ]
+                                        "description": "Reference atlas to which the dataset was aligned. Can be itself.",
+                                        "$ref": "#/definitions/onto_term"
                                     }
                                 },
                                 "required": [
@@ -439,7 +443,8 @@
                                 "properties": {
                                     "parent_space": {
                                         "description": "Parent space from which a bounding box was extracted. Reference the Knowledge Graph UUID of the parent observation.",
-                                        "$ref": "#/definitions/uuid"
+                                        "type": "string",
+                                        "format": "uuid"
                                     }
                                 },
                                 "required": [
@@ -478,7 +483,8 @@
                         "type": "array",
                         "minItems": 1,
                         "items": {
-                            "$ref": "#/definitions/uuid"
+                            "type": "string",
+                            "format": "uuid"
                         }
                     },
                     "documentation_files": {
@@ -488,12 +494,13 @@
                             "type": "object",
                             "required": [
                                 "id",
-                                "address",
+                                "addresses",
                                 "checksum"
                             ],
                             "properties": {
                                 "id": {
-                                    "$ref": "#/definitions/uuid"
+                                    "type": "string",
+                                    "format": "uuid"
                                 },
                                 "addresses": {
                                     "type": "array",
@@ -538,12 +545,13 @@
                     "id",
                     "categories",
                     "name",
-                    "generation",
+                    "activity_ref",
                     "representations"
                 ],
                 "properties": {
                     "id": {
-                        "$ref": "#/definitions/uuid"
+                        "type": "string",
+                        "format": "uuid"
                     },
                     "name": {
                         "type": "string"
@@ -559,11 +567,12 @@
                             "$ref": "#/definitions/onto_term"
                         }
                     },
-                    "generation": {
+                    "activity_ref": {
                         "description": "UUID of the activity that generated the model. Must be described in the same registration file.",
-                        "$ref": "#/definitions/uuid"
+                        "type": "string",
+                        "format": "uuid"
                     },
-                    "locations": {
+                    "brain_regions": {
                         "description": "Brain region(s) from which the model was derived.",
                         "type": "array",
                         "items": {
@@ -574,7 +583,8 @@
                         "type": "array",
                         "minItems": 1,
                         "items": {
-                            "$ref": "#/definitions/uuid"
+                            "type": "string",
+                            "format": "uuid"
                         }
                     }
                 },
@@ -589,22 +599,24 @@
                 "type": "object",
                 "required": [
                     "assigned_class",
-                    "generation",
+                    "activity_ref",
                     "evidences"
                 ],
                 "properties": {
                     "assigned_class": {
                         "$ref": "#/definitions/onto_term"
                     },
-                    "generation": {
+                    "activity_ref": {
                         "description": "UUID of the activity that generated the classification. Must be described in the same registration file.",
-                        "$ref": "#/definitions/uuid"
+                        "type": "string",
+                        "format": "uuid"
                     },
                     "evidences": {
                         "type": "array",
                         "description": "The datasets that contain the information that has been used to classify the entity.",
                         "items": {
-                            "$ref": "#/definitions/uuid"
+                            "type": "string",
+                            "format": "uuid"
                         },
                         "minItems": 1
                     }
@@ -613,11 +625,11 @@
             }
         }
     },
-
     "definitions": {
         "onto_term": {
             "description": "Reference to a resolvable ontology term.",
             "type": "object",
+            "javaType": "ch.epfl.hbp.nip.prov.v3.domain.OntologyTerm",
             "required": [
                 "uri"
             ],
@@ -637,13 +649,10 @@
             },
             "additionalProperties": false
         },
-        "uuid": {
-            "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
-        },
         "bounding_box": {
             "description": "XYZ coordinates of an axis-aligned bounding box in a reference space. The box is defined by at least 2 points.",
             "type": "object",
+            "javaType": "ch.epfl.hbp.nip.prov.v3.domain.BoundingBox",
             "required": [
                 "points"
             ],
@@ -709,6 +718,7 @@
         "xref": {
             "description": "Cross references to external resources.",
             "type": "object",
+            "javaType": "ch.epfl.hbp.nip.prov.v3.domain.Xref",
             "required": [
                 "code",
                 "database"
@@ -725,12 +735,9 @@
             },
             "additionalProperties": false
         },
-        "date_optional_MM_DD": {
-            "type": "string",
-            "pattern": "^(19|20)\\d\\d(-(0[1-9]|1[012])(-(0[1-9]|[12]\\d|3[01]))?)?$"
-        },
         "checksum": {
             "type": "object",
+            "javaType": "ch.epfl.hbp.nip.prov.v3.domain.Checksum",
             "properties": {
                 "algorithm": {
                     "enum": [
@@ -747,9 +754,17 @@
         },
         "resource_address": {
             "type": "object",
+            "javaType": "ch.epfl.hbp.nip.prov.v3.domain.ResourceAddress",
+            "required": ["uri","storage"],
             "properties": {
-                "id": {
-                    "description": "The id by which the resource can be retrieved from the service. Use URLs if it's possible."
+                "uri": {
+                    "type": "string",
+                    "description": "The uri by which the resource can be retrieved from the service. Use URLs if it's possible."
+                },
+                "date": {
+                    "type": "string",
+                    "description": "Date at which the resource was stored or downloaded depending on the storage type.",
+                    "format": "date"
                 },
                 "storage": {
                     "description": "The link to the ontology term that has the description of the services along with the its access parameters.",
@@ -757,8 +772,6 @@
                 }
             },
             "additionalProperties": false
-
         }
-
     }
 }
