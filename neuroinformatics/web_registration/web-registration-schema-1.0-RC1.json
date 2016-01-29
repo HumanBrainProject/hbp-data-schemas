@@ -1,0 +1,227 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "description": "A schema for simple description of the dataset. The schema is used for passing the data from the one-click registration app to its frontend, the Orchestrator",
+    "version": "3.0-RC3",
+    "type": "object",
+    "required": [
+        "registration",
+        "specimen",
+        "dataset"
+    ],
+    "properties": {
+        "registration": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "production_end_date": {
+                    "description": "The date on which the data has been produced.",
+                    "type": "string",
+                    "format": "date"
+                },
+                "contributors": {
+                    "description": "An array of people who contributed to the activities.",
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "id"
+                        ],
+                        "properties": {
+                            "name": {
+                                "type": "string"
+                            },
+                            "email": {
+                                "type": "string",
+                                "format": "email"
+                            },
+                            "role": {
+                                "$ref": "#/definitions/onto_term"
+                            },
+                            "contact_flag": {
+                                "type": "boolean"
+                            }
+                        }
+                    }
+                },
+                "organisations": {
+                    "description": "An array of organisations who contributed to the activities.",
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "software": {
+                    "description": "An array of software products used to generate data artifacts.",
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "id"
+                        ],
+                        "properties": {
+                            "name": {
+                                "type": "string"
+                            },
+                            "version": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "specimen": {
+            "type": "object",
+            "required": [
+                "name",
+                "sex",
+                "species",
+                "age"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "comment": {
+                    "type": "string"
+                },
+                "age": {
+                    "type": "object",
+                    "required": [
+                        "period",
+                        "value"
+                    ],
+                    "properties": {
+                        "period": {
+                            "enum": [
+                                "Gestation",
+                                "Post-natal"
+                            ]
+                        },
+                        "value": {
+                            "description": "Age in days.",
+                            "type": "number"
+                        }
+                    }
+                },
+                "sex": {
+                    "$ref": "#/definitions/onto_term"
+                },
+                "species": {
+                    "$ref": "#/definitions/onto_term"
+                },
+                "strain": {
+                    "$ref": "#/definitions/onto_term"
+                },
+                "disease": {
+                    "$ref": "#/definitions/onto_term"
+                }
+            }
+        },
+        "dataset": {
+            "description": "The description of the file attached. Maps to the HBPPROV Dataset and Resource. Brain regions are the same as the brain regions of the sample.",
+            "type": "object",
+            "required": [
+                "name",
+                "categories"
+            ],
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "categories": {
+                    "type": "array",
+                    "description": "The description of the nature of the data in neuroscientific terms. Contains the uri to a term in hbp data modality ontology",
+                    "minItems": 1,
+                    "items": {
+                        "$ref": "#/definitions/onto_term"
+                    }
+                },
+                "publication_doi": {
+                    "description": "Link to the doi of the publication that describes the dataset.",
+                    "type": "string",
+                    "format": "url"
+                },
+                "publication_pubmed": {
+                    "description": "Link to the pubmed id of the publication that describes the dataset.",
+                    "type": "string",
+                    "format": "url"
+                },
+                "brain_regions": {
+                    "description": "Brain region(s) where the sample originates.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/onto_term"
+                    }
+                },
+                "protocol_description": {
+                    "description": "This will go to activity_ref. Describes how the activity was performed.",
+                    "type": "string"
+                },
+                "assigned_class": {
+                    "$ref": "#/definitions/onto_term"
+                }
+            }
+        }
+    },
+    "definitions": {
+        "onto_term": {
+            "description": "Reference to a resolvable ontology term. Most likely it will have some more junk, which can be ignored.",
+            "type": "object",
+            "required": [
+                "uri"
+            ],
+            "properties": {
+                "uri": {
+                    "description": "Resolvable URI for the ontology term, eg ontology.humanbrainproject.eu/$ontology_name/$term_code.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Human readable name for the term.",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "Human readable description for the term.",
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true
+        },
+        "activity": {
+            "description": "FIXME Do we need the agents or we suppose that the activity was made by the whole organization?",
+            "type": "object",
+            "properties": {
+                "date": {
+                    "description": "Maps to the end_date",
+                    "type": "string",
+                    "format": "date"
+                },
+                "agents": {
+                    "description": "The person who did the activity",
+                    "type": "object",
+                    "required": [
+                        "agent_ref",
+                        "role"
+                    ],
+                    "properties": {
+                        "agent_ref": {
+                            "type": "string"
+                        },
+                        "role": {
+                            "$ref": "#/definitions/onto_term"
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            }
+        }
+    }
+}
