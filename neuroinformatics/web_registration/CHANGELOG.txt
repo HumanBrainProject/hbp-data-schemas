@@ -1,0 +1,9 @@
+## [1.0-RC2] 2016-01-28 Samuel Kerrien / Yuri Katkov
+- Updated schema version to 1.0-RC2
+- Added a number of "additionalProperties": false to prevent random attributes be added
+- Added id attribute to organisation, contributor and software
+- Added list of roles to contributor
+- Added single optional organisation to contributor (the contributor can be repeated if it is affiliated to multiple organisations)
+
+## [1.0-RC1] 2016-01-07 Yuri Katkov
+- Initial schema
