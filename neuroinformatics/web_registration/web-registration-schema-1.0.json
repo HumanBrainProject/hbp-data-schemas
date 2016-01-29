@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/schema#",
-    "description": "A schema for simple description of the dataset. The schema is used for passing the data from the one-click registration app to its frontend, the Orchestrator",
-    "version": "3.0-RC3",
+    "description": "A schema for simple description of a data registration.",
+    "version": "1.0-RC2",
     "type": "object",
     "required": [
         "registration",
@@ -21,15 +21,15 @@
                     "format": "date"
                 },
                 "contributors": {
-                    "description": "An array of people who contributed to the activities.",
+                    "description": "An array of people who contributed to the generation of the dataset.",
                     "type": "array",
                     "minItems": 1,
                     "items": {
                         "type": "object",
-                        "required": [
-                            "id"
-                        ],
                         "properties": {
+                            "id": {
+                                "type": "string"
+                            },
                             "name": {
                                 "type": "string"
                             },
@@ -37,13 +37,22 @@
                                 "type": "string",
                                 "format": "email"
                             },
-                            "role": {
-                                "$ref": "#/definitions/onto_term"
+                            "roles": {
+                                "description": "An array of role the contributor took during the generation of the dataset.",
+                                "type": "array",
+                                "minItems": 1,
+                                "items": {
+                                    "$ref": "#/definitions/onto_term"
+                                }
+                            },
+                            "organisation": {
+                                "$ref": "#/definitions/organisation"
                             },
                             "contact_flag": {
                                 "type": "boolean"
                             }
-                        }
+                        },
+                        "additionalProperties": false
                     }
                 },
                 "organisations": {
@@ -51,7 +60,7 @@
                     "type": "array",
                     "minItems": 1,
                     "items": {
-                        "type": "string"
+                        "$ref": "#/definitions/organisation"
                     }
                 },
                 "software": {
@@ -60,17 +69,18 @@
                     "minItems": 1,
                     "items": {
                         "type": "object",
-                        "required": [
-                            "id"
-                        ],
                         "properties": {
+                            "id": {
+                                "type": "string"
+                            },
                             "name": {
                                 "type": "string"
                             },
                             "version": {
                                 "type": "string"
                             }
-                        }
+                        },
+                        "additionalProperties": false
                     }
                 }
             }
@@ -107,7 +117,8 @@
                             "description": "Age in days.",
                             "type": "number"
                         }
-                    }
+                    },
+                    "additionalProperties": false
                 },
                 "sex": {
                     "$ref": "#/definitions/onto_term"
@@ -121,10 +132,11 @@
                 "disease": {
                     "$ref": "#/definitions/onto_term"
                 }
-            }
+            },
+            "additionalProperties": false
         },
         "dataset": {
-            "description": "The description of the file attached. Maps to the HBPPROV Dataset and Resource. Brain regions are the same as the brain regions of the sample.",
+            "description": "The description of the file attached. Maps to the HBP-PROV Dataset and Resource. Brain regions are the same as the brain regions of the sample.",
             "type": "object",
             "required": [
                 "name",
@@ -169,13 +181,15 @@
                 "assigned_class": {
                     "$ref": "#/definitions/onto_term"
                 }
-            }
+            },
+            "additionalProperties": false
         }
     },
     "definitions": {
         "onto_term": {
-            "description": "Reference to a resolvable ontology term. Most likely it will have some more junk, which can be ignored.",
+            "description": "Reference to a resolvable ontology term.",
             "type": "object",
+            "javaType": "ch.epfl.hbp.nip.integration.registration.web.domain.OntologyTerm",
             "required": [
                 "uri"
             ],
@@ -193,35 +207,20 @@
                     "type": "string"
                 }
             },
-            "additionalProperties": true
+            "additionalProperties": false
         },
-        "activity": {
-            "description": "FIXME Do we need the agents or we suppose that the activity was made by the whole organization?",
+        "organisation": {
             "type": "object",
+            "javaType": "ch.epfl.hbp.nip.integration.registration.web.domain.Organisation",
             "properties": {
-                "date": {
-                    "description": "Maps to the end_date",
-                    "type": "string",
-                    "format": "date"
+                "id": {
+                    "type": "string"
                 },
-                "agents": {
-                    "description": "The person who did the activity",
-                    "type": "object",
-                    "required": [
-                        "agent_ref",
-                        "role"
-                    ],
-                    "properties": {
-                        "agent_ref": {
-                            "type": "string"
-                        },
-                        "role": {
-                            "$ref": "#/definitions/onto_term"
-                        }
-                    },
-                    "additionalProperties": false
+                "name": {
+                    "type": "string"
                 }
-            }
+            },
+            "additionalProperties": false
         }
     }
 }
