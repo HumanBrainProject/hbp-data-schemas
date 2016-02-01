@@ -1,3 +1,16 @@
+
+## [3.0-RC4] 2016-02-01 Samuel Kerrien
+
+### Updated fields
+* Add ‘private' to registration.release enum
+* Rename dataset.comment to dataset.description
+* Add an organisation_ref to /agents.contributors
+  A user that has multiple organisations should be modelled as separate contributors so that roles can be attributed to a specific organisation.
+  The organisation MUST be in the same file.
+
+### Usage note
+* Support for multiple roles for an activity's agent was requested but it was decided that we users should duplicate the definition of the agent instead.
+
 ## [3.0-RC3] 2016-01-07 Samuel Kerrien / Lomig Mégard / Catherine Zwahlen / Yuri Katkov
 
 ### Updated fields
@@ -12,7 +25,7 @@
 * Added activities.methods is an optional array of ontology_term
 * Renamed all attribute 'generation' to 'activity_ref'
 * Changed the type of 'dataset.atlas_location.atlas_template' from an enum to an ontology term so that we do not require a schema change when adding a atlas templates.
-* some fields in address of resourse become mandatory
+* some fields in address of resource become mandatory
 
 ## [3.0-RC2] 2015-12-03 Yuri Katkov / Francois Sy:
 
@@ -20,7 +33,7 @@
 * additional properties are now not allowed anywhere in the schema
 * added new directory structure to store the schema
 * added examples/tests
-* starting from now, every json document will have the backlink to the schema
+* starting from now, every json document will have the back link to the schema
 
 #### Removed fields
 * /representations/represented_entities is removed because we never used it and not fully understand what it really means

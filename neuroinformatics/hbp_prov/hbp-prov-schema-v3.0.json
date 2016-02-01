@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/schema#",
     "description": "schema for a the json that describes the registration activity.",
-    "version": "3.0-RC3",
+    "version": "3.0-RC4",
     "type": "object",
     "required": [
         "registration",
@@ -16,7 +16,7 @@
             "type": "string",
             "description": "The version number of the schema. Note to the schema designer: if this schema supports more than one version, list all the versions in the enum. ",
             "enum": [
-                "3.0-RC3"
+                "3.0-RC4"
             ]
         },
         "registration": {
@@ -66,6 +66,7 @@
                 },
                 "release": {
                     "enum": [
+                        "private",
                         "HBP",
                         "public"
                     ]
@@ -174,11 +175,9 @@
                         }
                     },
                     "protocol_description": {
-                        "description": "The textual description of the protocol used to perform the activity.",
                         "type": "string"
                     },
                     "methods": {
-                        "description": "Methods that were used in the protocol, taken from the method ontology.",
                         "type": "array",
                         "items": {
                             "$ref": "#/definitions/onto_term"
@@ -215,6 +214,9 @@
                                 "type": "string"
                             },
                             "name": {
+                                "type": "string"
+                            },
+                            "organisation_ref": {
                                 "type": "string"
                             },
                             "email": {
@@ -398,7 +400,7 @@
                     "name": {
                         "type": "string"
                     },
-                    "comment": {
+                    "description": {
                         "type": "string"
                     },
                     "categories": {
@@ -494,7 +496,7 @@
                             "type": "object",
                             "required": [
                                 "id",
-                                "addresses",
+                                "address",
                                 "checksum"
                             ],
                             "properties": {
@@ -598,11 +600,17 @@
             "items": {
                 "type": "object",
                 "required": [
+                    "classified_entity_ref",
                     "assigned_class",
                     "activity_ref",
                     "evidences"
                 ],
                 "properties": {
+                    "classified_entity_ref": {
+                        "description": "UUID of the entity that was classified. Must be described in the same registration file.",
+                        "type": "string",
+                        "format": "uuid"
+                    },
                     "assigned_class": {
                         "$ref": "#/definitions/onto_term"
                     },
@@ -755,7 +763,6 @@
         "resource_address": {
             "type": "object",
             "javaType": "ch.epfl.hbp.nip.prov.v3.domain.ResourceAddress",
-            "required": ["uri","storage"],
             "properties": {
                 "uri": {
                     "type": "string",
