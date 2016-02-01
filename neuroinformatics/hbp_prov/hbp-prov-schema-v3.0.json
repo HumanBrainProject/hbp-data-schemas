@@ -602,8 +602,7 @@
                 "required": [
                     "classified_entity_ref",
                     "assigned_class",
-                    "activity_ref",
-                    "evidences"
+                    "activity_ref"
                 ],
                 "properties": {
                     "classified_entity_ref": {
