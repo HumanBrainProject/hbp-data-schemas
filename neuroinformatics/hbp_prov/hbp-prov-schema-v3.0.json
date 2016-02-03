@@ -496,9 +496,11 @@
                     },
                     "representations": {
                         "type": "array",
+                        "description": "Array of resources' uuid as the physical representations of the dataset.",
                         "minItems": 1,
                         "items": {
                             "type": "string",
+                            "description": "A resource uuid. Must be described in the same registration file.",
                             "format": "uuid"
                         }
                     },
