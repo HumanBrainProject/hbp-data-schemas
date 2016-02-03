@@ -104,6 +104,14 @@
                         "description": "Checksum of the file. Not applicable for databases.",
                         "$ref": "#/definitions/checksum"
                     },
+                    "size": {
+                        "description": "The size of the file in bytes.",
+                        "type": "long"
+                    },
+                    "original_filename": {
+                        "description": "The name of the file at the time of data submission.",
+                        "type": "string"
+                    },
                     "comment": {
                         "type": "string"
                     },
@@ -217,6 +225,11 @@
                                 "type": "string"
                             },
                             "organisation_ref": {
+                                "description": "The organisation the contributor is affiliated to.",
+                                "type": "string"
+                            },
+                            "laboratory": {
+                                "description": "The laboratory as a sub-entity of the organisation to further specify the contributor's affiliation.",
                                 "type": "string"
                             },
                             "email": {
