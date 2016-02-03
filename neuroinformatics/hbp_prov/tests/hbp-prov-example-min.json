@@ -1,5 +1,5 @@
 {
-  "schema_version": "3.0-RC3",
+  "schema_version": "3.0-RC4",
   "registration": {
     "id": "12345678-1234-5678-1234-567812345678",
     "submission_date": "1999",
@@ -26,10 +26,15 @@
       "end_date":"1999-12-22",
       "agents":[{
         "agent_ref":"yuryid",
-        "role": {"uri": "http://ontolorole.com/role1"}
+        "roles": [{"uri": "http://ontolorole.com/role1"}]
       }],
       "source_entities": ["12345678-1234-5678-1234-567812345678"]
     }
   ],
-  "agents": {}
+  "agents": {
+    "organisations":[
+      {"id":"EPFL", "name":"EPFL"},
+      {"id":"LNMC", "name":"LNMC"}
+    ]
+  }
 }

@@ -106,7 +106,7 @@
                     },
                     "size": {
                         "description": "The size of the file in bytes.",
-                        "type": "long"
+                        "type": "integer"
                     },
                     "original_filename": {
                         "description": "The name of the file at the time of data submission.",
