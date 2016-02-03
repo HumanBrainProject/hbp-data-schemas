@@ -115,6 +115,8 @@
             {
                 "id": "0",
                 "name": "Iurii Katkov",
+                "organisation_ref": "http://epfl.ch",
+                "laboratory": "Blue Brain Project",
                 "email": "iurii.katkov@example.com"
             }
         ],
@@ -202,7 +204,6 @@
     },
     "resources": [
         {
-
             "addresses": [
                 {
                     "uri": "smb://mit.edu/repo/em-stscks32.h3",
@@ -214,6 +215,8 @@
                 }
             ],
             "comment": "h3 representation",
+            "original_filename": "em-stscks32.h3",
+            "size": 23978432987,
             "id": "0a1a6a2f-da31-4fae-83d8-9af458274458",
             "mime_type": {
                 "code": "HBP_FT:0000003",
