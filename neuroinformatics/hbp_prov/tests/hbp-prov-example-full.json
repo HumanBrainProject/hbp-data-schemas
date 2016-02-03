@@ -1,20 +1,20 @@
 {
-    "schema_version": "3.0-RC3",
+    "schema_version": "3.0-RC4",
     "activities": [
         {
             "agents": [
                 {
-                    "role": {
+                    "roles": [{
                         "uri": "HBP_ROLE:0000030",
                         "name": "slicer"
-                    },
+                    }],
                     "agent_ref": "1"
                 },
                 {
-                    "role": {
+                    "roles": [{
                         "uri": "HBP_ROLE:0000020",
                         "name": "extraction of tissue"
-                    },
+                    }],
                     "agent_ref": "0"
                 }
             ],
@@ -38,10 +38,10 @@
         {
             "agents": [
                 {
-                    "role": {
+                    "roles": [{
                         "uri": "HBP_ROLE:0000018",
                         "name": "processing of biological sample"
-                    },
+                    }],
                     "agent_ref": "0"
                 }
             ],
@@ -58,17 +58,17 @@
         {
             "agents": [
                 {
-                    "role": {
+                    "roles": [{
                         "uri": "HBP_ROLE:0000026",
                         "name": "analysis of data"
-                    },
+                    }],
                     "agent_ref": "0"
                 },
                 {
-                    "role": {
+                    "roles": [{
                         "uri": "HBP_ROLE:0000032",
                         "name": "reconstructor"
-                    },
+                    }],
                     "agent_ref": "23"
                 }
             ],
@@ -85,10 +85,10 @@
         {
             "agents": [
                 {
-                    "role": {
+                    "roles": [{
                         "uri": "HBP_ROLE:0000030",
                         "name": "slicer"
-                    },
+                    }],
                     "agent_ref": "1"
                 }
             ],
@@ -115,6 +115,8 @@
             {
                 "id": "0",
                 "name": "Iurii Katkov",
+                "organisation_ref": "http://epfl.ch",
+                "laboratory": "Blue Brain Project",
                 "email": "iurii.katkov@example.com"
             }
         ],
@@ -159,7 +161,7 @@
                     "name": "morphological single cell model"
                 }
             ],
-            "comment": "annotated photo of emslice12",
+            "description": "annotated photo of emslice12",
             "activity_ref": "3d5c20b9-f54c-4e85-97b8-fcf4e178d5d3",
             "id": "119b832f-502c-4749-9827-2ac147744c9b",
             "name": "em-slice-photo12",
@@ -180,7 +182,7 @@
                     "name": "morphological single cell model"
                 }
             ],
-            "comment": "photo of emslice12",
+            "description": "photo of emslice12",
             "activity_ref": "b1d8335b-7153-4e5a-bb99-ffcde998053c",
             "id": "9c6d3c73-1c5d-45df-a27f-ae45fd6be49f",
             "name": "em-slice-photo12",
@@ -202,7 +204,6 @@
     },
     "resources": [
         {
-
             "addresses": [
                 {
                     "uri": "smb://mit.edu/repo/em-stscks32.h3",
@@ -214,6 +215,8 @@
                 }
             ],
             "comment": "h3 representation",
+            "original_filename": "em-stscks32.h3",
+            "size": 23978432987,
             "id": "0a1a6a2f-da31-4fae-83d8-9af458274458",
             "mime_type": {
                 "code": "HBP_FT:0000003",
@@ -298,6 +301,7 @@
     ],
     "classifications": [
         {
+            "classified_entity_ref":"119b832f-502c-4749-9827-2ac147744c9b",
             "assigned_class": {
                 "uri": "http://hbp.org/some_class"
             },
