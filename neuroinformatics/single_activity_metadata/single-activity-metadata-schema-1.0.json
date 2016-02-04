@@ -45,6 +45,10 @@
                             "organisation": {
                                 "$ref": "#/definitions/organisation"
                             },
+                            "laboratory": {
+                                "type": "string",
+                                "description": "The sub-entity within an organisation, e.g. Blue Brain Project within EPFL"
+                            },
                             "contact_flag": {
                                 "type": "boolean"
                             }
@@ -232,10 +236,6 @@
                 },
                 "name": {
                     "type": "string"
-                },
-                "laboratory": {
-                    "type": "string",
-                    "description": "The sub-entity within an organisation, e.g. Blue Brain Project within EPFL"
                 }
             },
             "additionalProperties": false

@@ -9,7 +9,7 @@
 #### Added fields
 - dataset.protocol describes the protocol and its name with optional id in the database
 - dataset.datatype is brought back. Probably it was removed by a mistake in the previous versions.
-- definitions/organisation/laboratory describes the laboratory (section, team, group) inside the organisation
+- registration/contributors/laboratory describes the laboratory (section, team, group) inside the organisation
 
 #### Removed fields
 - registration.description is removed because it has duplicated usage with dataset.description
