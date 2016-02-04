@@ -23,6 +23,7 @@
                     "minItems": 1,
                     "items": {
                         "type": "object",
+                        "required": ["family_name", "email", "roles", "organisation"],
                         "properties": {
                             "id": {
                                 "type": "string"
