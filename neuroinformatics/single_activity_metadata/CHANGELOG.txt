@@ -1,6 +1,19 @@
-## [1.0-RC3] 2016-02-03 Samuel Kerrien
+## [1.0-RC3] 2016-02-03 Samuel Kerrien / Yuri Katkov
+
+### Updated fields
 - Updated file names to Single Activity Metadata (SAM)
 - Updated javaType attributes to reflect java packages changes
+- specimen.name is no longer a mandatory field (decision is made after the discussion with Sean 1.2.2016). The reason to make it optional is that we consider the name of the specimen to be an internal id of the lab, which is unnesessary to expose.  We also decided that the "search by specimen name" use case is not our priority.
+- definitions/organisation/name is now the required field
+
+#### Added fields
+- dataset.protocol describes the protocol and its name with optional id in the database
+- dataset.datatype is brought back. Probably it was removed by a mistake in the previous versions.
+- definitions/organisation/laboratory describes the laboratory (section, team, group) inside the organisation
+
+#### Removed fields
+- registration.description is removed because it has duplicated usage with dataset.description
+- dataset.protocol_description is removed in favor to dataset.protocol (see Added fields)
 
 ## [1.0-RC2] 2016-01-28 Samuel Kerrien / Yuri Katkov
 - Updated schema version to 1.0-RC2

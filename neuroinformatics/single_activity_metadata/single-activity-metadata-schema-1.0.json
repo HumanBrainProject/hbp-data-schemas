@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/schema#",
-    "description": "A schema for simple description of a data registration.",
+    "description": "A schema for simple description of a data registration. Using this schema it's possible to describe a single-activity metadata. The following restrictions apply: only one activity (it's not possible to describes the steps), only once specimen. If the classification has been performed, we allow for only one class to be assigned to the dataset.",
     "version": "1.0-RC3",
     "type": "object",
     "required": [
@@ -12,9 +12,6 @@
         "registration": {
             "type": "object",
             "properties": {
-                "description": {
-                    "type": "string"
-                },
                 "production_end_date": {
                     "description": "The date on which the data has been produced.",
                     "type": "string",
@@ -88,7 +85,6 @@
         "specimen": {
             "type": "object",
             "required": [
-                "name",
                 "sex",
                 "species",
                 "age"
@@ -174,12 +170,28 @@
                         "$ref": "#/definitions/onto_term"
                     }
                 },
-                "protocol_description": {
-                    "description": "This will go to activity_ref. Describes how the activity was performed.",
-                    "type": "string"
+                "protocol": {
+                    "type": "object",
+                    "description": "Textual reusable description of the end-to-end protocol that describes how the experimentation was done and dataset has been created.",
+                    "properties": {
+                        "id": {
+                            "type": "string",
+                            "description": "If the protocol is already registered, the id is mandatory. If it's a new protocol that user has added through UI, this field must be empty and the new protocol will be added to the database."
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "description": {
+                            "type": "string"
+                        }
+                    }
                 },
                 "assigned_class": {
                     "$ref": "#/definitions/onto_term"
+                },
+                "data_type":{
+                    "$ref": "#/definitions/onto_term",
+                    "description": "Datatype of the main file in the dataset, taken from HBP PROV ontology"
                 }
             },
             "additionalProperties": false
@@ -212,12 +224,18 @@
         "organisation": {
             "type": "object",
             "javaType": "ch.epfl.hbp.nip.integration.registration.web.domain.Organisation",
+            "required": ["name"],
             "properties": {
                 "id": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "If the organisation is already registered, the id is mandatory. If it's a new organisations that user has added through UI, this field must be empty."
                 },
                 "name": {
                     "type": "string"
+                },
+                "laboratory": {
+                    "type": "string",
+                    "description": "The sub-entity within an organisation, e.g. Blue Brain Project within EPFL"
                 }
             },
             "additionalProperties": false
