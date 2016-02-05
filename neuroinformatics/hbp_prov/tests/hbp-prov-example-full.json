@@ -114,7 +114,8 @@
         "contributors": [
             {
                 "id": "0",
-                "name": "Iurii Katkov",
+                "family_name": "Katkov",
+                "given_names": "Iurii",
                 "organisation_ref": "http://epfl.ch",
                 "laboratory": "Blue Brain Project",
                 "email": "iurii.katkov@example.com"
