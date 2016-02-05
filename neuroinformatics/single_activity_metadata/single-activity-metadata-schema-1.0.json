@@ -23,13 +23,19 @@
                     "minItems": 1,
                     "items": {
                         "type": "object",
+                        "required": ["family_name", "email", "roles", "organisation"],
                         "properties": {
                             "id": {
                                 "type": "string"
                             },
-                            "name": {
+                            "family_name": {
                                 "type": "string"
                             },
+                            "given_names": {
+                                "type": "string",
+                                "description": "Following the recomendations of W3C: https://www.w3.org/International/questions/qa-personal-names"
+                            },
+
                             "email": {
                                 "type": "string",
                                 "format": "email"
@@ -139,8 +145,9 @@
             "description": "The description of the file attached. Maps to the HBP-PROV Dataset and Resource. Brain regions are the same as the brain regions of the sample.",
             "type": "object",
             "required": [
-                "name",
-                "categories"
+                "title",
+                "categories",
+                "protocol"
             ],
             "properties": {
                 "title": {
@@ -177,6 +184,7 @@
                 "protocol": {
                     "type": "object",
                     "description": "Textual reusable description of the end-to-end protocol that describes how the experimentation was done and dataset has been created.",
+                    "required": ["name", "description"],
                     "properties": {
                         "id": {
                             "type": "string",
