@@ -220,13 +220,18 @@
                     "items": {
                         "type": "object",
                         "required": [
-                            "id"
+                            "id",
+                            "family_name"
                         ],
                         "properties": {
                             "id": {
                                 "type": "string"
                             },
-                            "name": {
+                            "family_name": {
+                                "type": "string"
+                            },
+                            "given_names": {
+                                "description": "Name(s) the contributor is known by.",
                                 "type": "string"
                             },
                             "organisation_ref": {

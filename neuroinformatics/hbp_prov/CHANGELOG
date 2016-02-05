@@ -2,6 +2,8 @@
 ## [3.0-RC4] 2016-02-01 Samuel Kerrien
 
 ### Updated fields
+* Add /agents.contributors.family_name
+* Add /agents.contributors.given_names
 * Add ‘private' to registration.release enum
 * Rename dataset.comment to dataset.description
 * Add an organisation_ref to /agents.contributors
