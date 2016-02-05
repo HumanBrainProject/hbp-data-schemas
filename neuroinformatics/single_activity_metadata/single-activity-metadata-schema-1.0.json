@@ -213,7 +213,7 @@
         "onto_term": {
             "description": "Reference to a resolvable ontology term.",
             "type": "object",
-            "javaType": "ch.epfl.hbp.nip.integration.registration.web.domain.OntologyTerm",
+            "javaType": "ch.epfl.hbp.nip.integration.registration.sam.domain.OntologyTerm",
             "required": [
                 "uri"
             ],
@@ -235,7 +235,7 @@
         },
         "organisation": {
             "type": "object",
-            "javaType": "ch.epfl.hbp.nip.integration.registration.web.domain.Organisation",
+            "javaType": "ch.epfl.hbp.nip.integration.registration.sam.domain.Organisation",
             "required": ["name"],
             "properties": {
                 "id": {
