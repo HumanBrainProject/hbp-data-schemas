@@ -2,6 +2,8 @@
 ## [3.0-RC4] 2016-02-01 Samuel Kerrien
 
 ### Updated fields
+* Added mininum and maximum attributes on resource's size to make it an unsigned long.
+* Made all uuid fields into type 'string' and added pattern to validate UUID format (lowercase only).
 * Add /agents.contributors.family_name
 * Add /agents.contributors.given_names
 * Add ‘private' to registration.release enum
