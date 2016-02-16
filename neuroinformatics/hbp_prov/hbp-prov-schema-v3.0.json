@@ -32,7 +32,8 @@
             "properties": {
                 "id": {
                     "type": "string",
-                    "format": "uuid"
+                    "description": "A Universally unique identifier (we only allow lowercase UUIDs).",
+                    "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
                 },
                 "name": {
                     "type": "string"
@@ -87,7 +88,8 @@
                 "properties": {
                     "id": {
                         "type": "string",
-                        "format": "uuid"
+                        "description": "A Universally unique identifier (we only allow lowercase UUIDs).",
+                        "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
                     },
                     "addresses": {
                         "type": "array",
@@ -106,7 +108,9 @@
                     },
                     "size": {
                         "description": "The size of the file in bytes.",
-                        "type": "integer"
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 999999999999999999
                     },
                     "original_filename": {
                         "description": "The name of the file at the time of data submission.",
@@ -116,9 +120,9 @@
                         "type": "string"
                     },
                     "activity_ref": {
-                        "description": "UUID of the activity that generated the resource. Must be described in the same registration file.",
                         "type": "string",
-                        "format": "uuid"
+                        "description": "UUID of the activity that generated the resource. Must be described in the same registration file.",
+                        "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
                     }
                 },
                 "additionalProperties": false
@@ -140,7 +144,8 @@
                 "properties": {
                     "id": {
                         "type": "string",
-                        "format": "uuid"
+                        "description": "A Universally unique identifier (we only allow lowercase UUIDs).",
+                        "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
                     },
                     "name": {
                         "type": "string"
@@ -202,7 +207,8 @@
                         "minItems": 1,
                         "items": {
                             "type": "string",
-                            "format": "uuid"
+                            "description": "A Universally unique identifier (we only allow lowercase UUIDs).",
+                            "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
                         }
                     }
                 },
@@ -310,7 +316,8 @@
                 "properties": {
                     "id": {
                         "type": "string",
-                        "format": "uuid"
+                        "description": "A Universally unique identifier (we only allow lowercase UUIDs).",
+                        "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
                     },
                     "name": {
                         "type": "string"
@@ -377,7 +384,8 @@
                 "properties": {
                     "id": {
                         "type": "string",
-                        "format": "uuid"
+                        "description": "A Universally unique identifier (we only allow lowercase UUIDs).",
+                        "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
                     },
                     "name": {
                         "type": "string"
@@ -386,9 +394,9 @@
                         "type": "string"
                     },
                     "activity_ref": {
-                        "description": "UUID of the activity that generated the sample. Must be described in the same registration file.",
                         "type": "string",
-                        "format": "uuid"
+                        "description": "UUID of the activity that generated the sample. Must be described in the same registration file.",
+                        "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
                     },
                     "brain_regions": {
                         "description": "Brain region(s) where the sample originates.",
@@ -418,7 +426,8 @@
                 "properties": {
                     "id": {
                         "type": "string",
-                        "format": "uuid"
+                        "description": "A Universally unique identifier (we only allow lowercase UUIDs).",
+                        "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
                     },
                     "name": {
                         "type": "string"
@@ -435,9 +444,9 @@
                         }
                     },
                     "activity_ref": {
-                        "description": "UUID of the activity that generated the dataset. Must be described in the same registration file.",
                         "type": "string",
-                        "format": "uuid"
+                        "description": "UUID of the activity that generated the dataset. Must be described in the same registration file.",
+                        "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
                     },
                     "brain_regions": {
                         "description": "Brain region(s) this dataset was made on.",
@@ -467,9 +476,9 @@
                             {
                                 "properties": {
                                     "parent_space": {
-                                        "description": "Parent space from which a bounding box was extracted. Reference the Knowledge Graph UUID of the parent observation.",
                                         "type": "string",
-                                        "format": "uuid"
+                                        "description": "Parent space from which a bounding box was extracted. Reference the Knowledge Graph UUID of the parent observation.",
+                                        "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
                                     }
                                 },
                                 "required": [
@@ -511,7 +520,7 @@
                         "items": {
                             "type": "string",
                             "description": "A resource uuid. Must be described in the same registration file.",
-                            "format": "uuid"
+                            "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
                         }
                     },
                     "documentation_files": {
@@ -527,7 +536,8 @@
                             "properties": {
                                 "id": {
                                     "type": "string",
-                                    "format": "uuid"
+                                    "description": "A Universally unique identifier (we only allow lowercase UUIDs).",
+                                    "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
                                 },
                                 "addresses": {
                                     "type": "array",
@@ -578,7 +588,8 @@
                 "properties": {
                     "id": {
                         "type": "string",
-                        "format": "uuid"
+                        "description": "A Universally unique identifier (we only allow lowercase UUIDs).",
+                        "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
                     },
                     "name": {
                         "type": "string"
@@ -595,9 +606,9 @@
                         }
                     },
                     "activity_ref": {
-                        "description": "UUID of the activity that generated the model. Must be described in the same registration file.",
                         "type": "string",
-                        "format": "uuid"
+                        "description": "UUID of the activity that generated the model. Must be described in the same registration file.",
+                        "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
                     },
                     "brain_regions": {
                         "description": "Brain region(s) from which the model was derived.",
@@ -611,7 +622,8 @@
                         "minItems": 1,
                         "items": {
                             "type": "string",
-                            "format": "uuid"
+                            "description": "A Universally unique identifier (we only allow lowercase UUIDs).",
+                            "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
                         }
                     }
                 },
@@ -631,24 +643,25 @@
                 ],
                 "properties": {
                     "classified_entity_ref": {
-                        "description": "UUID of the entity that was classified. Must be described in the same registration file.",
                         "type": "string",
-                        "format": "uuid"
+                        "description": "UUID of the entity that was classified. Must be described in the same registration file.",
+                        "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
                     },
                     "assigned_class": {
                         "$ref": "#/definitions/onto_term"
                     },
                     "activity_ref": {
-                        "description": "UUID of the activity that generated the classification. Must be described in the same registration file.",
                         "type": "string",
-                        "format": "uuid"
+                        "description": "UUID of the activity that generated the classification. Must be described in the same registration file.",
+                        "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
                     },
                     "evidences": {
                         "type": "array",
                         "description": "The datasets that contain the information that has been used to classify the entity.",
                         "items": {
                             "type": "string",
-                            "format": "uuid"
+                            "description": "A Universally unique identifier (we only allow lowercase UUIDs).",
+                            "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
                         },
                         "minItems": 1
                     }
