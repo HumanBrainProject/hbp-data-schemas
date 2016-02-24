@@ -1,3 +1,8 @@
+## [1.0-RC4] 2016-02-24 Catherine Zwahlen / Yuri Katkov
+
+### Added fields
+- schema_version to specify the version in the SAM json file
+
 ## [1.0-RC3] 2016-02-03 Samuel Kerrien / Yuri Katkov
 
 ### Updated fields
