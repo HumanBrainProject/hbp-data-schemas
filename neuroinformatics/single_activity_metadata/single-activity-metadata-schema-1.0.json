@@ -20,6 +20,14 @@
         "registration": {
             "type": "object",
             "properties": {
+                "schema_version": {
+                    "type": "string",
+                    "description": "The version number of the schema. Note to the schema designer: if this schema supports more than one version, list all the versions in the enum. ",
+                    "enum": [
+                        "1.0-RC3",
+                        "1.0-RC4"
+                    ]
+                },
                 "production_end_date": {
                     "description": "The date on which the data has been produced.",
                     "type": "string",
