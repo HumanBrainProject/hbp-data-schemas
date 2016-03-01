@@ -110,7 +110,7 @@
                         "description": "The size of the file in bytes.",
                         "type": "integer",
                         "minimum": 0,
-                        "maximum": 999999999999999999
+                        "maximum": 9223372036854775807
                     },
                     "original_filename": {
                         "description": "The name of the file at the time of data submission.",

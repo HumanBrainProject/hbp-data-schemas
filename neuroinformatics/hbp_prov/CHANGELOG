@@ -2,6 +2,7 @@
 ## [3.0-RC4] 2016-02-01 Samuel Kerrien
 
 ### Updated fields
+* Gave resource's size the maximum value of Long.MAX_VALUE (i.e. 9,223,372,036,854,775,807)
 * Added mininum and maximum attributes on resource's size to make it an unsigned long.
 * Made all uuid fields into type 'string' and added pattern to validate UUID format (lowercase only).
 * Add /agents.contributors.family_name
