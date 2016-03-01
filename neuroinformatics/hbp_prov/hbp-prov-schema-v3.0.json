@@ -123,6 +123,13 @@
                         "type": "string",
                         "description": "UUID of the activity that generated the resource. Must be described in the same registration file.",
                         "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+                    },
+                    "attributes": {
+                        "type": "array",
+                        "description": "List of additional attributes. Typically it will be used to store the properties that came from the storage",
+                        "items": {
+                            "$ref": "#/definitions/attribute"
+                        }
                     }
                 },
                 "additionalProperties": false
@@ -590,6 +597,13 @@
                         "items": {
                             "$ref": "#/definitions/xref"
                         }
+                    },
+                    "attributes": {
+                        "type": "array",
+                        "description": "List of additional attributes.",
+                        "items": {
+                            "$ref": "#/definitions/attribute"
+                        }
                     }
                 },
                 "additionalProperties": false
@@ -836,6 +850,22 @@
                 "storage": {
                     "description": "The link to the ontology term that has the description of the services along with the its access parameters.",
                     "$ref": "#/definitions/onto_term"
+                }
+            },
+            "additionalProperties": false
+        },
+        "attribute": {
+            "type": "object",
+            "required": ["uri", "value"],
+            "description": "Additional properties that can be attached to an entity. The properties has to be described in an ontology as OWL datatype properties and hold all the information about the type, min and max values, regex restrictions, etc.",
+            "properties": {
+                "uri": {
+                    "description": "The link to datatype property in the hbp attribute ontology",
+                    "$ref": "#/definitions/onto_term"
+                },
+                "value": {
+                    "description": "The value of the attribute in a string form. No validation in possible in the schema level.",
+                    "type": "string"
                 }
             },
             "additionalProperties": false

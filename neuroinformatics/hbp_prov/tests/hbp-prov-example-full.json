@@ -1,5 +1,5 @@
 {
-    "schema_version": "3.0-RC4",
+    "schema_version": "3.0-RC5",
     "activities": [
         {
             "agents": [
@@ -209,6 +209,7 @@
             "representations": [
                 "ec3ca186-1cd8-44a2-8dec-825830d60559"
             ]
+
         },
         {
             "brain_regions": [
@@ -269,7 +270,12 @@
                 "value": "e472cdd6355b6ae710e7a380e4fd8fcd",
                 "algorithm": "MD5"
             },
-            "activity_ref":"b1d8335b-7153-4e5a-bb99-ffcde998053c"
+            "activity_ref":"b1d8335b-7153-4e5a-bb99-ffcde998053c",
+            "attributes": [{
+                "uri": {"uri": "http://supeddb/term/zenodo_id"},
+                "value": "21e23recdss"
+                }
+            ]
         },
         {
             "addresses": [
