@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/schema#",
     "description": "schema for a the json that describes the registration activity.",
-    "version": "3.0-RC4",
+    "version": "3.0-RC5",
     "type": "object",
     "required": [
         "registration",
@@ -16,7 +16,7 @@
             "type": "string",
             "description": "The version number of the schema. Note to the schema designer: if this schema supports more than one version, list all the versions in the enum. ",
             "enum": [
-                "3.0-RC4"
+                "3.0-RC5"
             ]
         },
         "registration": {
@@ -192,11 +192,34 @@
                             "additionalProperties": false
                         }
                     },
-                    "protocol_description": {
-                        "type": "string"
+                    "protocol": {
+                        "description": "Protocol captures the exact way activity was performed",
+                        "required": ["title", "summary"],
+                        "type": "object",
+                        "properties": {
+                            "title": {
+                                "description": "The name of the protocol which allows person to easily identify it.",
+                                "type": "string"
+                            },
+
+                            "summary": {
+                                "description": "Textual description of the protocol. Typically a copy/paste from material and methods section of the paper",
+                                "type": "string"
+                            },
+                            "publications": {
+                                "description": "A list of papers where you can find the full detailed description of the protocol",
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/definitions/xref"
+                                }
+                            }
+                        },
+                        "additionalProperties": false
                     },
+
                     "methods": {
                         "type": "array",
+                        "description": "the methods used in the activity. We don't recommend to use this field now, unless it's a matter of conversion from v2.",
                         "items": {
                             "$ref": "#/definitions/onto_term"
                         }

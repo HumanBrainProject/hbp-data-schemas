@@ -1,3 +1,6 @@
+## [3.0-RC5] 2016-03-01 Yuri Katkov / Samuel Kerrien /  Lomig Mégard / Catherine Zwahlen
+### Updated fields
+* Protocol_description became protocol with summary, title  and list of publications. The reason to bring in the title is that we want laboratories to reuse their existing protocols. The reason for the list of publications is to know, where does the original description of the protocol is stored
 
 ## [3.0-RC4] 2016-02-01 Samuel Kerrien
 
