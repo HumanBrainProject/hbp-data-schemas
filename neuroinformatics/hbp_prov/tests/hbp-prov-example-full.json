@@ -272,7 +272,7 @@
             },
             "activity_ref":"b1d8335b-7153-4e5a-bb99-ffcde998053c",
             "attributes": [{
-                "uri": {"uri": "http://supeddb/term/zenodo_id"},
+                "term": {"uri": "http://supeddb/term/zenodo_id"},
                 "value": "21e23recdss"
                 }
             ]

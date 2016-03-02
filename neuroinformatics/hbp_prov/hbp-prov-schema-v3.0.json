@@ -856,10 +856,10 @@
         },
         "attribute": {
             "type": "object",
-            "required": ["uri", "value"],
+            "required": ["term", "value"],
             "description": "Additional properties that can be attached to an entity. The properties has to be described in an ontology as OWL datatype properties and hold all the information about the type, min and max values, regex restrictions, etc.",
             "properties": {
-                "uri": {
+                "term": {
                     "description": "The link to datatype property in the hbp attribute ontology",
                     "$ref": "#/definitions/onto_term"
                 },
