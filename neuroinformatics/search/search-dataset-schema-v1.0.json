@@ -17,7 +17,9 @@
             "$ref": "#/definitions/uuid"
         },
         "title": {
-            "description": "The dataset title",
+            "type": "string"
+        },
+        "description": {
             "type": "string"
         },
         "methods": {
@@ -25,7 +27,7 @@
             "type": "array",
             "minItems": 1,
             "items": {
-                "$ref": "https://schemas.humanbrainproject.eu/neuroinformatics/ksearch-ontology-term-schema-1.0.json"
+                "$ref": "https://schemas.humanbrainproject.eu/neuroinformatics/search-ontology-term-schema-1.0.json"
             }
         },
         "classifications": {
@@ -33,7 +35,7 @@
             "type": "array",
             "minItems": 1,
             "items": {
-                "$ref": "https://schemas.humanbrainproject.eu/neuroinformatics/ksearch-ontology-term-schema-1.0.json"
+                "$ref": "https://schemas.humanbrainproject.eu/neuroinformatics/search-ontology-term-schema-1.0.json"
             }
         },
         "contributors": {
@@ -41,23 +43,23 @@
             "type": "array",
             "minItems": 1,
             "items": {
-                "$ref": "https://schemas.humanbrainproject.eu/neuroinformatics/ksearch-userprofile-schema-1.0.json"
+                "$ref": "https://schemas.humanbrainproject.eu/neuroinformatics/search-userprofile-schema-1.0.json"
             }
         },
-        "domain_aspects": {
+        "data_modalities": {
             "description": "The domain types of the dataset",
             "type": "array",
             "minItems": 1,
             "items": {
-                "$ref": "https://schemas.humanbrainproject.eu/neuroinformatics/ksearch-ontology-term-schema-1.0.json"
+                "$ref": "https://schemas.humanbrainproject.eu/neuroinformatics/search-ontology-term-schema-1.0.json"
             }
         },
-        "locations": {
+        "brain_regions": {
             "description": "Brain region(s)",
             "type": "array",
             "minItems": 1,
             "items": {
-                "$ref": "https://schemas.humanbrainproject.eu/neuroinformatics/ksearch-ontology-term-schema-1.0.json"
+                "$ref": "https://schemas.humanbrainproject.eu/neuroinformatics/search-ontology-term-schema-1.0.json"
             }
         },
         "specimen": {
@@ -65,7 +67,7 @@
             "type": "array",
             "minItems": 1,
             "items": {
-                "$ref": "https://schemas.humanbrainproject.eu/neuroinformatics/ksearch-specimen-schema-1.0.json"
+                "$ref": "https://schemas.humanbrainproject.eu/neuroinformatics/search-specimen-schema-1.0.json"
             }
         },
         "representations": {
@@ -80,7 +82,7 @@
                 ],
                 "properties": {
                     "datatype": {
-                        "$ref": "https://schemas.humanbrainproject.eu/neuroinformatics/ksearch-ontology-term-schema-1.0.json"
+                        "$ref": "https://schemas.humanbrainproject.eu/neuroinformatics/search-ontology-term-schema-1.0.json"
                     },
                     "access": {
                         "description": "The URL of the representation",
@@ -92,7 +94,6 @@
                 }
             }
         }
-
     },
     "definitions": {
         "imagestack_metadata": {
@@ -168,9 +169,8 @@
         },
         "uuid": {
             "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
+            "description": "A Universally unique identifier (we only allow lowercase UUIDs).",
+            "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
         }
     }
-
-
 }

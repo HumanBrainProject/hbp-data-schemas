@@ -1,0 +1,193 @@
+{
+    "took": 2,
+    "total": 1,
+    "next": null,
+    "previous": null,
+    "hits": [
+        {
+            "source": {
+                "uuid": "3731e540-ebe0-11e4-a29b-6003088da632",
+                "specimen": {
+                    "uuid": "3732d69e-ebe0-11e4-a9d1-6003088da632",
+                    "name": "spcimen name",
+                    "species": {
+                        "uri": "HBP_TAX:00000004",
+                        "name": "Homo sapiens",
+                        "description": ""
+                    },
+                    "age": "post natal year 65",
+                    "sex": "female"
+                },
+                "title": "BigBrain, FZJ",
+                "contributors": [{
+                        "id": "31",
+                        "first_name": "Katrin",
+                        "last_name": "Amunts",
+                        "roles": [
+                            {
+                                "label": "head of laboratory",
+                                "id": "HBP_ROLE:0000027"
+                            },
+                            {
+                                "label": "acquisition of data",
+                                "id": "HBP_ROLE:0000006"
+                            },
+                            {
+                                "label": "extraction of tissue",
+                                "id": "HBP_ROLE:0000020"
+                            }
+                        ],
+                        "affiliations": [
+                            {
+                                "institution": "INM-1",
+                                "lab_name": "Amunts Lab"
+                            }
+                        ]
+                    }, {
+                        "id": "34",
+                        "first_name": "Hartmut",
+                        "last_name": "Mohlberg",
+                        "roles": [
+                            {
+                                "label": "processing of data",
+                                "id": "HBP_ROLE:0000011"
+                            }
+                        ],
+                        "affiliations": [
+                            {
+                                "institution": "INM-1",
+                                "lab_name": "Amunts Lab"
+                            }
+                        ]
+                    }, {
+                        "id": "1",
+                        "first_name": "Martin",
+                        "last_name": "Telefont",
+                        "roles": [
+                            {
+                                "label": "data integration",
+                                "id": "HBP_ROLE:0000028"
+                            }
+                        ],
+                        "affiliations": [
+                            {
+                                "institution": "EPFL",
+                                "lab_name": "BBP"
+                            }
+                        ]
+                    }, {
+                        "id": "57",
+                        "first_name": "Stanislaw",
+                        "last_name": "Adaszewski",
+                        "roles": [
+                            {
+                                "label": "processing of data",
+                                "id": "HBP_ROLE:0000011"
+                            }
+                        ],
+                        "affiliations": [
+                            {
+                                "institution": "EPFL",
+                                "lab_name": "BBP"
+                            }
+                        ]
+                    }
+                ],
+                "data_providers": ["Institute of Neuroscience and Medicine, Jülich, Germany"],
+                "methods": [
+                    {
+                        "label": "BigBrain - Whole Brain Image Stack Generation",
+                        "id": "HBP_MTD:0000059"
+                    },
+                    {
+                        "label": "Pyramid Construction (BBIC)",
+                        "id": "HBP_MTD:0000055"
+                    },
+                    {
+                        "label": "Volume Block Resizing",
+                        "id": "HBP_MTD:0000056"
+                    },
+                    {
+                        "label": "Compression",
+                        "id": "HBP_MTD:0000057"
+                    },
+                    {
+                        "label": "Volume Block Resizing and Compression",
+                        "id": "HBP_MTD:0000068"
+                    },
+                    {
+                        "label": "BigBrain - Tissue Extraction and Fixation",
+                        "id": "HBP_MTD:0000031"
+                    }
+                ],
+                "representations": [
+                    {
+                        "datatype": {
+                            "uri": "identifier",
+                            "name": "human readable name",
+                            "description": ""
+                        },
+                        "access": "/gpfs/bbp.cscs.ch/project/proj39/template/human/bigbrain/release2013/bbic/sections/bigbrain.h5",
+                        "imagestack_metadata": [{
+                                "sectional_plane": {
+                                    "orientation": "coronal",
+                                    "code": null,
+                                    "stack": 0
+                                },
+                                "resolution": {
+                                    "unit": "micron",
+                                    "unit_per_pixel": "20"
+                                },
+                                "overlays": []
+                            }]
+
+                    },
+                    {
+                        "access": "/gpfs/bbp.cscs.ch/project/proj39/template/human/bigbrain/release2013/bbic/sections/bigbrain.h5",
+                        "sectional_plane": {
+                            "orientation": "sagittal",
+                            "code": null,
+                            "stack": 1
+                        },
+                        "resolution": {
+                            "unit": "micron",
+                            "unit_per_pixel": "20"
+                        },
+                        "overlays": []
+                    },
+                    {
+                        "access": "/gpfs/bbp.cscs.ch/project/proj39/template/human/bigbrain/release2013/bbic/sections/bigbrain.h5",
+                        "sectional_plane": {
+                            "orientation": "axial",
+                            "code": null,
+                            "stack": 2
+                        },
+                        "resolution": {
+                            "unit": "micron",
+                            "unit_per_pixel": "20"
+                        },
+                        "overlays": []
+                    }
+
+                ]
+
+            },
+            "self": "link to the source json object"
+        }
+
+    ],
+    "aggregations": [
+        {
+            "doc_count": 1,
+            "self": "http://",
+            "join_back_level": "Dataset",
+            "buckets": [
+                {
+                    "key": "Rattus norvegicus atlas template",
+                    "name": "Atlas template",
+                    "field": "fataset.template"
+                }
+            ]
+        }
+    ]
+}

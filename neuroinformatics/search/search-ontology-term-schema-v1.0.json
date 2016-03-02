@@ -1,0 +1,70 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "title": "Ontology term schema",
+    "description": "Schema for an ontology term as it is retrieved through ksearch API",
+    "version": "1.0-RC2",
+    "type": "object",
+    "required": [
+        "id"
+    ],
+    "additionalProperties": false,
+    "properties": {
+        "schema_version": {
+            "type": "string",
+            "description": "Compatible schema versions enum ",
+            "enum": [
+                "1.0-RC2"
+            ]
+        },
+        "id": {
+            "description": "Resolvable URI for the ontology term, eg ontology.humanbrainproject.eu/ontologies/$ontology_name/$term_code.",
+            "type": "string"
+        },
+        "name": {
+            "description": "Human readable name (corresponding to rdf:label or skos:prefLabel) for the term.",
+            "type": "string"
+        },
+        "description": {
+            "description": "Human readable description for the term.",
+            "type": "string"
+        },
+        "synonyms": {
+            "type": "array",
+            "items": {
+                "type": "String",
+                "description": "The type of the term."
+            }
+        },
+        "type": {
+            "description": "The type of the term: owl:class for example.",
+            "type": "string"
+        },
+        "obsolete": {
+            "description": "The type of the term.",
+            "type": "string"
+        },
+        "links": {
+            "type": "object",
+            "description": "An object providing a way (through URIS) to get entities in relation with this term. At least, the URI of the ontology within which this term is defined should be provided.",
+            "required": [
+                "ontology"
+            ],
+            "properties": {
+                "ontology": {
+                    "type": "object",
+                    "description": "The type of the term.",
+                    "properties": {
+                        "prefix": {
+                            "type": "string",
+                            "description": "Suggestion text"
+                        },
+                        "prefix": {
+                            "id": "string",
+                            "description": "Suggestion text"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

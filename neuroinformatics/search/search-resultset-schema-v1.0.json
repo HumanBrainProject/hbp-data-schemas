@@ -13,7 +13,7 @@
             "description": "The ordered list of search results",
             "type": "array",
             "items": {
-                "$ref": "https://schemas.humanbrainproject.eu/neuroinformatics/ksearch-search-result-schema-1.0.json"
+                "$ref": "https://schemas.humanbrainproject.eu/neuroinformatics/search-result-schema-1.0.json"
             }
         },
         "took": {

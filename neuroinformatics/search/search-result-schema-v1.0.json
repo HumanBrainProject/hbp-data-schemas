@@ -7,12 +7,12 @@
     "required": [
         "id",
         "schema",
-        "source",
-        "score"
+        "source"
     ],
     "properties": {
         "id": {
-            "$ref": "#/definitions/uuid"
+            "description": "The id of the retrieved document. It can be a dataset UUID or an ontology term URI",
+            "type": "string"
         },
         "score": {
             "description": "The score of the retrieved entity",
@@ -24,15 +24,13 @@
         },
         "source": {
             "type": "object",
+            "description": "The json source of the retrieved document",
             "oneOf": [
                 {
-                    "$ref": "https://schemas.humanbrainproject.eu/neuroinformatics/ksearch-dataset-schema-1.0.json"
+                    "$ref": "https://schemas.humanbrainproject.eu/neuroinformatics/search-dataset-schema-1.0.json"
                 },
                 {
-                    "$ref": "https://schemas.humanbrainproject.eu/neuroinformatics/ksearch-userprofile-schema-1.0.json"
-                },
-                {
-                    "$ref": "https://schemas.humanbrainproject.eu/neuroinformatics/ksearch-ontology-term-schema-1.0.json"
+                    "$ref": "https://schemas.humanbrainproject.eu/neuroinformatics/search-ontology-term-schema-1.0.json"
                 }
             ]
         },
@@ -55,12 +53,6 @@
                     }
                 }
             }
-        }
-    },
-    "definitions": {
-        "uuid": {
-            "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
         }
     }
 }
