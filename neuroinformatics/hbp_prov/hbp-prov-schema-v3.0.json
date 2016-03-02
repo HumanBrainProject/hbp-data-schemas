@@ -600,7 +600,7 @@
                     },
                     "attributes": {
                         "type": "array",
-                        "description": "List of additional attributes.",
+                        "description": "List of additional attributes. The dataset attributes are usually datatype-specific parameters, like resolutions of the images.",
                         "items": {
                             "$ref": "#/definitions/attribute"
                         }
