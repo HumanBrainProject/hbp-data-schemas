@@ -201,7 +201,7 @@
                     },
                     "protocol": {
                         "description": "Protocol captures the exact way activity was performed",
-                        "required": ["title", "summary"],
+                        "required": ["title", "description"],
                         "type": "object",
                         "properties": {
                             "title": {
@@ -209,7 +209,7 @@
                                 "type": "string"
                             },
 
-                            "summary": {
+                            "description": {
                                 "description": "Textual description of the protocol. Typically a copy/paste from material and methods section of the paper",
                                 "type": "string"
                             },
@@ -856,10 +856,10 @@
         },
         "attribute": {
             "type": "object",
-            "required": ["term", "value"],
+            "required": ["key", "value"],
             "description": "Additional properties that can be attached to an entity. The properties has to be described in an ontology as OWL datatype properties and hold all the information about the type, min and max values, regex restrictions, etc.",
             "properties": {
-                "term": {
+                "key": {
                     "description": "The link to datatype property in the hbp attribute ontology",
                     "$ref": "#/definitions/onto_term"
                 },
