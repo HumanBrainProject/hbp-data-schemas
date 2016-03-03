@@ -172,9 +172,14 @@
                     },
                     "protocol": {
                         "description": "Protocol captures the exact way activity was performed",
-                        "required": ["title", "description"],
+                        "required": ["id", "title", "description"],
                         "type": "object",
                         "properties": {
+                            "id": {
+                                "type": "string",
+                                "description": "A Universally unique identifier (we only allow lowercase UUIDs).",
+                                "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+                            },
                             "title": {
                                 "description": "The name of the protocol which allows person to easily identify it.",
                                 "type": "string"
@@ -826,7 +831,7 @@
         "attribute": {
             "type": "object",
             "required": ["key", "value"],
-            "description": "Additional properties that can be attached to an entity. The properties has to be described in an ontology as OWL datatype properties and hold all the information about the type, min and max values, regex restrictions, etc.",
+            "description": "Additional properties that can be attached to an entity. The properties has to be described in an ontology as datatype properties and hold all the information about the type, min and max values, regex restrictions, etc.",
             "properties": {
                 "key": {
                     "description": "The link to datatype property in the hbp attribute ontology",
