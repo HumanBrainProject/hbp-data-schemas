@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/schema#",
     "description": "schema for a the json that describes the registration activity.",
-    "version": "3.0-RC5",
+    "version": "3.0-RC6",
     "type": "object",
     "required": [
         "registration",
@@ -16,7 +16,7 @@
             "type": "string",
             "description": "The version number of the schema. Note to the schema designer: if this schema supports more than one version, list all the versions in the enum. ",
             "enum": [
-                "3.0-RC5"
+                "3.0-RC6"
             ]
         },
         "registration": {
@@ -56,14 +56,8 @@
                     "type": "string",
                     "format": "date"
                 },
-                "data_providers": {
-                    "description": "List of organisations and/or contributors' id who contributed the data.",
-                    "type": "array",
-                    "uniqueItems": true,
-                    "minItems": 1,
-                    "items": {
-                        "type": "string"
-                    }
+                "agents": {
+                    "$ref": "#/definitions/agents"
                 },
                 "release": {
                     "enum": [
@@ -174,30 +168,7 @@
                         "format": "date"
                     },
                     "agents": {
-                        "description": "List of agent ids that were associated with the activity.",
-                        "type": "array",
-                        "minItems": 1,
-                        "items": {
-                            "type": "object",
-                            "required": [
-                                "agent_ref",
-                                "roles"
-                            ],
-                            "properties": {
-                                "agent_ref": {
-                                    "type": "string"
-                                },
-                                "roles": {
-                                    "description": "An array of role the contributor took during the generation of the dataset.",
-                                    "type": "array",
-                                    "minItems": 1,
-                                    "items": {
-                                        "$ref": "#/definitions/onto_term"
-                                    }
-                                }
-                            },
-                            "additionalProperties": false
-                        }
+                        "$ref": "#/definitions/agents"
                     },
                     "protocol": {
                         "description": "Protocol captures the exact way activity was performed",
@@ -208,7 +179,6 @@
                                 "description": "The name of the protocol which allows person to easily identify it.",
                                 "type": "string"
                             },
-
                             "description": {
                                 "description": "Textual description of the protocol. Typically a copy/paste from material and methods section of the paper",
                                 "type": "string"
@@ -223,7 +193,6 @@
                         },
                         "additionalProperties": false
                     },
-
                     "methods": {
                         "type": "array",
                         "description": "the methods used in the activity. We don't recommend to use this field now, unless it's a matter of conversion from v2.",
@@ -869,6 +838,33 @@
                 }
             },
             "additionalProperties": false
+        },
+        "agents": {
+            "description": "List of agent ids along with their roles that were associated with the activity.",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+                "type": "object",
+                "javaType": "ch.epfl.hbp.nip.prov.v3.domain.Agent",
+                "required": [
+                    "agent_ref",
+                    "roles"
+                ],
+                "properties": {
+                    "agent_ref": {
+                        "type": "string"
+                    },
+                    "roles": {
+                        "description": "An array of role the contributor took during the activity.",
+                        "type": "array",
+                        "minItems": 1,
+                        "items": {
+                            "$ref": "#/definitions/onto_term"
+                        }
+                    }
+                },
+                "additionalProperties": false
+            }
         }
     }
 }
