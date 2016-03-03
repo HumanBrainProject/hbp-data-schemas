@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/schema#",
     "description": "schema for a the json that describes the registration activity.",
-    "version": "3.0-RC4",
+    "version": "3.0-RC5",
     "type": "object",
     "required": [
         "registration",
@@ -16,7 +16,7 @@
             "type": "string",
             "description": "The version number of the schema. Note to the schema designer: if this schema supports more than one version, list all the versions in the enum. ",
             "enum": [
-                "3.0-RC4"
+                "3.0-RC5"
             ]
         },
         "registration": {
@@ -123,6 +123,13 @@
                         "type": "string",
                         "description": "UUID of the activity that generated the resource. Must be described in the same registration file.",
                         "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+                    },
+                    "attributes": {
+                        "type": "array",
+                        "description": "List of additional attributes. Typically it will be used to store the properties that came from the storage",
+                        "items": {
+                            "$ref": "#/definitions/attribute"
+                        }
                     }
                 },
                 "additionalProperties": false
@@ -192,11 +199,34 @@
                             "additionalProperties": false
                         }
                     },
-                    "protocol_description": {
-                        "type": "string"
+                    "protocol": {
+                        "description": "Protocol captures the exact way activity was performed",
+                        "required": ["title", "description"],
+                        "type": "object",
+                        "properties": {
+                            "title": {
+                                "description": "The name of the protocol which allows person to easily identify it.",
+                                "type": "string"
+                            },
+
+                            "description": {
+                                "description": "Textual description of the protocol. Typically a copy/paste from material and methods section of the paper",
+                                "type": "string"
+                            },
+                            "publications": {
+                                "description": "A list of papers where you can find the full detailed description of the protocol",
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/definitions/xref"
+                                }
+                            }
+                        },
+                        "additionalProperties": false
                     },
+
                     "methods": {
                         "type": "array",
+                        "description": "the methods used in the activity. We don't recommend to use this field now, unless it's a matter of conversion from v2.",
                         "items": {
                             "$ref": "#/definitions/onto_term"
                         }
@@ -567,6 +597,13 @@
                         "items": {
                             "$ref": "#/definitions/xref"
                         }
+                    },
+                    "attributes": {
+                        "type": "array",
+                        "description": "List of additional attributes. The dataset attributes are usually datatype-specific parameters, like resolutions of the images.",
+                        "items": {
+                            "$ref": "#/definitions/attribute"
+                        }
                     }
                 },
                 "additionalProperties": false
@@ -813,6 +850,22 @@
                 "storage": {
                     "description": "The link to the ontology term that has the description of the services along with the its access parameters.",
                     "$ref": "#/definitions/onto_term"
+                }
+            },
+            "additionalProperties": false
+        },
+        "attribute": {
+            "type": "object",
+            "required": ["key", "value"],
+            "description": "Additional properties that can be attached to an entity. The properties has to be described in an ontology as OWL datatype properties and hold all the information about the type, min and max values, regex restrictions, etc.",
+            "properties": {
+                "key": {
+                    "description": "The link to datatype property in the hbp attribute ontology",
+                    "$ref": "#/definitions/onto_term"
+                },
+                "value": {
+                    "description": "The value of the attribute in a string form. No validation in possible in the schema level.",
+                    "type": "string"
                 }
             },
             "additionalProperties": false
