@@ -18,10 +18,10 @@
             "type": "string"
         },
         "species": {
-            "$ref": "https://schemas.humanbrainproject.eu/neuroinformatics/ksearch-ontology-term-schema-1.0.json"
+            "$ref": "https://schemas.humanbrainproject.eu/neuroinformatics/search-ontology-term-schema-1.0.json"
         },
         "strain": {
-            "$ref": "https://schemas.humanbrainproject.eu/neuroinformatics/ksearch-ontology-term-schema-1.0.json"
+            "$ref": "https://schemas.humanbrainproject.eu/neuroinformatics/search-ontology-term-schema-1.0.json"
         },
         "age": {
             "type": "string"
