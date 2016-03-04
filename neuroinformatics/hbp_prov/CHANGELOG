@@ -1,3 +1,10 @@
+## [3.0-RC6] 2016-03-03 Yuri Katkov / Samuel Kerrien /  Lomig Mégard / Mohameth François Sy
+### Updated fields
+* Registration.data_providers became Registration.agents object with 'id' and 'roles' fields.
+* The rational of this change is to separate agents with experimental roles (involved in activities) from those involved as principal investigator or data provider.
+* Added the field activities.protocol.id field
+* Made specimen.age, specimen.name, specimen.sex and resources.mime-type fields optional
+
 ## [3.0-RC5] 2016-03-01 Yuri Katkov / Samuel Kerrien /  Lomig Mégard / Catherine Zwahlen
 ### Updated fields
 * Protocol_description became protocol with description, title  and list of publications. The reason to bring in the title is that we want laboratories to reuse their existing protocols. The reason for the list of publications is to know, where does the original description of the protocol is stored
