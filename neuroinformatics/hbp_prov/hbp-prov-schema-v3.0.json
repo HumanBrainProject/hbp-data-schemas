@@ -25,7 +25,7 @@
                 "submission_date",
                 "release_date",
                 "release",
-                "data_providers"
+                "agents"
             ],
             "type": "object",
             "description": "Registration activity, regrouping all activities described in file.",
