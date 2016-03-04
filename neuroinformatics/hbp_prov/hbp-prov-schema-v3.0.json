@@ -76,7 +76,6 @@
                 "type": "object",
                 "required": [
                     "id",
-                    "mime_type",
                     "addresses"
                 ],
                 "properties": {
@@ -312,10 +311,7 @@
                 "javaType": "ch.epfl.hbp.nip.prov.v3.domain.Specimen",
                 "required": [
                     "id",
-                    "name",
-                    "sex",
-                    "species",
-                    "age"
+                    "species"
                 ],
                 "properties": {
                     "id": {
@@ -831,7 +827,7 @@
         "attribute": {
             "type": "object",
             "required": ["key", "value"],
-            "description": "Additional properties that can be attached to an entity. The properties has to be described in an ontology as datatype properties and hold all the information about the type, min and max values, regex restrictions, etc.",
+            "description": "Additional properties that can be attached to an entity. The properties have to be described in an ontology as features properties and hold information about the feature type and value restrictions if applicable.",
             "properties": {
                 "key": {
                     "description": "The link to datatype property in the hbp attribute ontology",
