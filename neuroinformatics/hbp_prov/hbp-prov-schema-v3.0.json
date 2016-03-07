@@ -109,6 +109,11 @@
                         "description": "The name of the file at the time of data submission.",
                         "type": "string"
                     },
+                    "retrieval_date": {
+                        "description": "The date at which the resource was downloaded from a source.",
+                        "type": "string",
+                        "format": "date"
+                    },
                     "comment": {
                         "type": "string"
                     },
@@ -740,24 +745,24 @@
                     "type": "object",
                     "required": [
                         "unit",
-                        "res_x",
-                        "res_y",
-                        "res_z"
+                        "anterior_proterior",
+                        "superior_inferior",
+                        "left_right"
                     ],
                     "properties": {
                         "unit": {
                             "description": "Units used to describe the resolution. All dimensions are specified in the same unit.",
                             "$ref": "#/definitions/onto_term"
                         },
-                        "res_x": {
+                        "anterior_proterior": {
                             "type": "number",
                             "format": "float"
                         },
-                        "res_y": {
+                        "superior_inferior": {
                             "type": "number",
                             "format": "float"
                         },
-                        "res_z": {
+                        "left_right": {
                             "type": "number",
                             "format": "float"
                         }
@@ -814,7 +819,7 @@
                 },
                 "date": {
                     "type": "string",
-                    "description": "Date at which the resource was stored or downloaded depending on the storage type.",
+                    "description": "The date at which the resource was stored after it was downloaded. This field is empty for storage related to original URL from which the dataset was downloaded prior integration.",
                     "format": "date"
                 },
                 "storage": {
