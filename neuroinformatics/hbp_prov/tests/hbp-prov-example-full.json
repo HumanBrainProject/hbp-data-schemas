@@ -280,6 +280,7 @@
             ],
             "comment": "h3 representation",
             "original_filename": "em-stscks32.h3",
+            "retrieval_date": "2013-11-22",
             "size": 23978432987,
             "id": "0a1a6a2f-da31-4fae-83d8-9af458274458",
             "mime_type": {
@@ -312,6 +313,7 @@
                 }
             ],
             "id": "ec3ca186-1cd8-44a2-8dec-825830d60559",
+            "retrieval_date": "2013-11-22",
             "mime_type": {
                 "code": "HBP_FT:0000003",
                 "database": {
