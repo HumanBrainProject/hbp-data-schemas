@@ -1,13 +1,13 @@
 ## [3.0-RC6] 2016-03-03 Yuri Katkov / Samuel Kerrien /  Lomig Mégard / Mohameth François Sy
 ### Added fields
 * Added the field activities.protocol.id field
-* Add resources.retrieval_date in hbp_prov. This date corresponds to when the resources was downloaded from a source. 
+* Add resources.retrieval_date field. This date corresponds to when the resources was downloaded from a source. 
 
 ### Updated fields
 * Registration.data_providers became Registration.agents object with 'id' and 'roles' fields.
 * The rational of this change is to separate agents with experimental roles (involved in activities) from those involved as principal investigator or data provider.
 * Made specimen.age, specimen.name, specimen.sex and resources.mime-type fields optional
-* Update the following resolution field names: res_x = anterior_posteriror, res_y = superiror_inferiror, res_z = left_right
+* Update the following resolution field names: res_x = anterior_posterior, res_y = superior_inferior, res_z = left_right
 
 
 ## [3.0-RC5] 2016-03-01 Yuri Katkov / Samuel Kerrien /  Lomig Mégard / Catherine Zwahlen
