@@ -1,3 +1,5 @@
+## [1.0-RC5] 2016-02-24 Yuri Katkov
+## removed the data_type field
 ## [1.0-RC4] 2016-02-24 Catherine Zwahlen / Yuri Katkov
 
 ### Added fields

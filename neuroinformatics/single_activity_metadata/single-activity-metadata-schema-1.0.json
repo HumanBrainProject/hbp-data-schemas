@@ -208,10 +208,6 @@
                 },
                 "assigned_class": {
                     "$ref": "#/definitions/onto_term"
-                },
-                "data_type":{
-                    "$ref": "#/definitions/onto_term",
-                    "description": "Datatype of the main file in the dataset, taken from HBP PROV ontology"
                 }
             },
             "additionalProperties": false
