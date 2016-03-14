@@ -8,7 +8,7 @@
         "uuid",
         "title",
         "contributors",
-        "methods",
+        "protocols",
         "representations",
         "specimen"
     ],
@@ -23,11 +23,44 @@
             "type": "string"
         },
         "methods": {
-            "description": "The methods used in the dataset",
+            "description": "The methods used during dataset generation.",
             "type": "array",
             "minItems": 1,
             "items": {
                 "$ref": "https://schemas.humanbrainproject.eu/neuroinformatics/search-ontology-term-schema-1.0.json"
+            }
+        },
+        "protocols": {
+            "description": "The protocols followed during dataset generation",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+                "type": "object",
+                "required": [
+                    "uuid",
+                    "title"
+                ],
+                "properties": {
+                    "uuid": {
+                        "$ref": "#/definitions/uuid"
+                    },
+                    "title": {
+                        "description": "The URL of the representation",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "Human readable description of the protocol",
+                        "type": "string"
+                    },
+                    "publications": {
+                        "type": "array",
+                        "minItems": 1,
+                        "items": {
+                            "description": "Publication URL",
+                            "type": "string"
+                        }
+                    }
+                }
             }
         },
         "classifications": {

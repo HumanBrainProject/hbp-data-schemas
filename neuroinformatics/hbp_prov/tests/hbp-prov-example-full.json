@@ -1,5 +1,5 @@
 {
-    "schema_version": "3.0-RC5",
+    "schema_version": "3.0-RC7",
     "activities": [
         {
             "agents": [
@@ -27,6 +27,7 @@
                 "id": "protocol_uuid",
                 "title": "ABA - Image Annotation",
                 "description": "some amazing amage annotation description",
+                "protocol_designer": "a lab",
                 "publications": [
                     {
                         "code": "http://dx.doi.org/10.1016/j.stem.2016.01.017",
@@ -168,8 +169,10 @@
                 "id": "0",
                 "family_name": "Katkov",
                 "given_names": "Iurii",
-                "organisation_ref": "http://epfl.ch",
-                "laboratory": "Blue Brain Project",
+                "affiliations": [{
+                        "organisation_ref": "http://epfl.ch",
+                        "laboratory": "Blue Brain Project"
+                    }],
                 "email": "iurii.katkov@example.com"
             }
         ],

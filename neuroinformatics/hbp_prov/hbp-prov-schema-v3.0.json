@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/schema#",
     "description": "schema for a the json that describes the registration activity.",
-    "version": "3.0-RC6",
+    "version": "3.0-RC7",
     "type": "object",
     "required": [
         "registration",
@@ -16,7 +16,7 @@
             "type": "string",
             "description": "The version number of the schema. Note to the schema designer: if this schema supports more than one version, list all the versions in the enum. ",
             "enum": [
-                "3.0-RC6"
+                "3.0-RC7"
             ]
         },
         "registration": {
@@ -192,6 +192,10 @@
                                 "description": "Textual description of the protocol. Typically a copy/paste from material and methods section of the paper",
                                 "type": "string"
                             },
+                            "protocol_designer": {
+                                "description": "The lab which designs the protocol",
+                                "type": "string"
+                            },
                             "publications": {
                                 "description": "A list of papers where you can find the full detailed description of the protocol",
                                 "type": "array",
@@ -248,13 +252,26 @@
                                 "description": "Name(s) the contributor is known by.",
                                 "type": "string"
                             },
-                            "organisation_ref": {
-                                "description": "The organisation the contributor is affiliated to.",
-                                "type": "string"
-                            },
-                            "laboratory": {
-                                "description": "The laboratory as a sub-entity of the organisation to further specify the contributor's affiliation.",
-                                "type": "string"
+                            "affiliations": {
+                                "description": "The list of contributor's affiliations",
+                                "type": "array",
+                                "minItems": 1,
+                                "items": {
+                                    "type": "object",
+                                    "required": [
+                                        "organisation_ref"
+                                    ],
+                                    "properties": {
+                                        "organisation_ref": {
+                                            "description": "The organisation the contributor is affiliated to.",
+                                            "type": "string"
+                                        },
+                                        "laboratory": {
+                                            "description": "The laboratory as a sub-entity of the organisation to further specify the contributor's affiliation.",
+                                            "type": "string"
+                                        }
+                                    }
+                                }
                             },
                             "email": {
                                 "type": "string",
