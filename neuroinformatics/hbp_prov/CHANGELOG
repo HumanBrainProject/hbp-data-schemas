@@ -1,7 +1,8 @@
 ## [3.0-RC7] 2016-03-14 Mohameth François Sy
 ### Added fields
-* Added the field /agents.contributors.affiliations field which groups former /agents.contributors.organisation_ref and /agents.contributors.laboratory fields
+* Added the field /agents.contributors.affiliations field which groups former /agents.contributors.organisation_ref (required) and /agents.contributors.laboratory fields
   All contributor's affiliations are now grouped in one array /agents.contributors.affiliations
+* Added the field /activities.protocol.protocol_designer (string) to keep the information about the lab which designs the protocol
 
 
 ## [3.0-RC6] 2016-03-03 Yuri Katkov / Samuel Kerrien /  Lomig Mégard / Mohameth François Sy

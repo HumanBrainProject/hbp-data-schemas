@@ -192,6 +192,10 @@
                                 "description": "Textual description of the protocol. Typically a copy/paste from material and methods section of the paper",
                                 "type": "string"
                             },
+                            "protocol_designer": {
+                                "description": "The lab which designs the protocol",
+                                "type": "string"
+                            },
                             "publications": {
                                 "description": "A list of papers where you can find the full detailed description of the protocol",
                                 "type": "array",
@@ -255,8 +259,7 @@
                                 "items": {
                                     "type": "object",
                                     "required": [
-                                        "organisation_ref",
-                                        "laboratory"
+                                        "organisation_ref"
                                     ],
                                     "properties": {
                                         "organisation_ref": {

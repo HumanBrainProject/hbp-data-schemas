@@ -27,6 +27,7 @@
                 "id": "protocol_uuid",
                 "title": "ABA - Image Annotation",
                 "description": "some amazing amage annotation description",
+                "protocol_designer": "a lab",
                 "publications": [
                     {
                         "code": "http://dx.doi.org/10.1016/j.stem.2016.01.017",
