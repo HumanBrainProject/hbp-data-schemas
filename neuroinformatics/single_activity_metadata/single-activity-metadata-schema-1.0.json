@@ -25,6 +25,22 @@
                     "type": "string",
                     "format": "date"
                 },
+                "agreement": {
+                    "description": "Information related to user accepting terms and conditions.",
+                    "type": "object",
+                    "required": ["timestamp", "version"],
+                    "properties": {
+                        "timestamp": {
+                            "description": "Time by which the user agreed with the terms and conditions in the epoch format in milliseconds",
+                            "type": "number"
+                        },
+                        "version": {
+                            "description": "Version of terms and conditions user agreed with.",
+                            "type": "string"
+                        }
+                    }
+                },
+
                 "contributors": {
                     "description": "An array of people who contributed to the generation of the dataset.",
                     "type": "array",
@@ -203,15 +219,23 @@
                         },
                         "description": {
                             "type": "string"
+                        },
+                        "designer": {
+                            "type": "string",
+                            "description": "The person or organisation/lab who invented the protocol. We just store the name of it without interpreting"
+                        },
+                        "publication_doi": {
+                            "description": "The doi of the publication where the protocol is described",
+                            "type": "string"
+                        },
+                        "publication_pubmed": {
+                            "description": "The pubmed id of the publication where the protocol is described",
+                            "type": "string"
                         }
                     }
                 },
                 "assigned_class": {
                     "$ref": "#/definitions/onto_term"
-                },
-                "data_type":{
-                    "$ref": "#/definitions/onto_term",
-                    "description": "Datatype of the main file in the dataset, taken from HBP PROV ontology"
                 }
             },
             "additionalProperties": false
