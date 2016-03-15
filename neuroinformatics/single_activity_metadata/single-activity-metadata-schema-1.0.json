@@ -203,6 +203,14 @@
                         },
                         "description": {
                             "type": "string"
+                        },
+                        "designer": {
+                            "type": "string",
+                            "description": "The person or organisation/lab who invented the protocol. We just store the name of it without interpreting"
+                        },
+                        "publication": {
+                            "type": "string",
+                            "description": "The doi of the publication where the protocol is described"
                         }
                     }
                 },
