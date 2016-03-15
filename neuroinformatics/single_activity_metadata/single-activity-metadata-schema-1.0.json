@@ -28,14 +28,14 @@
                 "agreement": {
                     "description": "Information related to user accepting terms and conditions.",
                     "type": "object",
-                    "required": ["timestamp", "version"]
+                    "required": ["timestamp", "version"],
                     "properties": {
                         "timestamp": {
-                            "description": "Time by which the user agreed with the terms and conditions in the epoch format ",
+                            "description": "Time by which the user agreed with the terms and conditions in the epoch format in milliseconds",
                             "type": "number"
                         },
                         "version": {
-                            "description": "Version of TOC user agreed with.",
+                            "description": "Version of terms and conditions user agreed with.",
                             "type": "string"
                         }
                     }
