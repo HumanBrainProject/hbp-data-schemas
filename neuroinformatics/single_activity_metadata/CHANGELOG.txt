@@ -1,6 +1,6 @@
 ## [1.0-RC5] 2016-02-24 Yuri Katkov
 ### Added fields
--  dataset.protocol.designer and dataset.protocol.publication
+-  dataset.protocol.designer and dataset.protocol.publication_doi and dataset.protocol.publication_pubmed
 -  registration.agreement_timestamp . We need this field to know when exactly the user agreed with legal terms, so that we can show it as a proof.
 
 ### Removed fields
