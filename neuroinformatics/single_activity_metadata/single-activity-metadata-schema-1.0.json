@@ -25,10 +25,22 @@
                     "type": "string",
                     "format": "date"
                 },
-                "agreement_timestamp":{
-                    "description": "Time by which the user agreed with the terms and conditions in the epoch format ",
-                    "type": "number"
+                "agreement": {
+                    "description": "Information related to user accepting terms and conditions.",
+                    "type": "object",
+                    "required": ["timestamp", "version"]
+                    "properties": {
+                        "timestamp": {
+                            "description": "Time by which the user agreed with the terms and conditions in the epoch format ",
+                            "type": "number"
+                        },
+                        "version": {
+                            "description": "Version of TOC user agreed with.",
+                            "type": "string"
+                        }
+                    }
                 },
+
                 "contributors": {
                     "description": "An array of people who contributed to the generation of the dataset.",
                     "type": "array",
