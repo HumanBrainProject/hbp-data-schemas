@@ -1,9 +1,14 @@
 ## [1.0-RC5] 2016-02-24 Yuri Katkov
-## removed the data_type field
-## added designer and publication to protocol
+### Added fields
+-  dataset.protocol.designer and dataset.protocol.publication
+-  registration.agreement_timestamp . We need this field to know when exactly the user agreed with legal terms, so that we can show it as a proof.
+
+### Removed fields
+## removed the data_type field. Reason: the meeting with Sean, where he said it's not needed for one-click registration. Also it's hard to know the proper datatype if we have a zip folder full of different files.
+
+
 ## [1.0-RC4] 2016-02-24 Catherine Zwahlen / Yuri Katkov
 
-### Added fields
 - schema_version to specify the version in the SAM json file
 
 ## [1.0-RC3] 2016-02-03 Samuel Kerrien / Yuri Katkov

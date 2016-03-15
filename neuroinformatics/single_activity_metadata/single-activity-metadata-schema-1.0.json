@@ -25,6 +25,10 @@
                     "type": "string",
                     "format": "date"
                 },
+                "agreement_timestamp":{
+                    "description": "Time by which the user agreed with the terms and conditions in the epoch format ",
+                    "type": "number"
+                },
                 "contributors": {
                     "description": "An array of people who contributed to the generation of the dataset.",
                     "type": "array",
