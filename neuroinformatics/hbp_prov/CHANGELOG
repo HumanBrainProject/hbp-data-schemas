@@ -2,13 +2,13 @@
 ### Added fields
 * Added the field /agents.contributors.affiliations field which groups former /agents.contributors.organisation_ref (required) and /agents.contributors.laboratory fields
   All contributor's affiliations are now grouped in one array /agents.contributors.affiliations
-* Added the field /activities.protocol.protocol_designer (string) to keep the information about the lab which designs the protocol
+* Added the field /activities.protocol.designer (string) to keep the information about the lab or person which designed the protocol.
 
 
 ## [3.0-RC6] 2016-03-03 Yuri Katkov / Samuel Kerrien /  Lomig Mégard / Mohameth François Sy
 ### Added fields
 * Added the field activities.protocol.id field
-* Add resources.retrieval_date field. This date corresponds to when the resources was downloaded from a source. 
+* Add resources.retrieval_date field. This date corresponds to when the resources was downloaded from a source.
 
 ### Updated fields
 * Registration.data_providers became Registration.agents object with 'id' and 'roles' fields.
@@ -46,7 +46,7 @@
 * 'schema_version' enum now has only the following value: "3.0"
 * All fields representing a UUID, previously typed as #/definitions/uuid are now defined as "type":"string", "format":"uuid"
   That way we do not have to maintain our own regex (which was wrong anyway since typically the accepted character set is 0-9a-Z)
-* All fields representing dates, previously typed as #/definitions/date_optional_MM_DD are now defined as "type":"string", "format":"date" so we do not have to maintain our own regex. 
+* All fields representing dates, previously typed as #/definitions/date_optional_MM_DD are now defined as "type":"string", "format":"date" so we do not have to maintain our own regex.
 * All fields representing emails with hand crafted regex, are now defined as "type":"string", "format":"email" and will be validated as per the schema specification against RFC 5322, section 3.4.1.
 * 'registration.data_providers': instead of defining the providers, we now only have a list of identifiers that should take their values in 'agents.contributors', 'agents.organisations' or 'agents.software'. This list of identifiers does not allow for duplicates.
 * Renamed 'activities.agents.id' to 'activities.agents.agent_ref' to clarify that this is a reference to an existing agent UUID.
@@ -83,4 +83,3 @@
 * resources/address is now an array
 * addresses support not just URLs but also ids in the outside services
 * resource can't have more than more than one MIME-type
-
