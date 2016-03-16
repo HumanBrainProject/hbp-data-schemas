@@ -4,6 +4,7 @@
     "version": "1.0-RC4",
     "type": "object",
     "required": [
+        "schema_version",
         "registration",
         "specimen",
         "dataset"
@@ -32,7 +33,8 @@
                     "properties": {
                         "timestamp": {
                             "description": "Time by which the user agreed with the terms and conditions in the epoch format in milliseconds",
-                            "type": "number"
+                            "type": "integer",
+                            "maximum": 9223372036854775807
                         },
                         "version": {
                             "description": "Version of terms and conditions user agreed with.",
