@@ -189,15 +189,15 @@
                                 "type": "string"
                             },
                             "description": {
-                                "description": "Textual description of the protocol. Typically a copy/paste from material and methods section of the paper",
+                                "description": "Textual description of the protocol. Typically a copy/paste from material and methods section of the paper.",
                                 "type": "string"
                             },
-                            "protocol_designer": {
-                                "description": "The lab which designs the protocol",
+                            "designer": {
+                                "description": "The laboratory or person which designed the protocol.",
                                 "type": "string"
                             },
                             "publications": {
-                                "description": "A list of papers where you can find the full detailed description of the protocol",
+                                "description": "A list of papers where you can find the full detailed description of the protocol.",
                                 "type": "array",
                                 "items": {
                                     "$ref": "#/definitions/xref"
