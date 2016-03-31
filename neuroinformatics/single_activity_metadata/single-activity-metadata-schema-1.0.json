@@ -193,13 +193,11 @@
                 },
                 "publication_doi": {
                     "description": "Link to the doi of the publication that describes the dataset.",
-                    "type": "string",
-                    "format": "url"
+                    "type": "string"
                 },
                 "publication_pubmed": {
                     "description": "Link to the pubmed id of the publication that describes the dataset.",
-                    "type": "string",
-                    "format": "url"
+                    "type": "string"
                 },
                 "brain_regions": {
                     "description": "Brain region(s) where the sample originates.",
