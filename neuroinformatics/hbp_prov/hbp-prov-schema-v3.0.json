@@ -234,7 +234,6 @@
                 "contributors": {
                     "description": "An array of people who contributed to the activities.",
                     "type": "array",
-                    "minItems": 1,
                     "items": {
                         "type": "object",
                         "required": [
@@ -255,7 +254,6 @@
                             "affiliations": {
                                 "description": "The list of contributor's affiliations",
                                 "type": "array",
-                                "minItems": 1,
                                 "items": {
                                     "type": "object",
                                     "required": [
@@ -283,7 +281,6 @@
                 "organisations": {
                     "description": "An array of organisations who contributed to the activities.",
                     "type": "array",
-                    "minItems": 1,
                     "items": {
                         "type": "object",
                         "required": [
@@ -302,7 +299,6 @@
                 "software": {
                     "description": "An array of software products used to generate data artifacts.",
                     "type": "array",
-                    "minItems": 1,
                     "items": {
                         "type": "object",
                         "required": [
@@ -327,7 +323,6 @@
         "specimen": {
             "description": "An individual animal, plant, or single-celled life form.",
             "type": "array",
-            "minItems": 1,
             "items": {
                 "type": "object",
                 "javaType": "ch.epfl.hbp.nip.prov.v3.domain.Specimen",
@@ -395,7 +390,6 @@
         "samples": {
             "description": "Biological material.",
             "type": "array",
-            "minItems": 1,
             "items": {
                 "type": "object",
                 "required": [
@@ -585,7 +579,6 @@
                     "publications": {
                         "description": "Cross references to publications describing the production or use of the datasets.",
                         "type": "array",
-                        "minItems": 1,
                         "items": {
                             "$ref": "#/definitions/xref"
                         }
@@ -604,7 +597,6 @@
         "models": {
             "description": "In silico models, used to perform simulations and in silico experimentation.",
             "type": "array",
-            "minItems": 1,
             "items": {
                 "type": "object",
                 "required": [
@@ -662,7 +654,6 @@
         "classifications": {
             "description": "A list of classification terms derived from a manual or automated analysis.",
             "type": "array",
-            "minItems": 1,
             "items": {
                 "type": "object",
                 "required": [
@@ -691,8 +682,7 @@
                             "type": "string",
                             "description": "A Universally unique identifier (we only allow lowercase UUIDs).",
                             "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
-                        },
-                        "minItems": 1
+                        }
                     }
                 },
                 "additionalProperties": false
