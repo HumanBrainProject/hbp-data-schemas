@@ -8,7 +8,7 @@
 
 ### Others
 - removed minItems constraint when the field is optional. 
-
+- Gestation is replaced by Pre-natal
 ## [1.0-RC4] 2016-02-24 Catherine Zwahlen / Yuri Katkov
 
 - schema_version to specify the version in the SAM json file
