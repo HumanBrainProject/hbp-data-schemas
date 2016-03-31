@@ -20,6 +20,11 @@
         },
         "registration": {
             "type": "object",
+            "required": [
+              "production_end_date",
+              "agreement",
+              "contributors"
+            ],
             "properties": {
                 "production_end_date": {
                     "description": "The date on which the data has been produced.",
@@ -42,7 +47,6 @@
                         }
                     }
                 },
-
                 "contributors": {
                     "description": "An array of people who contributed to the generation of the dataset.",
                     "type": "array",
@@ -61,7 +65,6 @@
                                 "type": "string",
                                 "description": "Following the recomendations of W3C: https://www.w3.org/International/questions/qa-personal-names"
                             },
-
                             "email": {
                                 "type": "string",
                                 "format": "email"
@@ -91,7 +94,6 @@
                 "organisations": {
                     "description": "An array of organisations who contributed to the activities.",
                     "type": "array",
-                    "minItems": 1,
                     "items": {
                         "$ref": "#/definitions/organisation"
                     }
@@ -99,7 +101,6 @@
                 "software": {
                     "description": "An array of software products used to generate data artifacts.",
                     "type": "array",
-                    "minItems": 1,
                     "items": {
                         "type": "object",
                         "properties": {
