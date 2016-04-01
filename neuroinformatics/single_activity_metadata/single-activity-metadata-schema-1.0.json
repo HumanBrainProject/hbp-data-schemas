@@ -209,13 +209,13 @@
                 "protocol": {
                     "type": "object",
                     "description": "Textual reusable description of the end-to-end protocol that describes how the experimentation was done and dataset has been created.",
-                    "required": ["name", "description"],
+                    "required": ["title", "description"],
                     "properties": {
                         "id": {
                             "type": "string",
                             "description": "If the protocol is already registered, the id is mandatory. If it's a new protocol that user has added through UI, this field must be empty and the new protocol will be added to the database."
                         },
-                        "name": {
+                        "title": {
                             "type": "string"
                         },
                         "description": {
