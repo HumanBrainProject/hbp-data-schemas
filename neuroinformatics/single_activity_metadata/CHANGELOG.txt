@@ -8,6 +8,8 @@
 
 ### Others
 - removed minItems constraint when the field is optional. 
+- Gestation is replaced by Pre-natal
+- protocol.name -> protocol.title to conform with hbpprov
 
 ## [1.0-RC4] 2016-02-24 Catherine Zwahlen / Yuri Katkov
 

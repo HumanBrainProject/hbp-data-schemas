@@ -352,7 +352,7 @@
                         "properties": {
                             "period": {
                                 "enum": [
-                                    "Gestation",
+                                    "Pre-natal",
                                     "Post-natal"
                                 ]
                             },
