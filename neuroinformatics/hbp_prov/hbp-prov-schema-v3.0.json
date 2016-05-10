@@ -65,6 +65,10 @@
                         "hbp_only",
                         "public"
                     ]
+                },
+                "license": {
+                    "description": "Contains the information about the license that is applied to the data.",
+                    "type": "string"
                 }
             },
             "additionalProperties": false

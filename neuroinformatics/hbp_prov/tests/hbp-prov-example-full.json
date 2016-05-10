@@ -267,7 +267,8 @@
         "name": "More or less realistic dataset",
         "release": "public",
         "submission_date": "2013-12-23",
-        "release_date": "2014-11-22"
+        "release_date": "2014-11-22",
+        "license": "CC-BY"
     },
     "resources": [
         {

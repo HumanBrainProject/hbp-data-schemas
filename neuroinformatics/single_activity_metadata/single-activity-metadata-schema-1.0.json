@@ -116,6 +116,10 @@
                         },
                         "additionalProperties": false
                     }
+                },
+                "license": {
+                    "description": "Contains the information about the license that is applied to the data.",
+                    "type": "string"
                 }
             }
         },

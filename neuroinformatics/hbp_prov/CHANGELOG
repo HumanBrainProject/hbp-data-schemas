@@ -1,8 +1,11 @@
+
 ## [3.0-RC7] 2016-03-14 Mohameth François Sy / Lomig Mégard
 ### Added fields
 * Added the field /agents.contributors.affiliations field which groups former /agents.contributors.organisation_ref (required) and /agents.contributors.laboratory fields
   All contributor's affiliations are now grouped in one array /agents.contributors.affiliations
 * Added the field /activities.protocol.designer (string) to keep the information about the lab or person which designed the protocol.
+* registration.license that contains the license information. Made to be just a string for now, to be more flexible.
+
 * Updated the `release` enum: `HBP` is now `hbp_only`.
 
 ### Others
