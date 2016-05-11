@@ -116,10 +116,6 @@
                         },
                         "additionalProperties": false
                     }
-                },
-                "license": {
-                    "description": "Contains the information about the license that is applied to the data.",
-                    "type": "string"
                 }
             }
         },
@@ -209,6 +205,10 @@
                     "items": {
                         "$ref": "#/definitions/onto_term"
                     }
+                },
+                "license": {
+                    "description": "Contains the information about the license that is applied to the data. The terms are in HBP_LICENSE ontology.",
+                    "$ref": "#/definitions/onto_term"
                 },
                 "protocol": {
                     "type": "object",
