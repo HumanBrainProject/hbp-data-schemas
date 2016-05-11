@@ -192,6 +192,9 @@
                     "name": "Thalamus"
                 }
             ],
+            "license": {
+                "uri": "http://humanbrainproject.eu/ontology/hbp_licence/cc-by"
+            },
             "atlas_location": {
                 "atlas_template": {
                     "uri": "http://atlases.bbp.epfl.ch/allenatlas"
@@ -267,8 +270,7 @@
         "name": "More or less realistic dataset",
         "release": "public",
         "submission_date": "2013-12-23",
-        "release_date": "2014-11-22",
-        "license": "CC-BY"
+        "release_date": "2014-11-22"
     },
     "resources": [
         {

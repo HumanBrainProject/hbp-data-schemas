@@ -4,8 +4,7 @@
 * Added the field /agents.contributors.affiliations field which groups former /agents.contributors.organisation_ref (required) and /agents.contributors.laboratory fields
   All contributor's affiliations are now grouped in one array /agents.contributors.affiliations
 * Added the field /activities.protocol.designer (string) to keep the information about the lab or person which designed the protocol.
-* registration.license that contains the license information. Made to be just a string for now, to be more flexible.
-
+* datasets[].license that contains the license information. Implemented as ontology term.
 * Updated the `release` enum: `HBP` is now `hbp_only`.
 
 ### Others
