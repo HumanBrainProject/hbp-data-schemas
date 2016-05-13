@@ -343,10 +343,10 @@
                         "type": "string"
                     },
                     "age": {
-                        "description": "",
                         "type": "object",
                         "required": [
                             "period",
+                            "unit",
                             "value"
                         ],
                         "properties": {
@@ -356,14 +356,30 @@
                                     "Post-natal"
                                 ]
                             },
+                            "unit": {
+                                "description": "The unit of the age value.",
+                                "enum": [
+                                    "days",
+                                    "weeks",
+                                    "months",
+                                    "years"
+                                ]
+                            },
                             "value": {
-                                "description": "Age in days.",
-                                "type": "number"
+                                "description": "Age value, must be positive. If the 'range_end_value' is set, indicates the start of the range.",
+                                "type": "number",
+                                "minimum": 0
+                            },
+                            "range_end_value": {
+                                "description": "Optional field, if set the age is a range. This value indicates the end of the range. Must be larger than the 'value' field.",
+                                "type": "number",
+                                "minimum": 0
                             },
                             "comment": {
                                 "type": "string"
                             }
-                        }
+                        },
+                        "additionalProperties": false
                     },
                     "developmental_stage": {
                         "$ref": "#/definitions/onto_term"

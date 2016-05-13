@@ -351,6 +351,7 @@
         {
             "age": {
                 "value": 16,
+                "unit": "days",
                 "period": "Post-natal"
             },
             "comment": "nothing interesting about this mouse",

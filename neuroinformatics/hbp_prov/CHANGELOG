@@ -5,6 +5,8 @@
   All contributor's affiliations are now grouped in one array /agents.contributors.affiliations
 * Added the field /activities.protocol.designer (string) to keep the information about the lab or person which designed the protocol.
 * datasets[].license that contains the license information. Implemented as ontology term.
+* specimen[].age.unit is a new mandatory field (enum) that indicates which unit is used for the age value.
+* specimen[].age.range_end_value is an optional field that indicated the end of the range. If not set, the age is not a range (backward compatible).
 * Updated the `release` enum: `HBP` is now `hbp_only`.
 
 ### Others
