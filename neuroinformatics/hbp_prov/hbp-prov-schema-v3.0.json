@@ -529,6 +529,10 @@
                             }
                         }
                     },
+                    "license": {
+                        "description": "Contains the information about the license that is applied to the dataset. The terms are in HBP_LICENSE ontology.",
+                        "$ref": "#/definitions/onto_term"
+                    },
                     "representations": {
                         "type": "array",
                         "description": "Array of resources' uuid as the physical representations of the dataset.",

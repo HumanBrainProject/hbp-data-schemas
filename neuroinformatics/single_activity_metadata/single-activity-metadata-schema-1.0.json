@@ -206,6 +206,10 @@
                         "$ref": "#/definitions/onto_term"
                     }
                 },
+                "license": {
+                    "description": "Contains the information about the license that is applied to the data. The terms are in HBP_LICENSE ontology.",
+                    "$ref": "#/definitions/onto_term"
+                },
                 "protocol": {
                     "type": "object",
                     "description": "Textual reusable description of the end-to-end protocol that describes how the experimentation was done and dataset has been created.",

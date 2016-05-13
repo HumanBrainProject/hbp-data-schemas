@@ -192,6 +192,9 @@
                     "name": "Thalamus"
                 }
             ],
+            "license": {
+                "uri": "http://humanbrainproject.eu/ontology/hbp_licence/cc-by"
+            },
             "atlas_location": {
                 "atlas_template": {
                     "uri": "http://atlases.bbp.epfl.ch/allenatlas"

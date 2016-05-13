@@ -1,13 +1,14 @@
 ## [1.0-RC5] 2016-02-24 Yuri Katkov
 ### Added fields
--  dataset.protocol.designer and dataset.protocol.publication_doi and dataset.protocol.publication_pubmed
--  registration.agreement.timestamp and registration.agreement.version . We need this field to know when exactly the user agreed with legal terms, so that we can show it as a proof.
+- dataset.protocol.designer and dataset.protocol.publication_doi and dataset.protocol.publication_pubmed
+- registration.agreement.timestamp and registration.agreement.version . We need this field to know when exactly the user agreed with legal terms, so that we can show it as a proof.
+- dataset.license that contains the license information. Implemented as ontology term.
 
 ### Removed fields
 - removed the data_type field. Reason: the meeting with Sean, where he said it's not needed for one-click registration. Also it's hard to know the proper datatype if we have a zip folder full of different files.
 
 ### Others
-- removed minItems constraint when the field is optional. 
+- removed minItems constraint when the field is optional.
 - Gestation is replaced by Pre-natal
 - protocol.name -> protocol.title to conform with hbpprov
 
