@@ -3,6 +3,8 @@
 - dataset.protocol.designer and dataset.protocol.publication_doi and dataset.protocol.publication_pubmed
 - registration.agreement.timestamp and registration.agreement.version . We need this field to know when exactly the user agreed with legal terms, so that we can show it as a proof.
 - dataset.license that contains the license information. Implemented as ontology term.
+- specimen.age.unit is a new mandatory field (enum) that indicates which unit is used for the age value.
+- specimen.age.range_end_value is an optional field that indicated the end of the range. If not set, the age is not a range (backward compatible).
 
 ### Removed fields
 - removed the data_type field. Reason: the meeting with Sean, where he said it's not needed for one-click registration. Also it's hard to know the proper datatype if we have a zip folder full of different files.
