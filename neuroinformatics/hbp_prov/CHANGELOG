@@ -8,7 +8,6 @@
 * specimen[].age.unit is a new mandatory field (enum) that indicates which unit is used for the age value.
 * specimen[].age.range_end_value is an optional field that indicated the end of the range. If not set, the age is not a range (backward compatible).
 * Updated the `release` enum: `HBP` is now `hbp_only`.
-* dataset.methods are added in SAM as not-required field
 
 ### Others
 * removed minItems constraint when the field is optional.
