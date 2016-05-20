@@ -208,7 +208,7 @@
                     },
                     "methods": {
                         "type": "array",
-                        "description": "the methods used in the activity. We don't recommend to use this field now, unless it's a matter of conversion from v2.",
+                        "description": "The methods used in the activity. The ontological term from HBP method ontology.",
                         "items": {
                             "$ref": "#/definitions/onto_term"
                         }

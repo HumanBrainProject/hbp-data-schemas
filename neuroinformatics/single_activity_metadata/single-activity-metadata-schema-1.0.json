@@ -256,6 +256,13 @@
                         }
                     }
                 },
+                "methods": {
+                    "type": "array",
+                    "description": "The methods used in the activity. The ontological term from HBP method ontology.",
+                    "items": {
+                        "$ref": "#/definitions/onto_term"
+                    }
+                },
                 "assigned_class": {
                     "$ref": "#/definitions/onto_term"
                 }
