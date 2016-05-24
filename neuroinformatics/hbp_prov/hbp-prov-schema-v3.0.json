@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/schema#",
     "description": "schema for a the json that describes the registration activity.",
-    "version": "3.0-RC7",
+    "version": "3.0",
     "type": "object",
     "required": [
         "registration",
@@ -16,7 +16,7 @@
             "type": "string",
             "description": "The version number of the schema. Note to the schema designer: if this schema supports more than one version, list all the versions in the enum. ",
             "enum": [
-                "3.0-RC7"
+                "3.0"
             ]
         },
         "registration": {
