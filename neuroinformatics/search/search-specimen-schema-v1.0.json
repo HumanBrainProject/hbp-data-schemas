@@ -6,9 +6,7 @@
     "type": "object",
     "required": [
         "uuid",
-        "sex",
-        "species",
-        "age"
+        "species"
     ],
     "properties": {
         "scale": {
@@ -18,10 +16,10 @@
             "type": "string"
         },
         "species": {
-            "$ref": "https://schemas.humanbrainproject.eu/neuroinformatics/search-ontology-term-schema-1.0.json"
+            "$ref": "https://raw.githubusercontent.com/HumanBrainProject/hbp-data-schemas/master/neuroinformatics/search/search-ontology-term-schema-v1.0.json"
         },
         "strain": {
-            "$ref": "https://schemas.humanbrainproject.eu/neuroinformatics/search-ontology-term-schema-1.0.json"
+            "$ref": "https://raw.githubusercontent.com/HumanBrainProject/hbp-data-schemas/master/neuroinformatics/search/search-ontology-term-schema-v1.0.json"
         },
         "age": {
             "type": "string"

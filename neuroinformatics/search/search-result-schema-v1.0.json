@@ -27,10 +27,10 @@
             "description": "The json source of the retrieved document",
             "oneOf": [
                 {
-                    "$ref": "https://schemas.humanbrainproject.eu/neuroinformatics/search-dataset-schema-1.0.json"
+                    "$ref": "https://raw.githubusercontent.com/HumanBrainProject/hbp-data-schemas/master/neuroinformatics/search/search-dataset-schema-v1.0.json"
                 },
                 {
-                    "$ref": "https://schemas.humanbrainproject.eu/neuroinformatics/search-ontology-term-schema-1.0.json"
+                    "$ref": "https://raw.githubusercontent.com/HumanBrainProject/hbp-data-schemas/master/neuroinformatics/search/search-ontology-term-schema-v1.0.json"
                 }
             ]
         },
