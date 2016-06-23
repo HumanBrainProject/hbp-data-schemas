@@ -13,11 +13,11 @@
             "description": "The ordered list of search results",
             "type": "array",
             "items": {
-                "$ref": "https://schemas.humanbrainproject.eu/neuroinformatics/search-result-schema-1.0.json"
+                "$ref": "https://raw.githubusercontent.com/HumanBrainProject/hbp-data-schemas/master/neuroinformatics/search/search-result-schema-v1.0.json"
             }
         },
         "took": {
-            "description": "The time (in milliseconds) it took to execute user query",
+            "description": "The time (in milliseconds) it took to execute user query on the server",
             "type": "integer"
         },
         "max_score": {
@@ -59,7 +59,7 @@
                         "type": "string"
                     },
                     "join_back_level": {
-                        "description": "The field name (the root of retrieved entity or one of its field names) that we count in doc_count.",
+                        "description": "The field name (the root of retrieved entity or one of its field names) that is counted in doc_count.",
                         "type": "string"
                     }
                 }

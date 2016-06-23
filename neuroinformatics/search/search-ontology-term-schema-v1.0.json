@@ -2,25 +2,19 @@
     "$schema": "http://json-schema.org/schema#",
     "title": "Ontology term schema",
     "description": "Schema for an ontology term as it is retrieved through ksearch API",
-    "version": "1.0-RC2",
+    "version": "1.0",
     "type": "object",
     "required": [
-        "id"
+        "id",
+        "term"
     ],
     "additionalProperties": false,
     "properties": {
-        "schema_version": {
-            "type": "string",
-            "description": "Compatible schema versions enum ",
-            "enum": [
-                "1.0-RC2"
-            ]
-        },
         "id": {
             "description": "Resolvable URI for the ontology term, eg ontology.humanbrainproject.eu/ontologies/$ontology_name/$term_code.",
             "type": "string"
         },
-        "name": {
+        "term": {
             "description": "Human readable name (corresponding to rdf:label or skos:prefLabel) for the term.",
             "type": "string"
         },
