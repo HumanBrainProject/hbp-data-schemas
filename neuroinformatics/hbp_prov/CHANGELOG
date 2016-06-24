@@ -1,4 +1,7 @@
 
+## [3.0] 2016-06-24 Samuel Kerrien
+* Made classification.activity_ref optional.
+
 ## [3.0-RC7] 2016-03-14 Mohameth François Sy / Lomig Mégard
 ### Added fields
 * Added the field /agents.contributors.affiliations field which groups former /agents.contributors.organisation_ref (required) and /agents.contributors.laboratory fields

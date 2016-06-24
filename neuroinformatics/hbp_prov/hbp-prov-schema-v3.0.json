@@ -678,8 +678,7 @@
                 "type": "object",
                 "required": [
                     "classified_entity_ref",
-                    "assigned_class",
-                    "activity_ref"
+                    "assigned_class"
                 ],
                 "properties": {
                     "classified_entity_ref": {
