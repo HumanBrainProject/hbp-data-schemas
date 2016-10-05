@@ -1,4 +1,9 @@
 
+## [3.1] 2016-10-05 Samuel Kerrien
+* Added optional attribute list on the following entities: Specimen, Sample, Activity
+* Added optional parameter list on activity to model experimental parameter (eg. extra cellular concentration of calcium)
+* Note that this version is backward compatible with 3.0.
+
 ## [3.0] 2016-06-24 Samuel Kerrien
 * Made classification.activity_ref optional.
 
