@@ -523,7 +523,7 @@
               {
                 "properties": {
                   "atlas_template": {
-                    "description": "The description of the reference atlas to which the dataset was aligned. This value should only be provided when the reference atlas is not registered in the knowledge graph or when the current dataset is itself a reference atlas.",
+                    "description": "The description of the reference atlas to which the dataset was aligned. This value should be provided when the reference atlas is not registered as a dataset. However, it can be provided when the current dataset is itself a reference atlas for description purpose.",
                     "$ref": "#/definitions/onto_term"
                   }
                 },
@@ -535,7 +535,7 @@
                 "properties": {
                   "parent_space": {
                     "type": "string",
-                    "description": "The reference of the parent space from which the bounding box was extracted. The parent space should be registered in the Knowledge Graph.",
+                    "description": "The reference of the parent space from which the bounding box was extracted. The parent space should be registered as a dataset.",
                     "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
                   }
                 },
