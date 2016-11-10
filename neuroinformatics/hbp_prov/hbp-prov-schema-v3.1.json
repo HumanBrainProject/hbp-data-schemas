@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema#",
-  "description": "schema for a the json that describes the registration activity.",
+  "description": "schema for a json that describes the registration activity.",
   "version": "3.0",
   "type": "object",
   "required": [
@@ -466,7 +466,6 @@
           }
         },
         "additionalProperties": false
-
       }
     },
     "datasets": {
@@ -515,7 +514,7 @@
             }
           },
           "atlas_location": {
-            "description": "Details for registering the dataset in a reference atlas.",
+            "description": "Details about the dataset registration in a reference space.",
             "type": "object",
             "required": [
               "bounding_box"
@@ -524,7 +523,7 @@
               {
                 "properties": {
                   "atlas_template": {
-                    "description": "Reference atlas to which the dataset was aligned. Can be itself.",
+                    "description": "The description of the reference atlas to which the dataset was aligned. This value should be provided when the reference atlas is not registered as a dataset. However, it can be provided when the current dataset is itself a reference atlas for description purpose.",
                     "$ref": "#/definitions/onto_term"
                   }
                 },
@@ -536,7 +535,7 @@
                 "properties": {
                   "parent_space": {
                     "type": "string",
-                    "description": "Parent space from which a bounding box was extracted. Reference the Knowledge Graph UUID of the parent observation.",
+                    "description": "The reference of the parent space from which the bounding box was extracted. The parent space should be registered as a dataset.",
                     "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
                   }
                 },
@@ -547,7 +546,7 @@
             ],
             "properties": {
               "bounding_box": {
-                "description": "Coordinates of a bounding box in a reference space where the observation was extracted.",
+                "description": "Coordinates of a bounding box in a reference space (described in atlas_template or in parent_space) where the dataset was extracted.",
                 "$ref": "#/definitions/bounding_box"
               },
               "transformation": {
