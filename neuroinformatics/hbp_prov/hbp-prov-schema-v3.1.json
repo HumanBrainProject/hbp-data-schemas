@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema#",
-  "description": "schema for a json that describes the registration activity.",
+  "description": "schema for a json instance that describes the registration of datasets and their provenance.",
   "version": "3.1",
   "type": "object",
   "required": [
@@ -8,16 +8,17 @@
     "activities",
     "datasets",
     "agents",
-    "schema_version"
+    "schema_url"
   ],
   "additionalProperties": false,
   "properties": {
     "schema_version": {
       "type": "string",
-      "description": "The version number of the schema. Note to the schema designer: if this schema supports more than one version, list all the versions in the enum. ",
-      "enum": [
-        "3.1"
-      ]
+      "description": "[DEPRECATED - will be removed in version 4.0, see schema_url instead] The version number of the schema. Note to the schema designer: if this schema supports more than one version, list all the versions in the enum. "
+    },
+    "schema_url": {
+      "type": "string",
+      "description": "In the context of an HBP-PROV instance, this fields contains a URL pointing to the schema the instance should be valid against."
     },
     "registration": {
       "required": [
@@ -124,7 +125,7 @@
           },
           "attributes": {
             "type": "array",
-            "description": "List of additional attributes. Typically it will be used to store the properties that came from the storage",
+            "description": "List of additional attributes, mainly used to extend the schema with custom annotations. For a resource, it will typically be used to store the properties that came from the storage",
             "items": {
               "$ref": "#/definitions/attribute"
             }
@@ -207,7 +208,7 @@
           },
           "methods": {
             "type": "array",
-            "description": "The methods used in the activity. The ontological term from HBP method ontology.",
+            "description": "The methods used in the activity. The ontological term from method ontology.",
             "items": {
               "$ref": "#/definitions/onto_term"
             }
@@ -429,9 +430,10 @@
       "items": {
         "type": "object",
         "required": [
-          "activity_ref",
           "id",
-          "name"
+          "name",
+          "activity_ref",
+          "scale"
         ],
         "properties": {
           "id": {
@@ -449,6 +451,10 @@
             "type": "string",
             "description": "UUID of the activity that generated the sample. Must be described in the same registration file.",
             "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+          },
+          "scale": {
+            "description": "An ontology term describing the nature of the sample (e.g. neuron, brain slice, ...).",
+            "$ref": "#/definitions/onto_term"
           },
           "brain_regions": {
             "description": "Brain region(s) where the sample originates.",
@@ -495,7 +501,7 @@
           },
           "categories": {
             "type": "array",
-            "description": "The description of the nature of the data in neuroscientific terms. Contains the uri to a term in hbp data modality ontology",
+            "description": "The description of the nature of the data in neuroscientific terms. Contains the uri to a term in data modality ontology. In most cases, a single category is sufficient.",
             "minItems": 1,
             "items": {
               "$ref": "#/definitions/onto_term"
@@ -519,57 +525,26 @@
             "required": [
               "bounding_box"
             ],
-            "oneOf": [
-              {
-                "properties": {
-                  "atlas_template": {
-                    "description": "The description of the reference atlas to which the dataset was aligned. This value should be provided when the reference atlas is not registered as a dataset. However, it can be provided when the current dataset is itself a reference atlas for description purpose.",
-                    "$ref": "#/definitions/onto_term"
-                  }
-                },
-                "required": [
-                  "atlas_template"
-                ]
-              },
-              {
-                "properties": {
-                  "parent_space": {
-                    "type": "string",
-                    "description": "The reference of the parent space from which the bounding box was extracted. The parent space should be registered as a dataset.",
-                    "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
-                  }
-                },
-                "required": [
-                  "parent_space"
-                ]
-              }
-            ],
             "properties": {
+              "atlas_template": {
+                "description": "IMPORTANT: atlas_template or parent_space must be specified. The description of the reference atlas to which the dataset was aligned. This value should be provided when the reference atlas is not registered as a dataset. However, it can be provided when the current dataset is itself a reference atlas for description purpose.",
+                "$ref": "#/definitions/onto_term"
+              },
+              "parent_space": {
+                "type": "string",
+                "description": "IMPORTANT: atlas_template or parent_space must be specified. The reference of the parent space from which the bounding box was extracted. The parent space should be registered as a dataset.",
+                "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+              },
               "bounding_box": {
                 "description": "Coordinates of a bounding box in a reference space (described in atlas_template or in parent_space) where the dataset was extracted.",
                 "$ref": "#/definitions/bounding_box"
               },
               "transformation": {
                 "description": "Transformation to place the current bounding box in the atlas template specified.",
-                "type": "object",
-                "properties": {
-                  "transformation_type": {
-                    "enum": [
-                      "linear",
-                      "polynom"
-                    ]
-                  },
-                  "transformation_matrix": {
-                    "description": "3D matrix, ordered row.",
-                    "type": "array",
-                    "items": {
-                      "type": "number",
-                      "format": "float"
-                    }
-                  }
-                }
+                "$ref": "#/definitions/transformation"
               }
-            }
+            },
+            "additionalProperties":false
           },
           "license": {
             "description": "Contains the information about the license that is applied to the dataset. The terms are in HBP_LICENSE ontology.",
@@ -631,7 +606,7 @@
           },
           "attributes": {
             "type": "array",
-            "description": "List of additional attributes. The dataset attributes are usually datatype-specific parameters, like resolutions of the images.",
+            "description": "List of additional attributes, mainly used to extend the schema with custom annotations. For a dataset, it will typically be used to store datatype-specific parameters, like resolutions of an image or the stimuli of an electrophysiology.",
             "items": {
               "$ref": "#/definitions/attribute"
             }
@@ -824,6 +799,27 @@
       },
       "additionalProperties": false
     },
+    "transformation": {
+      "description": "Transformation to place the current bounding box in the atlas template specified.",
+      "type": "object",
+      "javaType": "ch.epfl.hbp.nip.prov.v3.domain.Transformation",
+      "properties": {
+        "transformation_type": {
+          "enum": [
+            "linear",
+            "polynom"
+          ]
+        },
+        "transformation_matrix": {
+          "description": "3D matrix, ordered row.",
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      }
+    },
     "xref": {
       "description": "Cross references to external resources.",
       "type": "object",
@@ -917,7 +913,7 @@
       "description": "Additional properties that can be attached to an entity. The properties have to be described in an ontology as features properties and hold information about the feature type and value restrictions if applicable.",
       "properties": {
         "key": {
-          "description": "The link to datatype property in the hbp attribute ontology",
+          "description": "The link to datatype property in the attribute ontology",
           "$ref": "#/definitions/onto_term"
         },
         "value": {
