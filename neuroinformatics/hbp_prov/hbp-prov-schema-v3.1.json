@@ -1,0 +1,954 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "description": "schema for a json instance that describes the registration of datasets and their provenance.",
+  "version": "3.1",
+  "type": "object",
+  "required": [
+    "registration",
+    "activities",
+    "datasets",
+    "agents",
+    "schema_url"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "description": "[DEPRECATED - will be removed in version 4.0, see schema_url instead] The version number of the schema. Note to the schema designer: if this schema supports more than one version, list all the versions in the enum. "
+    },
+    "schema_url": {
+      "type": "string",
+      "description": "In the context of an HBP-PROV instance, this fields contains a URL pointing to the schema the instance should be valid against."
+    },
+    "registration": {
+      "required": [
+        "id",
+        "submission_date",
+        "release_date",
+        "release",
+        "agents"
+      ],
+      "type": "object",
+      "description": "Registration activity, regrouping all activities described in the file.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A Universally unique identifier (we only allow lowercase UUIDs).",
+          "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+        },
+        "name": {
+          "type": "string"
+        },
+        "comment": {
+          "type": "string"
+        },
+        "submission_date": {
+          "description": "The date on which the data provider submitted the data for the integration.",
+          "type": "string",
+          "format": "date"
+        },
+        "curation_date": {
+          "description": "The date of the start of the curation process.",
+          "type": "string",
+          "format": "date"
+        },
+        "release_date": {
+          "description": "The date on which the data has been released to a neuroinformatics platform.",
+          "type": "string",
+          "format": "date"
+        },
+        "agents": {
+          "$ref": "#/definitions/agents"
+        },
+        "release": {
+          "enum": [
+            "private",
+            "hbp_only",
+            "public"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "resources": {
+      "description": "List of the data sources used in the registration. Those data sources are typically files or databases that represent the results of the observations.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "addresses"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "A Universally unique identifier (we only allow lowercase UUIDs).",
+            "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+          },
+          "addresses": {
+            "type": "array",
+            "description": "The list of pointers to the places where the file is stored",
+            "items": {
+              "$ref": "#/definitions/resource_address"
+            }
+          },
+          "mime_type": {
+            "description": "Link to mime type service.",
+            "$ref": "#/definitions/xref"
+          },
+          "checksum": {
+            "description": "Checksum of the file. Not applicable for databases.",
+            "$ref": "#/definitions/checksum"
+          },
+          "size": {
+            "description": "The size of the file in bytes.",
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9223372036854775807
+          },
+          "original_filename": {
+            "description": "The name of the file at the time of data submission.",
+            "type": "string"
+          },
+          "retrieval_date": {
+            "description": "The date at which the resource was downloaded from a source.",
+            "type": "string",
+            "format": "date"
+          },
+          "comment": {
+            "type": "string"
+          },
+          "activity_ref": {
+            "type": "string",
+            "description": "UUID of the activity that generated the resource. Must be described in the same registration file.",
+            "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+          },
+          "attributes": {
+            "type": "array",
+            "description": "List of additional attributes, mainly used to extend the schema with custom annotations. For a resource, it will typically be used to store the properties that came from the storage",
+            "items": {
+              "$ref": "#/definitions/attribute"
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "activities": {
+      "description": "An activity represents a set of agents implementing a protocol, consuming entities and generating other entities.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "agents",
+          "source_entities"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "A Universally unique identifier (we only allow lowercase UUIDs).",
+            "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+          },
+          "name": {
+            "type": "string"
+          },
+          "comment": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/definitions/onto_term"
+          },
+          "start_date": {
+            "description": "The date on which the activity has started YYYY-MM-DD.",
+            "type": "string",
+            "format": "date"
+          },
+          "end_date": {
+            "description": "The date on which the activity has ended.",
+            "type": "string",
+            "format": "date"
+          },
+          "agents": {
+            "$ref": "#/definitions/agents"
+          },
+          "protocol": {
+            "description": "A protocol captures a precise description of the way an activity was performed.",
+            "required": ["id", "title", "description"],
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "A Universally unique identifier (we only allow lowercase UUIDs).",
+                "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+              },
+              "title": {
+                "description": "The name of the protocol which allows person to easily identify it.",
+                "type": "string"
+              },
+              "description": {
+                "description": "Textual description of the protocol. Typically a copy/paste from material and methods section of the paper.",
+                "type": "string"
+              },
+              "designer": {
+                "description": "The laboratory or person which designed the protocol.",
+                "type": "string"
+              },
+              "publications": {
+                "description": "A list of papers where you can find the full detailed description of the protocol.",
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/xref"
+                }
+              }
+            },
+            "additionalProperties": false
+          },
+          "methods": {
+            "type": "array",
+            "description": "The methods used in the activity. The ontological term from method ontology.",
+            "items": {
+              "$ref": "#/definitions/onto_term"
+            }
+          },
+          "source_entities": {
+            "description": "An array containing the identifiers for input entities. The entities might be described in the current file or already in repository.",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "description": "A Universally unique identifier (we only allow lowercase UUIDs).",
+              "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+            }
+          },
+          "parameters": {
+            "type": "array",
+            "description": "List of numerical parameters that characterise this activity (eg. extra-cellular concentration of calcium).",
+            "items": {
+              "$ref": "#/definitions/parameter"
+            }
+          },
+          "attributes": {
+            "type": "array",
+            "description": "List of additional attributes, mainly used to extend the schema with custom annotations.",
+            "items": {
+              "$ref": "#/definitions/attribute"
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "agents": {
+      "description": "list of all agents associated with the activities described in the registration.",
+      "type": "object",
+      "properties": {
+        "contributors": {
+          "description": "An array of people who contributed to the activities.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "family_name"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "family_name": {
+                "type": "string"
+              },
+              "given_names": {
+                "description": "Name(s) the contributor is known by.",
+                "type": "string"
+              },
+              "affiliations": {
+                "description": "The list of contributor's affiliations",
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "organisation_ref"
+                  ],
+                  "properties": {
+                    "organisation_ref": {
+                      "description": "The organisation the contributor is affiliated to.",
+                      "type": "string"
+                    },
+                    "laboratory": {
+                      "description": "The laboratory as a sub-entity of the organisation to further specify the contributor's affiliation.",
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "email": {
+                "type": "string",
+                "format": "email"
+              }
+            }
+          }
+        },
+        "organisations": {
+          "description": "An array of organisations who contributed to the activities.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "software": {
+          "description": "Software products used in an activity to generate a dataset.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "version": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "specimen": {
+      "description": "An individual animal, plant, or single-celled life form.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "javaType": "ch.epfl.hbp.nip.prov.v3.domain.Specimen",
+        "required": [
+          "id",
+          "species"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "A Universally unique identifier (we only allow lowercase UUIDs).",
+            "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+          },
+          "name": {
+            "type": "string"
+          },
+          "comment": {
+            "type": "string"
+          },
+          "age": {
+            "type": "object",
+            "required": [
+              "period",
+              "unit",
+              "value"
+            ],
+            "properties": {
+              "period": {
+                "enum": [
+                  "Pre-natal",
+                  "Post-natal"
+                ]
+              },
+              "unit": {
+                "description": "The unit of the age value.",
+                "enum": [
+                  "days",
+                  "weeks",
+                  "months",
+                  "years"
+                ]
+              },
+              "value": {
+                "description": "Age value, must be positive. If the 'range_end_value' is set, indicates the start of the range.",
+                "type": "number",
+                "minimum": 0
+              },
+              "range_end_value": {
+                "description": "Optional field, if set the age is a range. This value indicates the end of the range. Must be larger than the 'value' field.",
+                "type": "number",
+                "minimum": 0
+              },
+              "comment": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          "developmental_stage": {
+            "$ref": "#/definitions/onto_term"
+          },
+          "sex": {
+            "$ref": "#/definitions/onto_term"
+          },
+          "species": {
+            "$ref": "#/definitions/onto_term"
+          },
+          "strain": {
+            "$ref": "#/definitions/onto_term"
+          },
+          "transgenic": {
+            "$ref": "#/definitions/onto_term"
+          },
+          "disease": {
+            "$ref": "#/definitions/onto_term"
+          },
+          "attributes": {
+            "type": "array",
+            "description": "List of additional attributes, mainly used to extend the schema with custom annotations.",
+            "items": {
+              "$ref": "#/definitions/attribute"
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "samples": {
+      "description": "Representation of a Biological material used in the process of generating a dataset.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "activity_ref",
+          "scale"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "A Universally unique identifier (we only allow lowercase UUIDs).",
+            "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+          },
+          "name": {
+            "type": "string"
+          },
+          "comment": {
+            "type": "string"
+          },
+          "activity_ref": {
+            "type": "string",
+            "description": "UUID of the activity that generated the sample. Must be described in the same registration file.",
+            "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+          },
+          "scale": {
+            "description": "An ontology term describing the nature of the sample (e.g. neuron, brain slice, ...).",
+            "$ref": "#/definitions/onto_term"
+          },
+          "brain_regions": {
+            "description": "Brain region(s) where the sample originates.",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/onto_term"
+            }
+          },
+          "attributes": {
+            "type": "array",
+            "description": "List of additional attributes, mainly used to extend the schema with custom annotations.",
+            "items": {
+              "$ref": "#/definitions/attribute"
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "datasets": {
+      "description": "List of generated datasets to be registered.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "categories",
+          "name",
+          "activity_ref",
+          "representations"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "A Universally unique identifier (we only allow lowercase UUIDs).",
+            "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "categories": {
+            "type": "array",
+            "description": "The description of the nature of the data in neuroscientific terms. Contains the uri to a term in data modality ontology. In most cases, a single category is sufficient.",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/definitions/onto_term"
+            }
+          },
+          "activity_ref": {
+            "type": "string",
+            "description": "UUID of the activity that generated the dataset. Must be described in the same registration file.",
+            "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+          },
+          "brain_regions": {
+            "description": "Brain region(s) this dataset was made on.",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/onto_term"
+            }
+          },
+          "atlas_location": {
+            "description": "Details about the dataset registration in a reference space.",
+            "type": "object",
+            "required": [
+              "bounding_box"
+            ],
+            "properties": {
+              "atlas_template": {
+                "description": "IMPORTANT: atlas_template or parent_space must be specified. The description of the reference atlas to which the dataset was aligned. This value should be provided when the reference atlas is not registered as a dataset. However, it can be provided when the current dataset is itself a reference atlas for description purpose.",
+                "$ref": "#/definitions/onto_term"
+              },
+              "parent_space": {
+                "type": "string",
+                "description": "IMPORTANT: atlas_template or parent_space must be specified. The reference of the parent space from which the bounding box was extracted. The parent space should be registered as a dataset.",
+                "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+              },
+              "bounding_box": {
+                "description": "Coordinates of a bounding box in a reference space (described in atlas_template or in parent_space) where the dataset was extracted.",
+                "$ref": "#/definitions/bounding_box"
+              },
+              "transformation": {
+                "description": "Transformation to place the current bounding box in the atlas template specified.",
+                "$ref": "#/definitions/transformation"
+              }
+            },
+            "additionalProperties":false
+          },
+          "license": {
+            "description": "Contains the information about the license that is applied to the dataset. The terms are in HBP_LICENSE ontology.",
+            "$ref": "#/definitions/onto_term"
+          },
+          "representations": {
+            "type": "array",
+            "description": "Array of resources' uuid as the physical representations of the dataset.",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "description": "A resource uuid. Must be described in the same registration file.",
+              "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+            }
+          },
+          "documentation_files": {
+            "type": "array",
+            "description": "Files that are shipped with the main file and help to understand the data: pictures, notes, documents.",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "address",
+                "checksum"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "A Universally unique identifier (we only allow lowercase UUIDs).",
+                  "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+                },
+                "addresses": {
+                  "type": "array",
+                  "description": "The list of pointers to the places where the file is stored",
+                  "items": {
+                    "$ref": "#/definitions/resource_address"
+                  }
+                },
+                "mime_type": {
+                  "description": "Link to mime type service.",
+                  "$ref": "#/definitions/xref"
+                },
+                "checksum": {
+                  "description": "Checksum of the file. Not applicable for databases.",
+                  "$ref": "#/definitions/checksum"
+                },
+                "comment": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "publications": {
+            "description": "Cross references to publications describing the production or use of the datasets.",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/xref"
+            }
+          },
+          "attributes": {
+            "type": "array",
+            "description": "List of additional attributes, mainly used to extend the schema with custom annotations. For a dataset, it will typically be used to store datatype-specific parameters, like resolutions of an image or the stimuli of an electrophysiology.",
+            "items": {
+              "$ref": "#/definitions/attribute"
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "models": {
+      "description": "In silico models, used to perform simulations and in silico experimentation.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "categories",
+          "name",
+          "activity_ref",
+          "representations"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "A Universally unique identifier (we only allow lowercase UUIDs).",
+            "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+          },
+          "name": {
+            "type": "string"
+          },
+          "comment": {
+            "type": "string"
+          },
+          "categories": {
+            "type": "array",
+            "description": "The description of the nature of the model in neuroscientific terms.",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/definitions/onto_term"
+            }
+          },
+          "activity_ref": {
+            "type": "string",
+            "description": "UUID of the activity that generated the model. Must be described in the same registration file.",
+            "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+          },
+          "brain_regions": {
+            "description": "Brain region(s) from which the model was derived.",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/onto_term"
+            }
+          },
+          "representations": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "description": "A Universally unique identifier (we only allow lowercase UUIDs).",
+              "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "classifications": {
+      "description": "A list of classification terms derived from a manual or automated analysis.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "classified_entity_ref",
+          "assigned_class"
+        ],
+        "properties": {
+          "classified_entity_ref": {
+            "type": "string",
+            "description": "UUID of the entity that was classified. Must be described in the same registration file.",
+            "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+          },
+          "assigned_class": {
+            "$ref": "#/definitions/onto_term"
+          },
+          "activity_ref": {
+            "type": "string",
+            "description": "UUID of the activity that generated the classification. Must be described in the same registration file.",
+            "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+          },
+          "evidences": {
+            "type": "array",
+            "description": "The datasets that contain the information that has been used to classify the entity.",
+            "items": {
+              "type": "string",
+              "description": "A Universally unique identifier (we only allow lowercase UUIDs).",
+              "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "definitions": {
+    "onto_term": {
+      "description": "Reference to a resolvable ontology term.",
+      "type": "object",
+      "javaType": "ch.epfl.hbp.nip.prov.v3.domain.OntologyTerm",
+      "required": [
+        "uri"
+      ],
+      "properties": {
+        "uri": {
+          "description": "Resolvable URI for the ontology term, eg ontology.humanbrainproject.eu/$ontology_name/$term_code.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Human readable name for the term.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Human readable description for the term.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "bounding_box": {
+      "description": "XYZ coordinates of an axis-aligned bounding box in a reference space. The box is defined by at least 2 points.",
+      "type": "object",
+      "javaType": "ch.epfl.hbp.nip.prov.v3.domain.BoundingBox",
+      "required": [
+        "points"
+      ],
+      "properties": {
+        "points": {
+          "description": "The lower and upper coordinate of the bounding box.",
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "object",
+            "required": [
+              "x",
+              "y",
+              "z"
+            ],
+            "properties": {
+              "x": {
+                "type": "number"
+              },
+              "y": {
+                "type": "number"
+              },
+              "z": {
+                "type": "number"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "resolution": {
+          "description": "Resolution in each dimension",
+          "type": "object",
+          "required": [
+            "unit",
+            "anterior_proterior",
+            "superior_inferior",
+            "left_right"
+          ],
+          "properties": {
+            "unit": {
+              "description": "Units used to describe the resolution. All dimensions are specified in the same unit.",
+              "$ref": "#/definitions/onto_term"
+            },
+            "anterior_proterior": {
+              "type": "number",
+              "format": "float"
+            },
+            "superior_inferior": {
+              "type": "number",
+              "format": "float"
+            },
+            "left_right": {
+              "type": "number",
+              "format": "float"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "transformation": {
+      "description": "Transformation to place the current bounding box in the atlas template specified.",
+      "type": "object",
+      "javaType": "ch.epfl.hbp.nip.prov.v3.domain.Transformation",
+      "properties": {
+        "transformation_type": {
+          "enum": [
+            "linear",
+            "polynom"
+          ]
+        },
+        "transformation_matrix": {
+          "description": "3D matrix, ordered row.",
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      }
+    },
+    "xref": {
+      "description": "Cross references to external resources.",
+      "type": "object",
+      "javaType": "ch.epfl.hbp.nip.prov.v3.domain.Xref",
+      "required": [
+        "code",
+        "database"
+      ],
+      "properties": {
+        "code": {
+          "description": "Cross reference code, for example DOI or PUBMED_ID. The code is used with the database information to build a valid URL.",
+          "type": "string"
+        },
+        "database": {
+          "description": "Reference to an ontology term that contains the needed information to build a valid cross-reference from the code.",
+          "$ref": "#/definitions/onto_term"
+        }
+      },
+      "additionalProperties": false
+    },
+    "checksum": {
+      "type": "object",
+      "javaType": "ch.epfl.hbp.nip.prov.v3.domain.Checksum",
+      "properties": {
+        "algorithm": {
+          "enum": [
+            "MD5",
+            "SHA-1"
+          ]
+        },
+        "value": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{32,40}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "resource_address": {
+      "description": "The location of a given resource in the form of a storage type and a URI.",
+      "type": "object",
+      "javaType": "ch.epfl.hbp.nip.prov.v3.domain.ResourceAddress",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "The uri by which the resource can be retrieved from the service. Use URLs if it's possible."
+        },
+        "date": {
+          "type": "string",
+          "description": "The date at which the resource was stored after it was downloaded. This field is empty for storage related to original URL from which the dataset was downloaded prior integration.",
+          "format": "date"
+        },
+        "storage": {
+          "description": "The link to the ontology term that has the description of the services along with the its access parameters.",
+          "$ref": "#/definitions/onto_term"
+        }
+      },
+      "additionalProperties": false
+    },
+    "parameter": {
+      "type": "object",
+      "javaType": "ch.epfl.hbp.nip.prov.v3.domain.Parameter",
+      "required": [
+        "type",
+        "value",
+        "unit"
+      ],
+      "description": "A parameter is a way to represent a numerical value with an associated type and unit. Both type and unit are represented by ontology terms.",
+      "properties": {
+        "type": {
+          "description": "The parameter type represented as an ontology term.",
+          "$ref": "#/definitions/onto_term"
+        },
+        "value": {
+          "description": "The numerical value for this parameter.",
+          "type": "number"
+        },
+        "unit": {
+          "description": "The unit of the numerical value represented as an ontology term.",
+          "$ref": "#/definitions/onto_term"
+        }
+      },
+      "additionalProperties": false
+    },
+    "attribute": {
+      "type": "object",
+      "javaType": "ch.epfl.hbp.nip.prov.v3.domain.Attribute",
+      "required": [
+        "key",
+        "value"
+      ],
+      "description": "Additional properties that can be attached to an entity. The properties have to be described in an ontology as features properties and hold information about the feature type and value restrictions if applicable.",
+      "properties": {
+        "key": {
+          "description": "The link to datatype property in the attribute ontology",
+          "$ref": "#/definitions/onto_term"
+        },
+        "value": {
+          "description": "The value of the attribute in a string form. No validation in possible in the schema level.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "agents": {
+      "description": "List of agent ids along with their roles that were associated with the activity.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "javaType": "ch.epfl.hbp.nip.prov.v3.domain.Agent",
+        "required": [
+          "agent_ref",
+          "roles"
+        ],
+        "properties": {
+          "agent_ref": {
+            "type": "string"
+          },
+          "roles": {
+            "description": "An array of role the contributor took during the activity.",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/definitions/onto_term"
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

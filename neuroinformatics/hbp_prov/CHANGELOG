@@ -1,4 +1,14 @@
 
+## [3.1] 2016-10-05 Samuel Kerrien
+* Note that this version is backward compatible with 3.0.
+* Added optional 'attributes' on the following entities: 'specimen', 'samples', 'activities'
+* Added optional 'parameters' on 'activities' to model numerical parameters (eg. extra cellular concentration of calcium)
+* Added optional new attribute 'samples.scale'
+* Made schema_version optional (planned removal in 4.0).
+* Added new attribute 'schema_url' (optional until version 4.0), recommended to use instead of schema_version.
+* Removed oneOf in datasets.atlas_location as code generator isn't handling it correctly. Instead made atlas_template and parent_space optional but one of them should be given (Validator will catch that).
+
+
 ## [3.0] 2016-06-24 Samuel Kerrien
 * Made classification.activity_ref optional.
 
