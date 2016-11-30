@@ -128,7 +128,6 @@
                     "storagetype": {
                         "$ref": "https://raw.githubusercontent.com/HumanBrainProject/hbp-data-schemas/master/neuroinformatics/search/search-ontology-term-schema-v1.0.json"
                     }
-
                 }
             }
         },
@@ -155,6 +154,14 @@
                     }
                 }
             }
+        },
+        "downloadable": {
+            "description": "Indicates whether the document is downloadable (true) or not (false). The value of this field may depend on the accessing agent's permissions",
+            "type": "boolean"
+        },
+        "deprecated": {
+            "description": "Mark this document as being deprecated (true) or not (false).",
+            "type": "boolean"
         }
     },
     "definitions": {
