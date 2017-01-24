@@ -1,0 +1,174 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "title": "Dataset",
+  "description": "A json schema for a dataset",
+  "version": "1.0",
+  "type": "object",
+  "required": [
+    "uuid",
+    "title",
+    "contributors",
+    "data_modalities",
+    "representations"
+  ],
+  "properties": {
+    "uuid": {
+      "$ref": "#/definitions/uuid"
+    },
+    "title": {
+      "type": "string"
+    },
+    "usage_scope": {
+      "description": "Privacy information about the current dataset: hbp_only, public,...",
+      "type": "string"
+    },
+    "reg_uuid": {
+      "description": "The uuid of the registration from which the current dataset is taken and which holds all dataset provenance information.",
+      "$ref": "#/definitions/uuid"
+    },
+    "description": {
+      "type": "string"
+    },
+    "methods": {
+      "description": "The methods used during dataset generation.",
+      "type": "array",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/HumanBrainProject/hbp-data-schemas/master/neuroinformatics/search/search-ontology-term-schema-v1.0.json"
+      }
+    },
+    "protocols": {
+      "description": "The protocols followed during dataset generation",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "uuid",
+          "title"
+        ],
+        "properties": {
+          "uuid": {
+            "$ref": "#/definitions/uuid"
+          },
+          "title": {
+            "description": "The URL of the representation",
+            "type": "string"
+          },
+          "definition": {
+            "description": "Human readable definition of the protocol",
+            "type": "string"
+          },
+          "publications": {
+            "type": "array",
+            "items": {
+              "description": "Publication URL",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "classifications": {
+      "description": "A list of classification terms derived from a manual or automated analysis",
+      "type": "array",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/HumanBrainProject/hbp-data-schemas/master/neuroinformatics/search/search-ontology-term-schema-v1.0.json"
+      }
+    },
+    "contributors": {
+      "description": "The people who contributed to the dataset generation activities",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/HumanBrainProject/hbp-data-schemas/master/neuroinformatics/search/search-userprofile-schema-v1.0.json"
+      }
+    },
+    "data_modalities": {
+      "description": "The categories of the dataset",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/HumanBrainProject/hbp-data-schemas/master/neuroinformatics/search/search-ontology-term-schema-v1.0.json"
+      }
+    },
+    "brain_regions": {
+      "description": "Brain region(s)",
+      "type": "array",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/HumanBrainProject/hbp-data-schemas/master/neuroinformatics/search/search-ontology-term-schema-v1.0.json"
+      }
+    },
+    "specimen": {
+      "description": "An individual animal, plant, or single-celled life form",
+      "type": "array",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/HumanBrainProject/hbp-data-schemas/master/neuroinformatics/search/search-specimen-schema-v1.0.json"
+      }
+    },
+    "representations": {
+      "description": "Concrete representations of a data artifact.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "datatype",
+          "access"
+        ],
+        "properties": {
+          "datatype": {
+            "$ref": "https://raw.githubusercontent.com/HumanBrainProject/hbp-data-schemas/master/neuroinformatics/search/search-ontology-term-schema-v1.0.json"
+          },
+          "access": {
+            "description": "The URL of the representation",
+            "type": "string"
+          },
+          "uuid": {
+            "$ref": "#/definitions/uuid"
+          },
+          "storagetype": {
+            "$ref": "https://raw.githubusercontent.com/HumanBrainProject/hbp-data-schemas/master/neuroinformatics/search/search-ontology-term-schema-v1.0.json"
+          }
+        }
+      }
+    },
+    "attributes": {
+      "description": "List of additional attributes. The dataset attributes are usually datatype-specific parameters, like resolutions of the images.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "key",
+          "values"
+        ],
+        "properties": {
+          "values": {
+            "type": "array",
+            "items": {
+              "description": "The value of the attribute in a string form.",
+              "type": "string"
+            }
+          },
+          "key": {
+            "description": "The link to data attribute term in the hbp attribute ontology",
+            "$ref": "https://raw.githubusercontent.com/HumanBrainProject/hbp-data-schemas/master/neuroinformatics/search/search-ontology-term-schema-v1.0.json"
+          }
+        }
+      }
+    },
+    "downloadable": {
+      "description": "Indicates whether the document is downloadable (true) or not (false). The value of this field may depend on the accessing agent's permissions",
+      "type": "boolean"
+    },
+    "deprecated": {
+      "description": "Mark this document as being deprecated (true) or not (false).",
+      "type": "boolean"
+    }
+  },
+  "definitions": {
+    "uuid": {
+      "type": "string",
+      "description": "A Universally unique identifier.",
+      "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+    }
+  }
+}
